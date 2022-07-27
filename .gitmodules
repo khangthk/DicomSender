@@ -1,3 +1,6 @@
 [submodule "base/3rdparty/zlib"]
 	path = base/3rdparty/zlib
 	url = https://github.com/madler/zlib.git
+[submodule "base/3rdparty/dcmtk"]
+	path = base/3rdparty/dcmtk
+	url = https://github.com/DCMTK/dcmtk.git
