@@ -1,10 +1,18 @@
-win32:CONFIG(debug, debug|release): {
-    LIB_PATH = $$PWD/../../build/dcmtk/lib/Debug
-} else {
-    LIB_PATH = $$PWD/../../build/dcmtk/lib/Release
+win32 {
+    !contains(QMAKE_TARGET.arch, x86_64) {
+        ARCH = x86
+    } else {
+        ARCH = x64
+    }
 }
 
-HEADER_PATH = $$PWD/../../build/dcmtk/config/include \
+CONFIG(debug, debug|release): {
+    LIB_PATH = $$PWD/../../build/$${ARCH}/dcmtk/lib/Debug
+} else {
+    LIB_PATH = $$PWD/../../build/$${ARCH}/dcmtk/lib/Release
+}
+
+HEADER_PATH = $$PWD/../../build/$${ARCH}/dcmtk/config/include \
               $$PWD/../../base/3rdparty/dcmtk/ofstd/include \
               $$PWD/../../base/3rdparty/dcmtk/oflog/include \
               $$PWD/../../base/3rdparty/dcmtk/oficonv/include \
@@ -36,32 +44,38 @@ win32 {LIBS += -ladvapi32 -lcomdlg32 -lgdi32 -liphlpapi -lkernel32 -lnetapi32 -l
 
 LIBS += -L$${LIB_PATH} -lcmr -ldcmdata -ldcmdsig -ldcmect -ldcmfg -ldcmimage -ldcmimgle -ldcmiod -ldcmjpeg -ldcmjpls -ldcmnet -ldcmpmap -ldcmpstat -ldcmqrdb -ldcmrt -ldcmseg -ldcmsr -ldcmtkcharls -ldcmtls -ldcmtract -ldcmwlm -ldcmxml -li2d -lijg12 -lijg16 -lijg8 -loficonv -loflog -lofstd
 
-PRE_TARGETDEPS += $${LIB_PATH}/cmr.lib \
-                  $${LIB_PATH}/dcmdata.lib \
-                  $${LIB_PATH}/dcmdsig.lib \
-                  $${LIB_PATH}/dcmect.lib \
-                  $${LIB_PATH}/dcmfg.lib \
-                  $${LIB_PATH}/dcmimage.lib \
-                  $${LIB_PATH}/dcmimgle.lib \
-                  $${LIB_PATH}/dcmiod.lib \
-                  $${LIB_PATH}/dcmjpeg.lib \
-                  $${LIB_PATH}/dcmjpls.lib \
-                  $${LIB_PATH}/dcmnet.lib \
-                  $${LIB_PATH}/dcmpmap.lib \
-                  $${LIB_PATH}/dcmpstat.lib \
-                  $${LIB_PATH}/dcmqrdb.lib \
-                  $${LIB_PATH}/dcmrt.lib \
-                  $${LIB_PATH}/dcmseg.lib \
-                  $${LIB_PATH}/dcmsr.lib \
-                  $${LIB_PATH}/dcmtkcharls.lib \
-                  $${LIB_PATH}/dcmtls.lib \
-                  $${LIB_PATH}/dcmtract.lib \
-                  $${LIB_PATH}/dcmwlm.lib \
-                  $${LIB_PATH}/dcmxml.lib \
-                  $${LIB_PATH}/i2d.lib \
-                  $${LIB_PATH}/ijg12.lib \
-                  $${LIB_PATH}/ijg16.lib \
-                  $${LIB_PATH}/ijg8.lib \
-                  $${LIB_PATH}/oficonv.lib \
-                  $${LIB_PATH}/oflog.lib \
-                  $${LIB_PATH}/ofstd.lib
+win32: LIB_EXT = lib
+unix: {
+    LIB_EXT = a
+    LIB_PREFIX = lib
+}
+
+PRE_TARGETDEPS += $${LIB_PATH}/$${LIB_PREFIX}cmr.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmdata.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmdsig.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmect.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmfg.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmimage.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmimgle.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmiod.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmjpeg.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmjpls.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmnet.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmpmap.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmpstat.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmqrdb.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmrt.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmseg.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmsr.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmtkcharls.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmtls.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmtract.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmwlm.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}dcmxml.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}i2d.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}ijg12.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}ijg16.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}ijg8.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}oficonv.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}oflog.$${LIB_EXT} \
+                  $${LIB_PATH}/$${LIB_PREFIX}ofstd.$${LIB_EXT}
