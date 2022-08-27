@@ -2,4 +2,5 @@ TEMPLATE = subdirs
 
 SUBDIRS += \
     apps/DicomSender \
-    apps/DicomTags
+    apps/DicomTags \
+    apps/DicomViewer
