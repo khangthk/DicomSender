@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <OutDir>$(SolutionDir)bin\$(PlatformTarget)\$(Configuration)\</OutDir>
+    <IntDir>$(SolutionDir)build\$(PlatformTarget)\$(Configuration)\$(ProjectName)\</IntDir>
+	<QtVarsOutputDir>$(SolutionDir)build\$(PlatformTarget)\$(Configuration)\$(ProjectName)\qmake\</QtVarsOutputDir>
+  </PropertyGroup>
+  <ImportGroup Label="PropertySheets" Condition="Exists('$(QtMsBuild)\qt.props')">
+    <Import Project="$(QtMsBuild)\Qt.props" />
+  </ImportGroup>
+</Project>
