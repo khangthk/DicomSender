@@ -13,10 +13,16 @@ SOURCES += \
     mainwindow.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    version.h
 
 FORMS   += \
     mainwindow.ui
+
+RESOURCES += \
+    mainwindow.qrc
+
+RC_FILE = DicomSender.rc
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin
