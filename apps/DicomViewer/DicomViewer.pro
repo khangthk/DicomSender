@@ -1,4 +1,4 @@
-QT      += core gui widgets
+QT      += core gui widgets svg
 
 CONFIG  += c++17
 
