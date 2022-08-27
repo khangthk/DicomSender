@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets" />
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup />
+  <ItemDefinitionGroup>
+    <Link>
+      <AdditionalDependencies>gdcmCommon.lib;gdcmDICT.lib;gdcmDSED.lib;gdcmIOD.lib;gdcmMEXD.lib;gdcmMSFF.lib;gdcmcharls.lib;gdcmexpat.lib;gdcmjpeg12.lib;gdcmjpeg16.lib;gdcmjpeg8.lib;gdcmopenjp2.lib;socketxx.lib;crypt32.lib;rpcrt4.lib;ws2_32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(PlatformTarget)'=='Debug|x86'">$(SolutionDir)build\x86\gdcm\bin\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(PlatformTarget)'=='Release|x86'">$(SolutionDir)build\x86\gdcm\bin\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(PlatformTarget)'=='Debug|x64'">$(SolutionDir)build\x64\gdcm\bin\Debug;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories Condition="'$(Configuration)|$(PlatformTarget)'=='Release|x64'">$(SolutionDir)build\x64\gdcm\bin\Release;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+    </Link>
+    <ClCompile>
+	  <AdditionalIncludeDirectories Condition="'$(PlatformTarget)'=='x86'">$(SolutionDir)build\x86\gdcm\Source\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	  <AdditionalIncludeDirectories Condition="'$(PlatformTarget)'=='x86'">$(SolutionDir)build\x86\gdcm\Source\InformationObjectDefinition;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	  <AdditionalIncludeDirectories Condition="'$(PlatformTarget)'=='x64'">$(SolutionDir)build\x64\gdcm\Source\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	  <AdditionalIncludeDirectories Condition="'$(PlatformTarget)'=='x64'">$(SolutionDir)build\x64\gdcm\Source\InformationObjectDefinition;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+	  <AdditionalIncludeDirectories>$(SolutionDir)base\3rdparty\gdcm\Source\Common;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)base\3rdparty\gdcm\Source\DataDictionary;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)base\3rdparty\gdcm\Source\DataStructureAndEncodingDefinition;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)base\3rdparty\gdcm\Source\InformationObjectDefinition;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)base\3rdparty\gdcm\Source\MediaStorageAndFileFormat;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(SolutionDir)base\3rdparty\gdcm\Source\MessageExchangeDefinition;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+  </ItemDefinitionGroup>
+  <ItemGroup />
+</Project>
