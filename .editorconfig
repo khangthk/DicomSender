@@ -12,7 +12,7 @@ insert_final_newline = true
 charset = utf-8
 
 # 4 space indentation
-[*.{h,hh,hxx,hpp,cpp,cc,cxx}]
+[*.{h,hh,hxx,hpp,c,cc,cxx,cpp}]
 indent_style = space
 indent_size = 4
 
