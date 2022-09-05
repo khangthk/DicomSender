@@ -7,6 +7,7 @@
 #include <QDebug>
 #include <QDir>
 #include <QFileDialog>
+#include <QMimeData>
 
 #define MAX_PATH 10
 
@@ -14,19 +15,51 @@ MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent), ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setAcceptDrops(true);
     loadSetting();
 
     connect(ui->buttonBrowse, &QPushButton::clicked, this, &MainWindow::onBrowse);
     connect(ui->radioDcmtk, &QAbstractButton::clicked, this, &MainWindow::onDcmtk);
     connect(ui->radioGdcm, &QAbstractButton::clicked, this, &MainWindow::onGdcm);
     connect(ui->buttonEcho, &QPushButton::clicked, this, &MainWindow::onEcho);
-    connect(ui->buttonSend, &QPushButton::clicked, this, &MainWindow::onSend);    
+    connect(ui->buttonSend, &QPushButton::clicked, this, &MainWindow::onSend);
 }
 
 MainWindow::~MainWindow()
 {
     saveSetting();
     delete ui;
+}
+
+void MainWindow::dragEnterEvent(QDragEnterEvent *event)
+{
+    const QMimeData *mimeData = event->mimeData();
+    auto files = mimeData->urls();
+    if (files.size() != 1)
+    {
+        return;
+    }
+
+    auto file = files.at(0).toLocalFile();
+    if (!QFileInfo(file).isDir())
+    {
+        return;
+    }
+
+    event->acceptProposedAction();
+}
+
+void MainWindow::dropEvent(QDropEvent *event)
+{
+    const QMimeData *mimeData = event->mimeData();
+    if (!mimeData->hasUrls() || mimeData->urls().size() != 1)
+    {
+        return;
+    }
+
+    event->acceptProposedAction();
+
+    addPath(mimeData->urls().at(0).toLocalFile());
 }
 
 void MainWindow::onBrowse()
@@ -37,17 +70,7 @@ void MainWindow::onBrowse()
 
     if (!dir.isEmpty())
     {
-        m_paths.push_front(QDir::toNativeSeparators(dir));
-        m_paths.removeDuplicates();
-
-        while (m_paths.size() > MAX_PATH)
-        {
-            m_paths.removeLast();
-        }
-
-        ui->comboboxPaths->clear();
-        ui->comboboxPaths->addItems(m_paths);
-        ui->comboboxPaths->setCurrentIndex(0);
+        addPath(dir);
     }
 }
 
@@ -208,4 +231,19 @@ void MainWindow::saveSetting()
     Setting::saveDIMSETimeout(ui->comboBoxDIMSETimeout->currentData().toInt());
     Setting::saveMaxPDU(ui->comboBoxMaxPDU->currentData().toInt());
     Setting::saveCompressionLevel(ui->comboBoxCompressionLevel->currentData().toInt());
+}
+
+void MainWindow::addPath(const QString &path)
+{
+    m_paths.push_front(QDir::toNativeSeparators(path));
+    m_paths.removeDuplicates();
+
+    while (m_paths.size() > MAX_PATH)
+    {
+        m_paths.removeLast();
+    }
+
+    ui->comboboxPaths->clear();
+    ui->comboboxPaths->addItems(m_paths);
+    ui->comboboxPaths->setCurrentIndex(0);
 }

@@ -1,6 +1,8 @@
 #pragma once
 
 #include <QMainWindow>
+#include <QDragEnterEvent>
+#include <QDropEvent>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -14,6 +16,10 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+protected:
+    void dragEnterEvent(QDragEnterEvent* event) override;
+    void dropEvent(QDropEvent* event) override;
+
 private slots:
     void onBrowse();
     void onDcmtk(bool checked);
@@ -26,4 +32,5 @@ private:
 
     void loadSetting();
     void saveSetting();
+    void addPath(const QString &path);
 };
