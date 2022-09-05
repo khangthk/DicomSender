@@ -11,10 +11,12 @@ include($$PWD/../../base/3rdparty/zlib.pri)
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    setting.cpp
 
 HEADERS += \
     mainwindow.h \
+    setting.h \
     version.h
 
 FORMS   += \

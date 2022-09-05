@@ -43,6 +43,9 @@
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="setting.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <Image Include="icons\DicomSender.ico">
@@ -51,6 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="version.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="setting.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

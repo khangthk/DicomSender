@@ -14,6 +14,16 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+private slots:
+    void onBrowse();
+    void onDcmtk(bool checked);
+    void onGdcm(bool checked);
+    void onEcho();
+    void onSend();
 private:
     Ui::MainWindow *ui;
+    QStringList m_paths;
+
+    void loadSetting();
+    void saveSetting();
 };
