@@ -4,6 +4,7 @@ CONFIG  += c++17
 
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000
 
+include($$PWD/../../base/base.pri)
 include($$PWD/../../base/3rdparty/dcmtk.pri)
 include($$PWD/../../base/3rdparty/gdcm.pri)
 include($$PWD/../../base/3rdparty/zlib.pri)

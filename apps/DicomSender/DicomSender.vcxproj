@@ -65,10 +65,16 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)' == 'Debug'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\base\3rdparty\dcmtk.props" />
+    <Import Project="..\..\base\3rdparty\gdcm.props" />
+    <Import Project="..\..\base\3rdparty\zlib.props" />
     <Import Project="..\..\base\3rdparty\qt.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)' == 'Release'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+    <Import Project="..\..\base\3rdparty\dcmtk.props" />
+    <Import Project="..\..\base\3rdparty\gdcm.props" />
+    <Import Project="..\..\base\3rdparty\zlib.props" />
     <Import Project="..\..\base\3rdparty\qt.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -110,7 +116,7 @@
     <ClCompile Include="main.cpp" />
     <ResourceCompile Include="DicomSender.rc" />
   </ItemGroup>
-    <ItemGroup>
+  <ItemGroup>
     <Image Include="icons\DicomSender.ico" />
   </ItemGroup>
   <ItemGroup>
