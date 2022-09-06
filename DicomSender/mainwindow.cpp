@@ -2,6 +2,7 @@
 #include "ui_mainwindow.h"
 
 #include "setting.h"
+#include "echothread.h"
 
 #include <QString>
 #include <QDebug>
@@ -100,7 +101,32 @@ void MainWindow::onGdcm(bool checked)
 
 void MainWindow::onEcho()
 {
+    auto echo = new EchoThread(ui->editLocalAE->text(), ui->editTargetAE->text(),
+                               ui->editHost->text(), ui->spinBoxPort->value(),
+                               ui->radioDcmtk->isChecked() ? Library::dcmtk : Library::gdcm, this);
 
+    auto fnDone = [&](const bool status, const QString &log)
+    {
+        qDebug() << status << log;
+        addColorLog(status, " " + log);
+    };
+
+    auto fnStarted = [&]()
+    {
+        ui->buttonEcho->setEnabled(false);
+    };
+
+    auto fnFinished = [&]()
+    {
+        ui->buttonEcho->setEnabled(true);
+        addLog("----Done----\r\n");
+    };
+
+    connect(echo, &EchoThread::done, this, fnDone);
+    connect(echo, &EchoThread::started, this, fnStarted);
+    connect(echo, &EchoThread::finished, this, fnFinished);
+    connect(echo, &EchoThread::finished, echo, &QObject::deleteLater);
+    echo->start();
 }
 
 void MainWindow::onSend()
@@ -256,4 +282,20 @@ void MainWindow::addPath(const QString &path)
     ui->comboboxPaths->clear();
     ui->comboboxPaths->addItems(m_paths);
     ui->comboboxPaths->setCurrentIndex(0);
+}
+
+void MainWindow::addLog(const QString &log)
+{
+    ui->textEditLog->moveCursor(QTextCursor::End);
+    ui->textEditLog->insertPlainText(log + "\r\n");
+}
+
+void MainWindow::addColorLog(const bool status, const QString &log)
+{
+    ui->textEditLog->moveCursor(QTextCursor::End);
+    auto textColor = ui->textEditLog->textColor();
+    ui->textEditLog->setTextColor(status ? QColor(0, 165, 0) : Qt::red);
+    ui->textEditLog->insertPlainText(status ? "[OK]" : "[ERROR]");
+    ui->textEditLog->setTextColor(textColor);
+    ui->textEditLog->insertPlainText(log + "\r\n");
 }

@@ -34,4 +34,6 @@ private:
     void loadSetting();
     void saveSetting();
     void addPath(const QString &path);
+    void addLog(const QString &log);
+    void addColorLog(const bool status, const QString &log);
 };
