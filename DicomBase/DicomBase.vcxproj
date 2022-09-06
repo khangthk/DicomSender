@@ -65,10 +65,16 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)' == 'Debug'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+	<Import Project="..\ThirdParty\dcmtk.props" />
+	<Import Project="..\ThirdParty\gdcm.props" />
+	<Import Project="..\ThirdParty\zlib.props" />
     <Import Project="..\ThirdParty\qt.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)' == 'Release'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+	<Import Project="..\ThirdParty\dcmtk.props" />
+	<Import Project="..\ThirdParty\gdcm.props" />
+	<Import Project="..\ThirdParty\zlib.props" />
     <Import Project="..\ThirdParty\qt.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -83,7 +89,7 @@
       <DebugInformationFormat>ProgramDatabase</DebugInformationFormat>
       <Optimization>Disabled</Optimization>
       <RuntimeLibrary>MultiThreadedDebugDLL</RuntimeLibrary>
-      <PreprocessorDefinitions>DICOMBASE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DICOMBASE_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -97,7 +103,7 @@
       <DebugInformationFormat>None</DebugInformationFormat>
       <Optimization>MaxSpeed</Optimization>
       <RuntimeLibrary>MultiThreadedDLL</RuntimeLibrary>
-      <PreprocessorDefinitions>DICOMBASE_LIB;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>DICOMBASE_LIBRARY;%(PreprocessorDefinitions)</PreprocessorDefinitions>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
@@ -105,6 +111,14 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="echobase.cpp" />
+    <ClCompile Include="echodcmtk.cpp" />
+    <ClCompile Include="echogdcm.cpp" />
+    <ClCompile Include="echothread.cpp" />
+    <QtMoc Include="echobase.h" />
+    <QtMoc Include="echodcmtk.h" />
+    <QtMoc Include="echogdcm.h" />
+    <QtMoc Include="echothread.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="dicombase.h" />
     <ClCompile Include="dicombase.cpp" />

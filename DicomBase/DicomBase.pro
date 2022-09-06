@@ -13,10 +13,18 @@ include($$PWD/../ThirdParty/gdcm.pri)
 include($$PWD/../ThirdParty/zlib.pri)
 
 SOURCES += \
-    dicombase.cpp
+    dicombase.cpp \
+    echobase.cpp \
+    echodcmtk.cpp \
+    echogdcm.cpp \
+    echothread.cpp
 
 HEADERS += \
     dicombase.h \
+    echobase.h \
+    echodcmtk.h \
+    echogdcm.h \
+    echothread.h \
     global.h
 
 # Default rules for deployment.

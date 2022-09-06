@@ -33,4 +33,32 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="echobase.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="echodcmtk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="echogdcm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="echothread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <QtMoc Include="echobase.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="echodcmtk.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="echogdcm.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="echothread.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+  </ItemGroup>
 </Project>
