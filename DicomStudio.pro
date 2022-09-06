@@ -1,6 +1,8 @@
 TEMPLATE = subdirs
 
 SUBDIRS += \
-    apps/DicomSender \
-    apps/DicomTags \
-    apps/DicomViewer
+    DicomBase \
+    DicomSender \
+    DicomTags \
+    DicomViewer
+
