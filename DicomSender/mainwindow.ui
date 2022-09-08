@@ -51,6 +51,9 @@
       </item>
       <item>
        <widget class="QTextEdit" name="textEditLog">
+        <property name="lineWrapMode">
+         <enum>QTextEdit::NoWrap</enum>
+        </property>
         <property name="readOnly">
          <bool>true</bool>
         </property>
@@ -176,7 +179,7 @@ hr { height: 1px; border-width: 0; }
              <set>Qt::AlignCenter</set>
             </property>
             <property name="placeholderText">
-             <string>IP Address</string>
+             <string>IP Address/Computer Name</string>
             </property>
            </widget>
           </item>
@@ -253,14 +256,14 @@ hr { height: 1px; border-width: 0; }
           <property name="labelAlignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
-          <item row="0" column="0">
+          <item row="1" column="0">
            <widget class="QLabel" name="labelConnectionTimeout">
             <property name="text">
              <string>Connection Timeout:</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
+          <item row="1" column="1">
            <widget class="QComboBox" name="comboBoxConnectionTimeout">
             <property name="minimumSize">
              <size>
@@ -281,78 +284,9 @@ hr { height: 1px; border-width: 0; }
             </item>
             <item>
              <property name="text">
-              <string>10 seconds</string>
+              <string>3 seconds</string>
              </property>
             </item>
-            <item>
-             <property name="text">
-              <string>20 seconds</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>30 seconds</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>40 seconds</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>50 seconds</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>60 seconds</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>70 seconds</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>80 seconds</string>
-             </property>
-            </item>
-            <item>
-             <property name="text">
-              <string>90 seconds</string>
-             </property>
-            </item>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="labelACSETimeout">
-            <property name="text">
-             <string>ACSE Timeout:</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <widget class="QComboBox" name="comboBoxACSETimeout">
-            <property name="minimumSize">
-             <size>
-              <width>0</width>
-              <height>24</height>
-             </size>
-            </property>
-            <property name="maximumSize">
-             <size>
-              <width>100</width>
-              <height>16777215</height>
-             </size>
-            </property>
-            <property name="currentText">
-             <string>30 seconds</string>
-            </property>
-            <property name="currentIndex">
-             <number>2</number>
-            </property>
             <item>
              <property name="text">
               <string>10 seconds</string>
@@ -401,14 +335,14 @@ hr { height: 1px; border-width: 0; }
            </widget>
           </item>
           <item row="2" column="0">
-           <widget class="QLabel" name="labelDIMSETimeout">
+           <widget class="QLabel" name="labelACSETimeout">
             <property name="text">
-             <string>DIMSE Timeout:</string>
+             <string>ACSE Timeout:</string>
             </property>
            </widget>
           </item>
           <item row="2" column="1">
-           <widget class="QComboBox" name="comboBoxDIMSETimeout">
+           <widget class="QComboBox" name="comboBoxACSETimeout">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -421,9 +355,15 @@ hr { height: 1px; border-width: 0; }
               <height>16777215</height>
              </size>
             </property>
+            <property name="currentText">
+             <string>30 seconds</string>
+            </property>
+            <property name="currentIndex">
+             <number>3</number>
+            </property>
             <item>
              <property name="text">
-              <string>Unlimited</string>
+              <string>3 seconds</string>
              </property>
             </item>
             <item>
@@ -474,13 +414,91 @@ hr { height: 1px; border-width: 0; }
            </widget>
           </item>
           <item row="3" column="0">
+           <widget class="QLabel" name="labelDIMSETimeout">
+            <property name="text">
+             <string>DIMSE Timeout:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="1">
+           <widget class="QComboBox" name="comboBoxDIMSETimeout">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>100</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <item>
+             <property name="text">
+              <string>Unlimited</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>3 seconds</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>10 seconds</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>20 seconds</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>30 seconds</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>40 seconds</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>50 seconds</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>60 seconds</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>70 seconds</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>80 seconds</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>90 seconds</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="4" column="0">
            <widget class="QLabel" name="labelMaxDPU">
             <property name="text">
              <string>Max PDU:</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
+          <item row="4" column="1">
            <widget class="QComboBox" name="comboBoxMaxPDU">
             <property name="minimumSize">
              <size>
@@ -662,14 +680,14 @@ hr { height: 1px; border-width: 0; }
             </item>
            </widget>
           </item>
-          <item row="4" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="labelCompressionLevel">
             <property name="text">
              <string>Compression Level:</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="5" column="1">
            <widget class="QComboBox" name="comboBoxCompressionLevel">
             <property name="minimumSize">
              <size>
@@ -739,6 +757,13 @@ hr { height: 1px; border-width: 0; }
               <string>9</string>
              </property>
             </item>
+           </widget>
+          </item>
+          <item row="0" column="0" colspan="2">
+           <widget class="QCheckBox" name="checkBoxStopWhenError">
+            <property name="text">
+             <string>Stop sending files if there is an error</string>
+            </property>
            </widget>
           </item>
          </layout>

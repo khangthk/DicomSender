@@ -21,19 +21,27 @@ protected:
     void dropEvent(QDropEvent *event) override;
     void showEvent(QShowEvent *event) override;
 
-private slots:
-    void onBrowse();
-    void onDcmtk(bool checked);
-    void onGdcm(bool checked);
-    void onEcho();
-    void onSend();
 private:
     Ui::MainWindow *ui;
     QStringList m_paths;
+    QStringList m_sendFiles;
+
+    enum class CheckInput { path, localAE, targetAE, host };
 
     void loadSetting();
     void saveSetting();
     void addPath(const QString &path);
     void addLog(const QString &log);
-    void addColorLog(const bool status, const QString &log);
+    void addColorLog(const bool result, const QString &log);
+    void logDone();
+    void updateOtherSetting(const bool isDcmtk);
+    bool validInput(CheckInput type);
+    void send();
+
+private slots:
+    void onBrowse();
+    void onDcmtk();
+    void onGdcm();
+    void onEcho();
+    void onSend();
 };

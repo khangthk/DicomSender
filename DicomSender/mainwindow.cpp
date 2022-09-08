@@ -2,7 +2,8 @@
 #include "ui_mainwindow.h"
 
 #include "setting.h"
-#include "echothread.h"
+
+#include <dicombase.h>
 
 #include <QString>
 #include <QDebug>
@@ -66,72 +67,12 @@ void MainWindow::dropEvent(QDropEvent *event)
 void MainWindow::showEvent(QShowEvent *event)
 {
     QMainWindow::showEvent(event);
-    loadSetting();
-}
-
-void MainWindow::onBrowse()
-{
-    QString lastPath = (m_paths.empty() ? QDir::currentPath() : ui->comboboxPaths->currentText());
-    QString dir = QFileDialog::getExistingDirectory(this, "Select Dicom Folder", lastPath,
-                                                    QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
-
-    if (!dir.isEmpty())
+    static bool init = false;
+    if (!init)
     {
-        addPath(dir);
+        init = true;
+        loadSetting();
     }
-}
-
-void MainWindow::onDcmtk(bool checked)
-{
-    qDebug() << "dcmtk:" << checked;
-    if (checked)
-    {
-        ui->groupBoxOther->setEnabled(true);
-    }
-}
-
-void MainWindow::onGdcm(bool checked)
-{
-    qDebug() << "gdcm:" << checked;
-    if (checked)
-    {
-        ui->groupBoxOther->setEnabled(false);
-    }
-}
-
-void MainWindow::onEcho()
-{
-    auto echo = new EchoThread(ui->editLocalAE->text(), ui->editTargetAE->text(),
-                               ui->editHost->text(), ui->spinBoxPort->value(),
-                               ui->radioDcmtk->isChecked() ? Library::dcmtk : Library::gdcm, this);
-
-    auto fnDone = [&](const bool status, const QString &log)
-    {
-        qDebug() << status << log;
-        addColorLog(status, " " + log);
-    };
-
-    auto fnStarted = [&]()
-    {
-        ui->buttonEcho->setEnabled(false);
-    };
-
-    auto fnFinished = [&]()
-    {
-        ui->buttonEcho->setEnabled(true);
-        addLog("----Done----\r\n");
-    };
-
-    connect(echo, &EchoThread::done, this, fnDone);
-    connect(echo, &EchoThread::started, this, fnStarted);
-    connect(echo, &EchoThread::finished, this, fnFinished);
-    connect(echo, &EchoThread::finished, echo, &QObject::deleteLater);
-    echo->start();
-}
-
-void MainWindow::onSend()
-{
-
 }
 
 void MainWindow::loadSetting()
@@ -164,9 +105,9 @@ void MainWindow::loadSetting()
     }
 
     // Other group
-    QList<int> connectionTimeout = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90 };
-    QList<int> ACSETimeout = { 10, 20, 30, 40, 50, 60, 70, 80, 90 };
-    QList<int> DIMSETimeout = { 0, 10, 20, 30, 40, 50, 60, 70, 80, 90 };
+    QList<int> connectionTimeout = { -1, 3, 10, 20, 30, 40, 50, 60, 70, 80, 90 };
+    QList<int> ACSETimeout = { 3, 10, 20, 30, 40, 50, 60, 70, 80, 90 };
+    QList<int> DIMSETimeout = { -1, 3, 10, 20, 30, 40, 50, 60, 70, 80, 90 };
     QList<int> MaxPDU = { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124, 128 };
     QList<int> CompressionLevel = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
@@ -176,12 +117,15 @@ void MainWindow::loadSetting()
     ui->comboBoxMaxPDU->clear();
     ui->comboBoxCompressionLevel->clear();
 
+    // Stop When Fail;
+    ui->checkBoxStopWhenError->setChecked(Setting::getStopWhenError());
+
     // Connection Timeout
     for (auto &value : connectionTimeout)
     {
-        if (value == 0)
+        if (value <= 0)
         {
-            ui->comboBoxConnectionTimeout->addItem("Unlimited", value);
+            ui->comboBoxConnectionTimeout->addItem("Unlimited", -1);
         }
         else
         {
@@ -203,16 +147,16 @@ void MainWindow::loadSetting()
     index = ACSETimeout.indexOf(Setting::getACSETimeout());
     if (index == -1)
     {
-        index = 2;
+        index = 3;
     }
     ui->comboBoxACSETimeout->setCurrentIndex(index);
 
     // DIMSE Timeout
     for (auto &value : DIMSETimeout)
     {
-        if (value == 0)
+        if (value <= 0)
         {
-            ui->comboBoxDIMSETimeout->addItem("Unlimited", value);
+            ui->comboBoxDIMSETimeout->addItem("Unlimited", 0);
         }
         else
         {
@@ -250,18 +194,19 @@ void MainWindow::loadSetting()
     }
     ui->comboBoxCompressionLevel->setCurrentIndex(index);
 
-    // Enable/Disable Other group
-    ui->groupBoxOther->setEnabled(ui->radioDcmtk->isChecked());
+    // Other group
+    updateOtherSetting(ui->radioDcmtk->isChecked());
 }
 
 void MainWindow::saveSetting()
 {
     Setting::savePaths(m_paths);
-    Setting::saveLocalAE(ui->editLocalAE->text());
-    Setting::saveTargetAE(ui->editTargetAE->text());
-    Setting::saveHost(ui->editHost->text());
+    Setting::saveLocalAE(ui->editLocalAE->text().trimmed());
+    Setting::saveTargetAE(ui->editTargetAE->text().trimmed());
+    Setting::saveHost(ui->editHost->text().trimmed());
     Setting::savePort(ui->spinBoxPort->value());
     Setting::saveLibrary(ui->radioDcmtk->isChecked() ? "dcmtk" : "gdcm");
+    Setting::saveStopWhenError(ui->checkBoxStopWhenError->isChecked());
     Setting::saveConnectionTimeout(ui->comboBoxConnectionTimeout->currentData().toInt());
     Setting::saveACSETimeout(ui->comboBoxACSETimeout->currentData().toInt());
     Setting::saveDIMSETimeout(ui->comboBoxDIMSETimeout->currentData().toInt());
@@ -288,14 +233,220 @@ void MainWindow::addLog(const QString &log)
 {
     ui->textEditLog->moveCursor(QTextCursor::End);
     ui->textEditLog->insertPlainText(log + "\r\n");
+    ui->textEditLog->moveCursor(QTextCursor::End);
 }
 
-void MainWindow::addColorLog(const bool status, const QString &log)
+void MainWindow::addColorLog(const bool result, const QString &log)
 {
     ui->textEditLog->moveCursor(QTextCursor::End);
     auto textColor = ui->textEditLog->textColor();
-    ui->textEditLog->setTextColor(status ? QColor(0, 165, 0) : Qt::red);
-    ui->textEditLog->insertPlainText(status ? "[OK]" : "[ERROR]");
+    ui->textEditLog->setTextColor(result ? QColor(0, 165, 0) : Qt::red);
+    ui->textEditLog->insertPlainText(result ? "[OK]" : "[ERROR]");
     ui->textEditLog->setTextColor(textColor);
     ui->textEditLog->insertPlainText(log + "\r\n");
+    ui->textEditLog->moveCursor(QTextCursor::End);
+}
+
+void MainWindow::logDone()
+{
+    addLog("----Done----\r\n");
+}
+
+void MainWindow::updateOtherSetting(const bool isDcmtk)
+{
+    ui->comboBoxConnectionTimeout->setEnabled(true);
+    ui->comboBoxACSETimeout->setEnabled(isDcmtk ? true : false);
+    ui->comboBoxDIMSETimeout->setEnabled(isDcmtk ? true : false);
+    ui->comboBoxMaxPDU->setEnabled(isDcmtk ? true : false);
+    ui->comboBoxCompressionLevel->setEnabled(isDcmtk ? true : false);
+}
+
+bool MainWindow::validInput(CheckInput type)
+{
+    bool valid = true;
+
+    switch (type) {
+    case CheckInput::path:
+        if (ui->comboboxPaths->currentText().isEmpty())
+        {
+            addColorLog(false, " No folder selected");
+            valid = false;
+        }
+        break;
+    case CheckInput::localAE:
+        if (ui->editLocalAE->text().trimmed().isEmpty())
+        {
+            addColorLog(false, " Local AE is not valid");
+            valid = false;
+        }
+        break;
+    case CheckInput::targetAE:
+        if (ui->editTargetAE->text().trimmed().isEmpty())
+        {
+            addColorLog(false, " Target AE is not valid");
+            valid = false;
+        }
+        break;
+    case CheckInput::host:
+        if (ui->editHost->text().trimmed().isEmpty())
+        {
+            addColorLog(false, " Host is not valid");
+            valid = false;
+        }
+        break;
+    default:
+        valid = false;
+        break;
+    }
+
+    return valid;
+}
+
+void MainWindow::send()
+{
+    if (m_sendFiles.isEmpty())
+    {
+        ui->buttonSend->setEnabled(true);
+        addColorLog(false, " No files to send");
+        logDone();
+        return;
+    }
+
+    auto store = new StoreThread(ui->radioDcmtk->isChecked() ? Library::dcmtk : Library::gdcm, this);
+    store->object()->setFiles(m_sendFiles);
+    store->object()->setLocalAE(ui->editLocalAE->text().trimmed());
+    store->object()->setTargetAE(ui->editTargetAE->text().trimmed());
+    store->object()->setHost(ui->editHost->text().trimmed());
+    store->object()->setPort(ui->spinBoxPort->value());
+    store->object()->setStopWhenError(ui->checkBoxStopWhenError->isChecked());
+    store->object()->setConnectionTimeout(ui->comboBoxConnectionTimeout->currentData().toInt());
+    if (ui->radioDcmtk->isChecked())
+    {
+        store->object()->setACSETimeout(ui->comboBoxACSETimeout->currentData().toInt());
+        store->object()->setDIMSETimeout(ui->comboBoxDIMSETimeout->currentData().toInt());
+        store->object()->setMaxPDU(ui->comboBoxMaxPDU->currentData().toInt());
+        store->object()->setCompressionLevel(ui->comboBoxCompressionLevel->currentData().toInt());
+    }
+
+    auto fnDone = [&](const bool result, const QString &log)
+    {
+        if (!log.isEmpty())
+        {
+            addColorLog(result, " " + log);
+        }
+    };
+
+    auto fnProcessed = [&](const QPair<int, int> &index, const bool result, const QString &log)
+    {
+        qDebug() << index.first << "/" << index.second << " " << log;
+        QString totalStr = QString("%1").arg(index.second);
+        QString str = QString("[%1/%2] %3").arg(index.first, totalStr.length(), 10, QChar('0')).arg(index.second).arg(log);
+
+        addColorLog(result, str);
+    };
+
+    auto fnFinished = [&]()
+    {
+        ui->buttonSend->setEnabled(true);
+        logDone();
+    };
+
+    connect(store, &StoreThread::done, this, fnDone);
+    connect(store, &StoreThread::processed, this, fnProcessed);
+    connect(store, &StoreThread::finished, this, fnFinished);
+    connect(store, &StoreThread::finished, store, &QObject::deleteLater);
+    store->start();
+}
+
+void MainWindow::onBrowse()
+{
+    QString lastPath = (m_paths.empty() ? QDir::currentPath() : ui->comboboxPaths->currentText());
+    QString dir = QFileDialog::getExistingDirectory(this, "Select Dicom Folder", lastPath,
+        QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
+
+    if (!dir.isEmpty())
+    {
+        addPath(dir);
+    }
+}
+
+void MainWindow::onDcmtk()
+{
+    updateOtherSetting(ui->radioDcmtk->isChecked());
+}
+
+void MainWindow::onGdcm()
+{
+    updateOtherSetting(ui->radioDcmtk->isChecked());
+}
+
+void MainWindow::onEcho()
+{
+    if (!validInput(CheckInput::localAE) ||
+        !validInput(CheckInput::targetAE) ||
+        !validInput(CheckInput::host))
+    {
+        logDone();
+        return;
+    }
+
+    auto echo = new EchoThread(ui->radioDcmtk->isChecked() ? Library::dcmtk : Library::gdcm, this);
+    echo->object()->setLocalAE(ui->editLocalAE->text().trimmed());
+    echo->object()->setTargetAE(ui->editTargetAE->text().trimmed());
+    echo->object()->setHost(ui->editHost->text().trimmed());
+    echo->object()->setPort(ui->spinBoxPort->value());
+    echo->object()->setConnectionTimeout(ui->comboBoxConnectionTimeout->currentData().toInt());
+
+    auto fnDone = [&](const bool result, const QString &log)
+    {
+        qDebug() << result << log;
+        addColorLog(result, " " + log);
+    };
+
+    auto fnStarted = [&]()
+    {
+        ui->buttonEcho->setEnabled(false);
+    };
+
+    auto fnFinished = [&]()
+    {
+        ui->buttonEcho->setEnabled(true);
+        logDone();
+    };
+
+    connect(echo, &EchoThread::done, this, fnDone);
+    connect(echo, &EchoThread::started, this, fnStarted);
+    connect(echo, &EchoThread::finished, this, fnFinished);
+    connect(echo, &EchoThread::finished, echo, &QObject::deleteLater);
+    echo->start();
+}
+
+void MainWindow::onSend()
+{
+    if (!validInput(CheckInput::path) || !validInput(CheckInput::localAE) ||
+        !validInput(CheckInput::targetAE) || !validInput(CheckInput::host))
+    {
+        logDone();
+        return;
+    }
+
+    auto scan = new ScanThread(ui->radioDcmtk->isChecked() ? Library::dcmtk : Library::gdcm, this);
+    scan->object()->setDir(ui->comboboxPaths->currentText());
+    scan->object()->setOutput(m_sendFiles);
+
+    auto fnDone = [&](const int count)
+    {
+        qDebug() << "File(s): " << count;
+        send();
+    };
+
+    auto fnStarted = [&]()
+    {
+        ui->buttonSend->setEnabled(false);
+    };
+
+    connect(scan, &ScanThread::done, this, fnDone);
+    connect(scan, &ScanThread::started, this, fnStarted);
+    connect(scan, &ScanThread::finished, scan, &QObject::deleteLater);
+    scan->start();
 }

@@ -18,24 +18,27 @@ public:
     static void saveHost(const QString &host);
     static QString getHost();
 
-    static void savePort(const int &port);
+    static void savePort(const int port);
     static int getPort();
 
-    static void saveLibrary(const QString &lib);
+    static void saveLibrary(const QString &library);
     static QString getLibrary();
 
-    static void saveConnectionTimeout(const int &sec);
+    static void saveStopWhenError(const bool stop);
+    static bool getStopWhenError();
+
+    static void saveConnectionTimeout(const int seconds);
     static int getConnectionTimeout();
 
-    static void saveACSETimeout(const int &sec);
+    static void saveACSETimeout(const int seconds);
     static int getACSETimeout();
 
-    static void saveDIMSETimeout(const int &sec);
+    static void saveDIMSETimeout(const int seconds);
     static int getDIMSETimeout();
 
-    static void saveMaxPDU(const int &num);
+    static void saveMaxPDU(const int number);
     static int getMaxPDU();
 
-    static void saveCompressionLevel(const int &level);
+    static void saveCompressionLevel(const int level);
     static int getCompressionLevel();
 };

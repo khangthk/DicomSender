@@ -16,8 +16,11 @@ QStringList Setting::getPaths()
 
 void Setting::saveLocalAE(const QString &title)
 {
-    QSettings setting;
-    setting.setValue("LocalAE", title);
+    if (!title.isEmpty())
+    {
+        QSettings setting;
+        setting.setValue("LocalAE", title);
+    }
 }
 
 QString Setting::getLocalAE()
@@ -28,8 +31,11 @@ QString Setting::getLocalAE()
 
 void Setting::saveTargetAE(const QString &title)
 {
-    QSettings setting;
-    setting.setValue("TargetAE", title);
+    if (!title.isEmpty())
+    {
+        QSettings setting;
+        setting.setValue("TargetAE", title);
+    }
 }
 
 QString Setting::getTargetAE()
@@ -40,8 +46,11 @@ QString Setting::getTargetAE()
 
 void Setting::saveHost(const QString &host)
 {
-    QSettings setting;
-    setting.setValue("Host", host);
+    if (!host.isEmpty())
+    {
+        QSettings setting;
+        setting.setValue("Host", host);
+    }
 }
 
 QString Setting::getHost()
@@ -50,7 +59,7 @@ QString Setting::getHost()
     return setting.value("Host", "localhost").toString();
 }
 
-void Setting::savePort(const int &port)
+void Setting::savePort(const int port)
 {
     QSettings setting;
     setting.setValue("Port", port);
@@ -62,10 +71,10 @@ int Setting::getPort()
     return setting.value("Port", 104).toInt();
 }
 
-void Setting::saveLibrary(const QString &lib)
+void Setting::saveLibrary(const QString &library)
 {
     QSettings setting;
-    setting.setValue("Library", lib);
+    setting.setValue("Library", library);
 }
 
 QString Setting::getLibrary()
@@ -74,46 +83,58 @@ QString Setting::getLibrary()
     return setting.value("Library", "dcmtk").toString();
 }
 
-void Setting::saveConnectionTimeout(const int &sec)
+void Setting::saveStopWhenError(const bool stop)
 {
     QSettings setting;
-    setting.setValue("ConnectionTimeout", sec);
+    setting.setValue("StopWhenFail", stop);
+}
+
+bool Setting::getStopWhenError()
+{
+    QSettings setting;
+    return setting.value("StopWhenFail", true).toBool();
+}
+
+void Setting::saveConnectionTimeout(const int seconds)
+{
+    QSettings setting;
+    setting.setValue("ConnectionTimeout", QString("%1").arg(seconds));
 }
 
 int Setting::getConnectionTimeout()
 {
     QSettings setting;
-    return setting.value("ConnectionTimeout", -1).toInt();
+    return setting.value("ConnectionTimeout", "-1").toInt();
 }
 
-void Setting::saveACSETimeout(const int &sec)
+void Setting::saveACSETimeout(const int seconds)
 {
     QSettings setting;
-    setting.setValue("ACSETimeout", sec);
+    setting.setValue("ACSETimeout", QString("%1").arg(seconds));
 }
 
 int Setting::getACSETimeout()
 {
     QSettings setting;
-    return setting.value("ACSETimeout", 30).toInt();
+    return setting.value("ACSETimeout", "30").toInt();
 }
 
-void Setting::saveDIMSETimeout(const int &sec)
+void Setting::saveDIMSETimeout(const int seconds)
 {
     QSettings setting;
-    setting.setValue("DIMSETimeout", sec);
+    setting.setValue("DIMSETimeout", QString("%1").arg(seconds));
 }
 
 int Setting::getDIMSETimeout()
 {
     QSettings setting;
-    return setting.value("DIMSETimeout", -1).toInt();
+    return setting.value("DIMSETimeout", "-1").toInt();
 }
 
-void Setting::saveMaxPDU(const int &num)
+void Setting::saveMaxPDU(const int number)
 {
     QSettings setting;
-    setting.setValue("MaxPDU", num);
+    setting.setValue("MaxPDU", number);
 }
 
 int Setting::getMaxPDU()
@@ -122,7 +143,7 @@ int Setting::getMaxPDU()
     return setting.value("MaxPDU", 16).toInt();
 }
 
-void Setting::saveCompressionLevel(const int &level)
+void Setting::saveCompressionLevel(const int level)
 {
     QSettings setting;
     setting.setValue("CompressionLevel", level);
