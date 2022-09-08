@@ -13,11 +13,17 @@ include($$PWD/../ThirdParty/gdcm.pri)
 include($$PWD/../ThirdParty/zlib.pri)
 
 SOURCES += \
-    dicombase.cpp \
-    echobase.cpp \
     echodcmtk.cpp \
     echogdcm.cpp \
-    echothread.cpp
+    echothread.cpp \
+    gdcmhelper.cpp \
+    scandcmtk.cpp \
+    scangdcm.cpp \
+    scanthread.cpp \
+    scuinfo.cpp \
+    storedcmtk.cpp \
+    storegdcm.cpp \
+    storethread.cpp
 
 HEADERS += \
     dicombase.h \
@@ -25,7 +31,17 @@ HEADERS += \
     echodcmtk.h \
     echogdcm.h \
     echothread.h \
-    global.h
+    gdcmhelper.h \
+    global.h \
+    scanbase.h \
+    scandcmtk.h \
+    scangdcm.h \
+    scanthread.h \
+    scuinfo.h \
+    storebase.h \
+    storedcmtk.h \
+    storegdcm.h \
+    storethread.h
 
 # Default rules for deployment.
 unix {

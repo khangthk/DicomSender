@@ -1,9 +1,15 @@
 #pragma once
 
-#include "global.h"
-
-class DICOMBASE_EXPORT DicomBase
-{
-public:
-    DicomBase();
-};
+#include "scuinfo.h"
+#include "echobase.h"
+#include "echodcmtk.h"
+#include "echogdcm.h"
+#include "echothread.h"
+#include "scanbase.h"
+#include "scandcmtk.h"
+#include "scangdcm.h"
+#include "scanthread.h"
+#include "storebase.h"
+#include "storedcmtk.h"
+#include "storegdcm.h"
+#include "storethread.h"

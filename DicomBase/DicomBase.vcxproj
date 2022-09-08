@@ -65,16 +65,16 @@
   <ImportGroup Label="Shared" />
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)' == 'Debug'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-	<Import Project="..\ThirdParty\dcmtk.props" />
-	<Import Project="..\ThirdParty\gdcm.props" />
-	<Import Project="..\ThirdParty\zlib.props" />
+    <Import Project="..\ThirdParty\dcmtk.props" />
+    <Import Project="..\ThirdParty\gdcm.props" />
+    <Import Project="..\ThirdParty\zlib.props" />
     <Import Project="..\ThirdParty\qt.props" />
   </ImportGroup>
   <ImportGroup Label="PropertySheets" Condition="'$(Configuration)' == 'Release'">
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
-	<Import Project="..\ThirdParty\dcmtk.props" />
-	<Import Project="..\ThirdParty\gdcm.props" />
-	<Import Project="..\ThirdParty\zlib.props" />
+    <Import Project="..\ThirdParty\dcmtk.props" />
+    <Import Project="..\ThirdParty\gdcm.props" />
+    <Import Project="..\ThirdParty\zlib.props" />
     <Import Project="..\ThirdParty\qt.props" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
@@ -111,17 +111,33 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="echobase.cpp" />
     <ClCompile Include="echodcmtk.cpp" />
     <ClCompile Include="echogdcm.cpp" />
     <ClCompile Include="echothread.cpp" />
+    <ClCompile Include="gdcmhelper.cpp" />
+    <ClCompile Include="scandcmtk.cpp" />
+    <ClCompile Include="scangdcm.cpp" />
+    <ClCompile Include="scanthread.cpp" />
+    <ClCompile Include="scuinfo.cpp" />
+    <ClCompile Include="storedcmtk.cpp" />
+    <ClCompile Include="storegdcm.cpp" />
+    <ClCompile Include="storethread.cpp" />
+    <QtMoc Include="scuinfo.h" />
+    <QtMoc Include="storethread.h" />
+    <QtMoc Include="storegdcm.h" />
+    <QtMoc Include="storedcmtk.h" />
+    <QtMoc Include="storebase.h" />
+    <QtMoc Include="scanthread.h" />
+    <QtMoc Include="scangdcm.h" />
+    <QtMoc Include="scandcmtk.h" />
+    <QtMoc Include="scanbase.h" />
     <QtMoc Include="echobase.h" />
     <QtMoc Include="echodcmtk.h" />
     <QtMoc Include="echogdcm.h" />
     <QtMoc Include="echothread.h" />
+    <ClInclude Include="gdcmhelper.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="dicombase.h" />
-    <ClCompile Include="dicombase.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

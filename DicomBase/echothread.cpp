@@ -4,30 +4,21 @@
 
 #include <QDebug>
 
-EchoThread::EchoThread(const QString &localAE, const QString &targetAE,
-                       const QString &host, uint16_t port,
-                       const Library &lib, QObject *parent)
+EchoThread::EchoThread(const Library &lib, QObject *parent)
     : QThread(parent)
 {
-    if (lib == Library::dcmtk)
-    {
-        m_echo.reset(new EchoDcmtk());
-    }
-    else
-    {
-        m_echo.reset(new EchoGdcm());
-    }
-    m_echo->setLocalAE(localAE);
-    m_echo->setTargetAE(targetAE);
-    m_echo->setHost(host);
-    m_echo->setPort(port);
-
+    Library::dcmtk == lib ? m_echo.reset(new EchoDcmtk()) : m_echo.reset(new EchoGdcm());
     connect(m_echo.get(), &EchoBase::done, this, &EchoThread::done);
 }
 
 EchoThread::~EchoThread()
 {
     qDebug() << "~EchoThread";
+}
+
+EchoBase *EchoThread::object()
+{
+    return m_echo.get();
 }
 
 void EchoThread::run()

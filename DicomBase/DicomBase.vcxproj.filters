@@ -26,17 +26,14 @@
     <ClInclude Include="global.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClCompile Include="dicombase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClInclude Include="dicombase.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="gdcmhelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="echobase.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="echodcmtk.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
@@ -44,6 +41,30 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="echothread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="gdcmhelper.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scandcmtk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scangdcm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scanthread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="storedcmtk.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="storegdcm.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="storethread.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="scuinfo.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
@@ -58,6 +79,33 @@
       <Filter>Header Files</Filter>
     </QtMoc>
     <QtMoc Include="echothread.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="scanbase.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="scandcmtk.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="scangdcm.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="scanthread.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="storebase.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="storedcmtk.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="storegdcm.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="storethread.h">
+      <Filter>Header Files</Filter>
+    </QtMoc>
+    <QtMoc Include="scuinfo.h">
       <Filter>Header Files</Filter>
     </QtMoc>
   </ItemGroup>

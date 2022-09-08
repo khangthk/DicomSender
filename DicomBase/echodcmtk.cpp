@@ -7,7 +7,6 @@ EchoDcmtk::EchoDcmtk(QObject *parent)
 EchoDcmtk::~EchoDcmtk()
 {}
 
-bool EchoDcmtk::echo()
+void EchoDcmtk::echo()
 {
-    return false;
 }

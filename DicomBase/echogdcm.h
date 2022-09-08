@@ -11,5 +11,5 @@ public:
     EchoGdcm(QObject *parent = nullptr);
     ~EchoGdcm();
 
-    bool echo();
+    void echo() override;
 };

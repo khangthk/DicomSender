@@ -11,3 +11,5 @@
 #else
 # define DICOMBASE_EXPORT
 #endif
+
+enum class Library { dcmtk, gdcm };

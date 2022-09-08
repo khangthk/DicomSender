@@ -13,13 +13,13 @@ EchoGdcm::EchoGdcm(QObject *parent)
 EchoGdcm::~EchoGdcm()
 {}
 
-bool EchoGdcm::echo()
+void EchoGdcm::echo()
 {
     PresentationContextGenerator generator;
     if (!generator.GenerateFromUID(UIDs::VerificationSOPClass))
     {
         emit done(false, "Failed to generate presentation context");
-        return false;
+        return;
     }
 
     network::ULConnectionManager theManager;
@@ -31,7 +31,7 @@ bool EchoGdcm::echo()
             host().toStdString(),
             0,
             port(),
-            1000,
+            connectionTimeout(),
             generator.GetPresentationContexts()))
         {
             connect = false;
@@ -45,7 +45,7 @@ bool EchoGdcm::echo()
     if (!connect)
     {
         emit done(false, "Failed to establish connection");
-        return false;
+        return;
     }
 
     std::vector<network::PresentationDataValue> theValues = theManager.SendEcho();
@@ -67,13 +67,13 @@ bool EchoGdcm::echo()
         if (at.GetValue() != 0)
         {
             emit done(false, "Wrong value for status (C-ECHO)");
-            return false;
+            return;
         }
 
         emit done(true, "Echo successfully");
-        return true;
+        return;
     }
 
     emit done(false, "Empty return on C-ECHO (no status)");
-    return false;
+    return;
 }

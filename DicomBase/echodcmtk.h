@@ -11,5 +11,5 @@ public:
     EchoDcmtk(QObject *parent = nullptr);
     ~EchoDcmtk();
 
-    bool echo();
+    void echo() override;
 };
