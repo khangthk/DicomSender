@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>850</width>
-    <height>500</height>
+    <height>571</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -24,7 +24,7 @@
         </property>
         <layout class="QHBoxLayout" name="horizontalLayout_2" stretch="1,0">
          <item>
-          <widget class="QComboBox" name="comboboxPaths">
+          <widget class="QComboBox" name="comboBoxPaths">
            <property name="minimumSize">
             <size>
              <width>0</width>
@@ -43,6 +43,10 @@
            </property>
            <property name="text">
             <string>Browse</string>
+           </property>
+           <property name="icon">
+            <iconset resource="mainwindow.qrc">
+             <normaloff>:/icons/browse.ico</normaloff>:/icons/browse.ico</iconset>
            </property>
           </widget>
          </item>
@@ -256,6 +260,13 @@ hr { height: 1px; border-width: 0; }
           <property name="labelAlignment">
            <set>Qt::AlignRight|Qt::AlignTrailing|Qt::AlignVCenter</set>
           </property>
+          <item row="0" column="0" colspan="2">
+           <widget class="QCheckBox" name="checkBoxStopWhenError">
+            <property name="text">
+             <string>Stop sending files if there is an error</string>
+            </property>
+           </widget>
+          </item>
           <item row="1" column="0">
            <widget class="QLabel" name="labelConnectionTimeout">
             <property name="text">
@@ -273,7 +284,7 @@ hr { height: 1px; border-width: 0; }
             </property>
             <property name="maximumSize">
              <size>
-              <width>100</width>
+              <width>105</width>
               <height>16777215</height>
              </size>
             </property>
@@ -351,7 +362,7 @@ hr { height: 1px; border-width: 0; }
             </property>
             <property name="maximumSize">
              <size>
-              <width>100</width>
+              <width>105</width>
               <height>16777215</height>
              </size>
             </property>
@@ -430,7 +441,7 @@ hr { height: 1px; border-width: 0; }
             </property>
             <property name="maximumSize">
              <size>
-              <width>100</width>
+              <width>105</width>
               <height>16777215</height>
              </size>
             </property>
@@ -491,15 +502,15 @@ hr { height: 1px; border-width: 0; }
             </item>
            </widget>
           </item>
-          <item row="4" column="0">
-           <widget class="QLabel" name="labelMaxDPU">
+          <item row="5" column="0">
+           <widget class="QLabel" name="labelMaxReceiveDPU">
             <property name="text">
-             <string>Max PDU:</string>
+             <string>Max Receive PDU:</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
-           <widget class="QComboBox" name="comboBoxMaxPDU">
+          <item row="5" column="1">
+           <widget class="QComboBox" name="comboBoxMaxReceivePDU">
             <property name="minimumSize">
              <size>
               <width>0</width>
@@ -508,7 +519,7 @@ hr { height: 1px; border-width: 0; }
             </property>
             <property name="maximumSize">
              <size>
-              <width>100</width>
+              <width>105</width>
               <height>16777215</height>
              </size>
             </property>
@@ -680,14 +691,14 @@ hr { height: 1px; border-width: 0; }
             </item>
            </widget>
           </item>
-          <item row="5" column="0">
+          <item row="6" column="0">
            <widget class="QLabel" name="labelCompressionLevel">
             <property name="text">
              <string>Compression Level:</string>
             </property>
            </widget>
           </item>
-          <item row="5" column="1">
+          <item row="6" column="1">
            <widget class="QComboBox" name="comboBoxCompressionLevel">
             <property name="minimumSize">
              <size>
@@ -697,7 +708,7 @@ hr { height: 1px; border-width: 0; }
             </property>
             <property name="maximumSize">
              <size>
-              <width>100</width>
+              <width>105</width>
               <height>16777215</height>
              </size>
             </property>
@@ -759,11 +770,234 @@ hr { height: 1px; border-width: 0; }
             </item>
            </widget>
           </item>
-          <item row="0" column="0" colspan="2">
-           <widget class="QCheckBox" name="checkBoxStopWhenError">
+          <item row="4" column="0">
+           <widget class="QLabel" name="labelMaxSendPDU">
             <property name="text">
-             <string>Stop sending files if there is an error</string>
+             <string>Max Send PDU:</string>
             </property>
+           </widget>
+          </item>
+          <item row="4" column="1">
+           <widget class="QComboBox" name="comboBoxMaxSendPDU">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>105</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="currentText">
+             <string>16K (16384)</string>
+            </property>
+            <property name="currentIndex">
+             <number>3</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>4K (4096)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>8K (8192)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>12K (12288)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>16K (16384)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>20K (20480)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>24K (24576)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>28K (28672)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>32K (32768)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>36K (36864)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>40K (40960)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>44K (45056)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>48K (49152)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>52K (53248)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>56K (57344)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>60K (61440)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>64K (65536)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>68K (69632)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>72K (73728)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>76K (77824)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>80K (81920)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>84K (86016)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>88K (90112)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>92K (94208)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>96K (98304)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>100K (102400)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>104K (106496)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>108K (110592)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>112K (114688)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>116K (118784)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>120K (122880)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>124K (126976)</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>128K (131072)</string>
+             </property>
+            </item>
+           </widget>
+          </item>
+          <item row="7" column="0">
+           <widget class="QLabel" name="labelDecompressionMode">
+            <property name="text">
+             <string>Decompression Mode:</string>
+            </property>
+           </widget>
+          </item>
+          <item row="7" column="1">
+           <widget class="QComboBox" name="comboBoxDecompressionMode">
+            <property name="minimumSize">
+             <size>
+              <width>0</width>
+              <height>24</height>
+             </size>
+            </property>
+            <property name="maximumSize">
+             <size>
+              <width>105</width>
+              <height>16777215</height>
+             </size>
+            </property>
+            <property name="currentIndex">
+             <number>1</number>
+            </property>
+            <item>
+             <property name="text">
+              <string>Never</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Lossless</string>
+             </property>
+            </item>
+            <item>
+             <property name="text">
+              <string>Lossless|Lossy</string>
+             </property>
+            </item>
            </widget>
           </item>
          </layout>
@@ -780,7 +1014,17 @@ hr { height: 1px; border-width: 0; }
             </size>
            </property>
            <property name="text">
-            <string>Echo</string>
+            <string> Echo</string>
+           </property>
+           <property name="icon">
+            <iconset resource="mainwindow.qrc">
+             <normaloff>:/icons/echo.ico</normaloff>:/icons/echo.ico</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
            </property>
           </widget>
          </item>
@@ -793,7 +1037,17 @@ hr { height: 1px; border-width: 0; }
             </size>
            </property>
            <property name="text">
-            <string>Send</string>
+            <string> Send</string>
+           </property>
+           <property name="icon">
+            <iconset resource="mainwindow.qrc">
+             <normaloff>:/icons/send.ico</normaloff>:/icons/send.ico</iconset>
+           </property>
+           <property name="iconSize">
+            <size>
+             <width>20</width>
+             <height>20</height>
+            </size>
            </property>
           </widget>
          </item>
@@ -818,6 +1072,8 @@ hr { height: 1px; border-width: 0; }
    </layout>
   </widget>
  </widget>
- <resources/>
+ <resources>
+  <include location="mainwindow.qrc"/>
+ </resources>
  <connections/>
 </ui>

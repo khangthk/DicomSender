@@ -14,6 +14,18 @@ QStringList Setting::getPaths()
     return setting.value("Paths", {}).toStringList();
 }
 
+void Setting::saveCurrentPath(const QString &path)
+{
+    QSettings setting;
+    setting.setValue("CurrentPath", path);
+}
+
+QString Setting::getCurrentPath()
+{
+    QSettings setting;
+    return setting.value("CurrentPath", "").toString();
+}
+
 void Setting::saveLocalAE(const QString &title)
 {
     if (!title.isEmpty())
@@ -131,16 +143,28 @@ int Setting::getDIMSETimeout()
     return setting.value("DIMSETimeout", "-1").toInt();
 }
 
-void Setting::saveMaxPDU(const int number)
+void Setting::saveMaxSendPDU(const int max)
 {
     QSettings setting;
-    setting.setValue("MaxPDU", number);
+    setting.setValue("MaxSendPDU", max);
 }
 
-int Setting::getMaxPDU()
+int Setting::getMaxSendPDU()
 {
     QSettings setting;
-    return setting.value("MaxPDU", 16).toInt();
+    return setting.value("MaxSendPDU", 16).toInt();
+}
+
+void Setting::saveMaxReceivePDU(const int max)
+{
+    QSettings setting;
+    setting.setValue("MaxReceivePDU", max);
+}
+
+int Setting::getMaxReceivePDU()
+{
+    QSettings setting;
+    return setting.value("MaxReceivePDU", 16).toInt();
 }
 
 void Setting::saveCompressionLevel(const int level)
@@ -153,4 +177,16 @@ int Setting::getCompressionLevel()
 {
     QSettings setting;
     return setting.value("CompressionLevel", 6).toInt();
+}
+
+void Setting::saveDecompressionMode(const int mode)
+{
+    QSettings setting;
+    setting.setValue("DecompressionMode", mode);
+}
+
+int Setting::getDecompressionMode()
+{
+    QSettings setting;
+    return setting.value("DecompressionMode", 1).toInt();
 }

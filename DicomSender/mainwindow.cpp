@@ -77,13 +77,20 @@ void MainWindow::showEvent(QShowEvent *event)
 
 void MainWindow::loadSetting()
 {
+    int index = -1;
+
     // Path list
     m_paths = Setting::getPaths();
-    ui->comboboxPaths->clear();
-    ui->comboboxPaths->addItems(m_paths);
+    ui->comboBoxPaths->clear();
+    ui->comboBoxPaths->addItems(m_paths);
     if (!m_paths.isEmpty())
     {
-        ui->comboboxPaths->setCurrentIndex(0);
+        index = m_paths.indexOf(Setting::getCurrentPath());
+        if (index == -1)
+        {
+            index = 0;  // First path
+        }
+        ui->comboBoxPaths->setCurrentIndex(index);
     }
 
     // Log
@@ -105,17 +112,20 @@ void MainWindow::loadSetting()
     }
 
     // Other group
-    QList<int> connectionTimeout = { -1, 3, 10, 20, 30, 40, 50, 60, 70, 80, 90 };
-    QList<int> ACSETimeout = { 3, 10, 20, 30, 40, 50, 60, 70, 80, 90 };
-    QList<int> DIMSETimeout = { -1, 3, 10, 20, 30, 40, 50, 60, 70, 80, 90 };
+    QList<int> connectionTimeout = { -1, 3, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000 };
+    QList<int> ACSETimeout = { 3, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000 };
+    QList<int> DIMSETimeout = { 0, 3, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000 };
     QList<int> MaxPDU = { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124, 128 };
     QList<int> CompressionLevel = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
+    QList<int> DecompressionMode = { 0, 1, 2 };
 
     ui->comboBoxConnectionTimeout->clear();
     ui->comboBoxACSETimeout->clear();
     ui->comboBoxDIMSETimeout->clear();
-    ui->comboBoxMaxPDU->clear();
+    ui->comboBoxMaxSendPDU->clear();
+    ui->comboBoxMaxReceivePDU->clear();
     ui->comboBoxCompressionLevel->clear();
+    ui->comboBoxDecompressionMode->clear();
 
     // Stop When Fail;
     ui->checkBoxStopWhenError->setChecked(Setting::getStopWhenError());
@@ -132,10 +142,10 @@ void MainWindow::loadSetting()
             ui->comboBoxConnectionTimeout->addItem(QString("%1 seconds").arg(value), value);
         }
     }
-    int index = connectionTimeout.indexOf(Setting::getConnectionTimeout());
+    index = connectionTimeout.indexOf(Setting::getConnectionTimeout());
     if (index == -1)
     {
-        index = 0;
+        index = 0;  // Unlimited
     }
     ui->comboBoxConnectionTimeout->setCurrentIndex(index);
 
@@ -147,7 +157,7 @@ void MainWindow::loadSetting()
     index = ACSETimeout.indexOf(Setting::getACSETimeout());
     if (index == -1)
     {
-        index = 3;
+        index = 3;  // 30 seconds
     }
     ui->comboBoxACSETimeout->setCurrentIndex(index);
 
@@ -166,21 +176,33 @@ void MainWindow::loadSetting()
     index = DIMSETimeout.indexOf(Setting::getDIMSETimeout());
     if (index == -1)
     {
-        index = 0;
+        index = 0;  // Unlimited
     }
     ui->comboBoxDIMSETimeout->setCurrentIndex(index);
 
-    // Max PDU
+    // Max Send PDU
     for (auto &value : MaxPDU)
     {
-        ui->comboBoxMaxPDU->addItem(QString("%1K (%2)").arg(value).arg(value * 1024), value);
+        ui->comboBoxMaxSendPDU->addItem(QString("%1K (%2)").arg(value).arg(value * 1024), value);
     }
-    index = MaxPDU.indexOf(Setting::getMaxPDU());
+    index = MaxPDU.indexOf(Setting::getMaxSendPDU());
     if (index == -1)
     {
-        index = 3;
+        index = 3;  // 16K (16384)
     }
-    ui->comboBoxMaxPDU->setCurrentIndex(index);
+    ui->comboBoxMaxSendPDU->setCurrentIndex(index);
+
+    // Max Receive PDU
+    for (auto &value : MaxPDU)
+    {
+        ui->comboBoxMaxReceivePDU->addItem(QString("%1K (%2)").arg(value).arg(value * 1024), value);
+    }
+    index = MaxPDU.indexOf(Setting::getMaxReceivePDU());
+    if (index == -1)
+    {
+        index = 3;  // 16K (16384)
+    }
+    ui->comboBoxMaxReceivePDU->setCurrentIndex(index);
 
     // Compression Level
     for (auto &value : CompressionLevel)
@@ -190,9 +212,20 @@ void MainWindow::loadSetting()
     index = CompressionLevel.indexOf(Setting::getCompressionLevel());
     if (index == -1)
     {
-        index = 6;
+        index = 6;  // 6
     }
     ui->comboBoxCompressionLevel->setCurrentIndex(index);
+
+    // Decompression Mode
+    ui->comboBoxDecompressionMode->addItem("Never", 0);
+    ui->comboBoxDecompressionMode->addItem("Lossless", 1);
+    ui->comboBoxDecompressionMode->addItem("Lossless|Lossy", 2);
+    index = DecompressionMode.indexOf(Setting::getDecompressionMode());
+    if (index == -1)
+    {
+        index = 1;  // Lossless
+    }
+    ui->comboBoxDecompressionMode->setCurrentIndex(index);
 
     // Other group
     updateOtherSetting(ui->radioDcmtk->isChecked());
@@ -201,6 +234,7 @@ void MainWindow::loadSetting()
 void MainWindow::saveSetting()
 {
     Setting::savePaths(m_paths);
+    Setting::saveCurrentPath(ui->comboBoxPaths->currentText());
     Setting::saveLocalAE(ui->editLocalAE->text().trimmed());
     Setting::saveTargetAE(ui->editTargetAE->text().trimmed());
     Setting::saveHost(ui->editHost->text().trimmed());
@@ -210,8 +244,10 @@ void MainWindow::saveSetting()
     Setting::saveConnectionTimeout(ui->comboBoxConnectionTimeout->currentData().toInt());
     Setting::saveACSETimeout(ui->comboBoxACSETimeout->currentData().toInt());
     Setting::saveDIMSETimeout(ui->comboBoxDIMSETimeout->currentData().toInt());
-    Setting::saveMaxPDU(ui->comboBoxMaxPDU->currentData().toInt());
+    Setting::saveMaxSendPDU(ui->comboBoxMaxSendPDU->currentData().toInt());
+    Setting::saveMaxReceivePDU(ui->comboBoxMaxReceivePDU->currentData().toInt());
     Setting::saveCompressionLevel(ui->comboBoxCompressionLevel->currentData().toInt());
+    Setting::saveDecompressionMode(ui->comboBoxDecompressionMode->currentData().toInt());
 }
 
 void MainWindow::addPath(const QString &path)
@@ -224,9 +260,9 @@ void MainWindow::addPath(const QString &path)
         m_paths.removeLast();
     }
 
-    ui->comboboxPaths->clear();
-    ui->comboboxPaths->addItems(m_paths);
-    ui->comboboxPaths->setCurrentIndex(0);
+    ui->comboBoxPaths->clear();
+    ui->comboBoxPaths->addItems(m_paths);
+    ui->comboBoxPaths->setCurrentIndex(0);
 }
 
 void MainWindow::addLog(const QString &log)
@@ -257,8 +293,10 @@ void MainWindow::updateOtherSetting(const bool isDcmtk)
     ui->comboBoxConnectionTimeout->setEnabled(true);
     ui->comboBoxACSETimeout->setEnabled(isDcmtk ? true : false);
     ui->comboBoxDIMSETimeout->setEnabled(isDcmtk ? true : false);
-    ui->comboBoxMaxPDU->setEnabled(isDcmtk ? true : false);
+    ui->comboBoxMaxSendPDU->setEnabled(isDcmtk ? true : false);
+    ui->comboBoxMaxReceivePDU->setEnabled(isDcmtk ? true : false);
     ui->comboBoxCompressionLevel->setEnabled(isDcmtk ? true : false);
+    ui->comboBoxDecompressionMode->setEnabled(isDcmtk ? true : false);
 }
 
 bool MainWindow::validInput(CheckInput type)
@@ -267,7 +305,7 @@ bool MainWindow::validInput(CheckInput type)
 
     switch (type) {
     case CheckInput::path:
-        if (ui->comboboxPaths->currentText().isEmpty())
+        if (ui->comboBoxPaths->currentText().isEmpty())
         {
             addColorLog(false, " No folder selected");
             valid = false;
@@ -324,8 +362,10 @@ void MainWindow::send()
     {
         store->object()->setACSETimeout(ui->comboBoxACSETimeout->currentData().toInt());
         store->object()->setDIMSETimeout(ui->comboBoxDIMSETimeout->currentData().toInt());
-        store->object()->setMaxPDU(ui->comboBoxMaxPDU->currentData().toInt());
+        store->object()->setMaxSendPDU(ui->comboBoxMaxSendPDU->currentData().toInt());
+        store->object()->setMaxReceivePDU(ui->comboBoxMaxReceivePDU->currentData().toInt());
         store->object()->setCompressionLevel(ui->comboBoxCompressionLevel->currentData().toInt());
+        store->object()->setDecompressionMode(ui->comboBoxDecompressionMode->currentData().toInt());
     }
 
     auto fnDone = [&](const bool result, const QString &log)
@@ -360,7 +400,7 @@ void MainWindow::send()
 
 void MainWindow::onBrowse()
 {
-    QString lastPath = (m_paths.empty() ? QDir::currentPath() : ui->comboboxPaths->currentText());
+    QString lastPath = (m_paths.empty() ? QDir::currentPath() : ui->comboBoxPaths->currentText());
     QString dir = QFileDialog::getExistingDirectory(this, "Select Dicom Folder", lastPath,
         QFileDialog::ShowDirsOnly | QFileDialog::DontResolveSymlinks);
 
@@ -396,6 +436,12 @@ void MainWindow::onEcho()
     echo->object()->setHost(ui->editHost->text().trimmed());
     echo->object()->setPort(ui->spinBoxPort->value());
     echo->object()->setConnectionTimeout(ui->comboBoxConnectionTimeout->currentData().toInt());
+    if (ui->radioDcmtk->isChecked())
+    {
+        echo->object()->setACSETimeout(ui->comboBoxACSETimeout->currentData().toInt());
+        echo->object()->setDIMSETimeout(ui->comboBoxDIMSETimeout->currentData().toInt());
+        echo->object()->setMaxReceivePDU(ui->comboBoxMaxReceivePDU->currentData().toInt());
+    }
 
     auto fnDone = [&](const bool result, const QString &log)
     {
@@ -431,7 +477,7 @@ void MainWindow::onSend()
     }
 
     auto scan = new ScanThread(ui->radioDcmtk->isChecked() ? Library::dcmtk : Library::gdcm, this);
-    scan->object()->setDir(ui->comboboxPaths->currentText());
+    scan->object()->setDir(ui->comboBoxPaths->currentText());
     scan->object()->setOutput(m_sendFiles);
 
     auto fnDone = [&](const int count)

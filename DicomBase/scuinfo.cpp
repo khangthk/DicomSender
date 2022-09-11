@@ -2,7 +2,7 @@
 
 SCUInfo::SCUInfo(QObject *parent)
     : QObject(parent), m_localAE("AE"), m_targetAE("AE"), m_host("localhost"), m_port(104), m_stopWhenError(true),
-    m_connectionTimeout(10), m_ACSETimeout(10), m_DIMSETimeout(10), m_maxPDU(16), m_compressionLevel(6)
+    m_connectionTimeout(10), m_ACSETimeout(10), m_DIMSETimeout(10), m_maxReceivePDU(16), m_compressionLevel(6)
 {}
 
 SCUInfo::~SCUInfo()
@@ -88,14 +88,24 @@ void SCUInfo::setDIMSETimeout(const int seconds)
     m_DIMSETimeout = seconds;
 }
 
-int SCUInfo::maxPDU() const
+int SCUInfo::maxSendPDU() const
 {
-    return m_maxPDU;
+    return m_maxSendPDU;
 }
 
-void SCUInfo::setMaxPDU(const int max)
+void SCUInfo::setMaxSendPDU(const int max)
 {
-    m_maxPDU = max;
+    m_maxSendPDU = max;
+}
+
+int SCUInfo::maxReceivePDU() const
+{
+    return m_maxReceivePDU;
+}
+
+void SCUInfo::setMaxReceivePDU(const int max)
+{
+    m_maxReceivePDU = max;
 }
 
 int SCUInfo::compressionLevel() const
@@ -106,4 +116,14 @@ int SCUInfo::compressionLevel() const
 void SCUInfo::setCompressionLevel(const int level)
 {
     m_compressionLevel = level;
+}
+
+int SCUInfo::decompressionMode() const
+{
+    return m_decompressionMode;
+}
+
+void SCUInfo::setDecompressionMode(const int mode)
+{
+    m_decompressionMode = mode;
 }

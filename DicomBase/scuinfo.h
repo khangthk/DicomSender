@@ -37,11 +37,17 @@ public:
     int DIMSETimeout() const;
     void setDIMSETimeout(const int seconds);
 
-    int maxPDU() const;
-    void setMaxPDU(const int max);
+    int maxSendPDU() const;
+    void setMaxSendPDU(const int max);
+
+    int maxReceivePDU() const;
+    void setMaxReceivePDU(const int max);
 
     int compressionLevel() const;
     void setCompressionLevel(const int level);
+
+    int decompressionMode() const;
+    void setDecompressionMode(const int mode);
 
 private:
     QString m_localAE;
@@ -52,6 +58,8 @@ private:
     int m_connectionTimeout;
     int m_ACSETimeout;
     int m_DIMSETimeout;
-    int m_maxPDU;
+    int m_maxSendPDU;
+    int m_maxReceivePDU;
     int m_compressionLevel;
+    int m_decompressionMode;
 };
