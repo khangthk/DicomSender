@@ -33,6 +33,9 @@ public:
     static void saveConnectionTimeout(const int seconds);
     static int getConnectionTimeout();
 
+    static void saveSocketTimeout(const int seconds);
+    static int getSocketTimeout();
+
     static void saveACSETimeout(const int seconds);
     static int getACSETimeout();
 

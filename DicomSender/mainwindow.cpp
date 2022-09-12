@@ -113,6 +113,7 @@ void MainWindow::loadSetting()
 
     // Other group
     QList<int> connectionTimeout = { -1, 3, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000 };
+    QList<int> socketTimeout = { -1, 0, 3, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000 };
     QList<int> ACSETimeout = { 3, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000 };
     QList<int> DIMSETimeout = { 0, 3, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000 };
     QList<int> MaxPDU = { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124, 128 };
@@ -120,6 +121,7 @@ void MainWindow::loadSetting()
     QList<int> DecompressionMode = { 0, 1, 2 };
 
     ui->comboBoxConnectionTimeout->clear();
+    ui->comboBoxSocketTimeout->clear();
     ui->comboBoxACSETimeout->clear();
     ui->comboBoxDIMSETimeout->clear();
     ui->comboBoxMaxSendPDU->clear();
@@ -148,6 +150,29 @@ void MainWindow::loadSetting()
         index = 0;  // Unlimited
     }
     ui->comboBoxConnectionTimeout->setCurrentIndex(index);
+
+    // Socket Timeout
+    for (auto &value : socketTimeout)
+    {
+        if (value < 0)
+        {
+            ui->comboBoxSocketTimeout->addItem("No Setting", -1);
+        }
+        else if (value == 0)
+        {
+            ui->comboBoxSocketTimeout->addItem("Unlimited", 0);
+        }
+        else
+        {
+            ui->comboBoxSocketTimeout->addItem(QString("%1 seconds").arg(value), value);
+        }
+    }
+    index = socketTimeout.indexOf(Setting::getSocketTimeout());
+    if (index == -1)
+    {
+        index = 8;  // 60 seconds
+    }
+    ui->comboBoxSocketTimeout->setCurrentIndex(index);
 
     // ACSE Timeout
     for (auto &value : ACSETimeout)
@@ -242,6 +267,7 @@ void MainWindow::saveSetting()
     Setting::saveLibrary(ui->radioDcmtk->isChecked() ? "dcmtk" : "gdcm");
     Setting::saveStopWhenError(ui->checkBoxStopWhenError->isChecked());
     Setting::saveConnectionTimeout(ui->comboBoxConnectionTimeout->currentData().toInt());
+    Setting::saveSocketTimeout(ui->comboBoxSocketTimeout->currentData().toInt());
     Setting::saveACSETimeout(ui->comboBoxACSETimeout->currentData().toInt());
     Setting::saveDIMSETimeout(ui->comboBoxDIMSETimeout->currentData().toInt());
     Setting::saveMaxSendPDU(ui->comboBoxMaxSendPDU->currentData().toInt());
@@ -291,6 +317,7 @@ void MainWindow::logDone()
 void MainWindow::updateOtherSetting(const bool isDcmtk)
 {
     ui->comboBoxConnectionTimeout->setEnabled(true);
+    ui->comboBoxSocketTimeout->setEnabled(isDcmtk ? true : false);
     ui->comboBoxACSETimeout->setEnabled(isDcmtk ? true : false);
     ui->comboBoxDIMSETimeout->setEnabled(isDcmtk ? true : false);
     ui->comboBoxMaxSendPDU->setEnabled(isDcmtk ? true : false);
@@ -360,10 +387,11 @@ void MainWindow::send()
     store->object()->setConnectionTimeout(ui->comboBoxConnectionTimeout->currentData().toInt());
     if (ui->radioDcmtk->isChecked())
     {
+        store->object()->setSocketTimeout(ui->comboBoxSocketTimeout->currentData().toInt());
         store->object()->setACSETimeout(ui->comboBoxACSETimeout->currentData().toInt());
         store->object()->setDIMSETimeout(ui->comboBoxDIMSETimeout->currentData().toInt());
-        store->object()->setMaxSendPDU(ui->comboBoxMaxSendPDU->currentData().toInt());
-        store->object()->setMaxReceivePDU(ui->comboBoxMaxReceivePDU->currentData().toInt());
+        store->object()->setMaxSendPDU(ui->comboBoxMaxSendPDU->currentData().toInt() * 1024);
+        store->object()->setMaxReceivePDU(ui->comboBoxMaxReceivePDU->currentData().toInt() * 1024);
         store->object()->setCompressionLevel(ui->comboBoxCompressionLevel->currentData().toInt());
         store->object()->setDecompressionMode(ui->comboBoxDecompressionMode->currentData().toInt());
     }
@@ -438,9 +466,10 @@ void MainWindow::onEcho()
     echo->object()->setConnectionTimeout(ui->comboBoxConnectionTimeout->currentData().toInt());
     if (ui->radioDcmtk->isChecked())
     {
+        echo->object()->setSocketTimeout(ui->comboBoxSocketTimeout->currentData().toInt());
         echo->object()->setACSETimeout(ui->comboBoxACSETimeout->currentData().toInt());
         echo->object()->setDIMSETimeout(ui->comboBoxDIMSETimeout->currentData().toInt());
-        echo->object()->setMaxReceivePDU(ui->comboBoxMaxReceivePDU->currentData().toInt());
+        echo->object()->setMaxReceivePDU(ui->comboBoxMaxReceivePDU->currentData().toInt() * 1024);
     }
 
     auto fnDone = [&](const bool result, const QString &log)

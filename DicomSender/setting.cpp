@@ -119,6 +119,18 @@ int Setting::getConnectionTimeout()
     return setting.value("ConnectionTimeout", "-1").toInt();
 }
 
+void Setting::saveSocketTimeout(const int seconds)
+{
+    QSettings setting;
+    setting.setValue("SocketTimeout", QString("%1").arg(seconds));
+}
+
+int Setting::getSocketTimeout()
+{
+    QSettings setting;
+    return setting.value("SocketTimeout", "60").toInt();
+}
+
 void Setting::saveACSETimeout(const int seconds)
 {
     QSettings setting;
@@ -140,7 +152,7 @@ void Setting::saveDIMSETimeout(const int seconds)
 int Setting::getDIMSETimeout()
 {
     QSettings setting;
-    return setting.value("DIMSETimeout", "-1").toInt();
+    return setting.value("DIMSETimeout", "0").toInt();
 }
 
 void Setting::saveMaxSendPDU(const int max)
