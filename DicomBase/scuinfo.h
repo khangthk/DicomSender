@@ -31,6 +31,9 @@ public:
     int connectionTimeout() const;
     void setConnectionTimeout(const int seconds);
 
+    int socketTimeout() const;
+    void setSocketTimeout(const int seconds);
+
     int ACSETimeout() const;
     void setACSETimeout(const int seconds);
 
@@ -56,6 +59,7 @@ private:
     uint16_t m_port;
     bool m_stopWhenError;
     int m_connectionTimeout;
+    int m_socketTimeout;
     int m_ACSETimeout;
     int m_DIMSETimeout;
     int m_maxSendPDU;

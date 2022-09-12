@@ -1,8 +1,9 @@
 #include "scuinfo.h"
 
 SCUInfo::SCUInfo(QObject *parent)
-    : QObject(parent), m_localAE("AE"), m_targetAE("AE"), m_host("localhost"), m_port(104), m_stopWhenError(true),
-    m_connectionTimeout(10), m_ACSETimeout(10), m_DIMSETimeout(10), m_maxReceivePDU(16), m_compressionLevel(6)
+    : QObject(parent), m_localAE("AE"), m_targetAE("AE"), m_host("localhost"), m_port(104),
+    m_stopWhenError(true), m_connectionTimeout(-1), m_socketTimeout(60), m_ACSETimeout(30), m_DIMSETimeout(0),
+    m_maxSendPDU(16 * 1024), m_maxReceivePDU(16 * 1024), m_compressionLevel(6), m_decompressionMode(1)
 {}
 
 SCUInfo::~SCUInfo()
@@ -66,6 +67,16 @@ int SCUInfo::connectionTimeout() const
 void SCUInfo::setConnectionTimeout(const int seconds)
 {
     m_connectionTimeout = seconds;
+}
+
+int SCUInfo::socketTimeout() const
+{
+    return m_socketTimeout;
+}
+
+void SCUInfo::setSocketTimeout(const int seconds)
+{
+    m_socketTimeout = seconds;
 }
 
 int SCUInfo::ACSETimeout() const
