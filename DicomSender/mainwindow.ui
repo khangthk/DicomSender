@@ -1012,7 +1012,7 @@ hr { height: 1px; border-width: 0; }
             <property name="currentIndex">
              <number>8</number>
             </property>
-			<item>
+            <item>
              <property name="text">
               <string>No Setting</string>
              </property>
@@ -1196,6 +1196,28 @@ hr { height: 1px; border-width: 0; }
    </layout>
   </widget>
  </widget>
+ <tabstops>
+  <tabstop>comboBoxPaths</tabstop>
+  <tabstop>buttonBrowse</tabstop>
+  <tabstop>textEditLog</tabstop>
+  <tabstop>editLocalAE</tabstop>
+  <tabstop>editTargetAE</tabstop>
+  <tabstop>editHost</tabstop>
+  <tabstop>spinBoxPort</tabstop>
+  <tabstop>radioDcmtk</tabstop>
+  <tabstop>radioGdcm</tabstop>
+  <tabstop>checkBoxStopWhenError</tabstop>
+  <tabstop>comboBoxConnectionTimeout</tabstop>
+  <tabstop>comboBoxSocketTimeout</tabstop>
+  <tabstop>comboBoxACSETimeout</tabstop>
+  <tabstop>comboBoxDIMSETimeout</tabstop>
+  <tabstop>comboBoxMaxSendPDU</tabstop>
+  <tabstop>comboBoxMaxReceivePDU</tabstop>
+  <tabstop>comboBoxCompressionLevel</tabstop>
+  <tabstop>comboBoxDecompressionMode</tabstop>
+  <tabstop>buttonEcho</tabstop>
+  <tabstop>buttonSend</tabstop>
+ </tabstops>
  <resources>
   <include location="mainwindow.qrc"/>
  </resources>
