@@ -32,6 +32,9 @@
     <ClInclude Include="gdcmhelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="dcmtkhelper.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="echodcmtk.cpp">
@@ -65,6 +68,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="scuinfo.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="dcmtkhelper.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

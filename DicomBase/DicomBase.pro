@@ -13,6 +13,7 @@ include($$PWD/../ThirdParty/gdcm.pri)
 include($$PWD/../ThirdParty/zlib.pri)
 
 SOURCES += \
+    dcmtkhelper.cpp \
     echodcmtk.cpp \
     echogdcm.cpp \
     echothread.cpp \
@@ -26,6 +27,7 @@ SOURCES += \
     storethread.cpp
 
 HEADERS += \
+    dcmtkhelper.h \
     dicombase.h \
     echobase.h \
     echodcmtk.h \

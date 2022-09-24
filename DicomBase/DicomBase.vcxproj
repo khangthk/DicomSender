@@ -111,6 +111,7 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="dcmtkhelper.cpp" />
     <ClCompile Include="echodcmtk.cpp" />
     <ClCompile Include="echogdcm.cpp" />
     <ClCompile Include="echothread.cpp" />
@@ -135,6 +136,7 @@
     <QtMoc Include="echodcmtk.h" />
     <QtMoc Include="echogdcm.h" />
     <QtMoc Include="echothread.h" />
+    <ClInclude Include="dcmtkhelper.h" />
     <ClInclude Include="gdcmhelper.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="dicombase.h" />
