@@ -47,10 +47,4 @@ public:
 
     static void saveMaxReceivePDU(const int max);
     static int getMaxReceivePDU();
-
-    static void saveCompressionLevel(const int level);
-    static int getCompressionLevel();
-
-    static void saveDecompressionMode(const int mode);
-    static int getDecompressionMode();
 };

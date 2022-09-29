@@ -178,27 +178,3 @@ int Setting::getMaxReceivePDU()
     QSettings setting;
     return setting.value("MaxReceivePDU", 16).toInt();
 }
-
-void Setting::saveCompressionLevel(const int level)
-{
-    QSettings setting;
-    setting.setValue("CompressionLevel", level);
-}
-
-int Setting::getCompressionLevel()
-{
-    QSettings setting;
-    return setting.value("CompressionLevel", 6).toInt();
-}
-
-void Setting::saveDecompressionMode(const int mode)
-{
-    QSettings setting;
-    setting.setValue("DecompressionMode", mode);
-}
-
-int Setting::getDecompressionMode()
-{
-    QSettings setting;
-    return setting.value("DecompressionMode", 1).toInt();
-}

@@ -117,8 +117,6 @@ void MainWindow::loadSetting()
     QList<int> ACSETimeout = { 3, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000 };
     QList<int> DIMSETimeout = { 0, 3, 10, 20, 30, 40, 50, 60, 70, 80, 90, 100, 200, 300, 400, 500, 600, 700, 800, 900, 1000 };
     QList<int> MaxPDU = { 4, 8, 12, 16, 20, 24, 28, 32, 36, 40, 44, 48, 52, 56, 60, 64, 68, 72, 76, 80, 84, 88, 92, 96, 100, 104, 108, 112, 116, 120, 124, 128 };
-    QList<int> CompressionLevel = { 0, 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    QList<int> DecompressionMode = { 0, 1, 2 };
 
     ui->comboBoxConnectionTimeout->clear();
     ui->comboBoxSocketTimeout->clear();
@@ -126,8 +124,6 @@ void MainWindow::loadSetting()
     ui->comboBoxDIMSETimeout->clear();
     ui->comboBoxMaxSendPDU->clear();
     ui->comboBoxMaxReceivePDU->clear();
-    ui->comboBoxCompressionLevel->clear();
-    ui->comboBoxDecompressionMode->clear();
 
     // Stop When Fail;
     ui->checkBoxStopWhenError->setChecked(Setting::getStopWhenError());
@@ -229,29 +225,6 @@ void MainWindow::loadSetting()
     }
     ui->comboBoxMaxReceivePDU->setCurrentIndex(index);
 
-    // Compression Level
-    for (auto &value : CompressionLevel)
-    {
-        ui->comboBoxCompressionLevel->addItem(QString("%1").arg(value), value);
-    }
-    index = CompressionLevel.indexOf(Setting::getCompressionLevel());
-    if (index == -1)
-    {
-        index = 6;  // 6
-    }
-    ui->comboBoxCompressionLevel->setCurrentIndex(index);
-
-    // Decompression Mode
-    ui->comboBoxDecompressionMode->addItem("Never", 0);
-    ui->comboBoxDecompressionMode->addItem("Lossless", 1);
-    ui->comboBoxDecompressionMode->addItem("Lossless|Lossy", 2);
-    index = DecompressionMode.indexOf(Setting::getDecompressionMode());
-    if (index == -1)
-    {
-        index = 1;  // Lossless
-    }
-    ui->comboBoxDecompressionMode->setCurrentIndex(index);
-
     // Other group
     updateOtherSetting(ui->radioDcmtk->isChecked());
 }
@@ -272,8 +245,6 @@ void MainWindow::saveSetting()
     Setting::saveDIMSETimeout(ui->comboBoxDIMSETimeout->currentData().toInt());
     Setting::saveMaxSendPDU(ui->comboBoxMaxSendPDU->currentData().toInt());
     Setting::saveMaxReceivePDU(ui->comboBoxMaxReceivePDU->currentData().toInt());
-    Setting::saveCompressionLevel(ui->comboBoxCompressionLevel->currentData().toInt());
-    Setting::saveDecompressionMode(ui->comboBoxDecompressionMode->currentData().toInt());
 }
 
 void MainWindow::addPath(const QString &path)
@@ -322,8 +293,6 @@ void MainWindow::updateOtherSetting(const bool isDcmtk)
     ui->comboBoxDIMSETimeout->setEnabled(isDcmtk ? true : false);
     ui->comboBoxMaxSendPDU->setEnabled(isDcmtk ? true : false);
     ui->comboBoxMaxReceivePDU->setEnabled(isDcmtk ? true : false);
-    ui->comboBoxCompressionLevel->setEnabled(isDcmtk ? true : false);
-    ui->comboBoxDecompressionMode->setEnabled(isDcmtk ? true : false);
 }
 
 bool MainWindow::validInput(CheckInput type)
@@ -392,8 +361,6 @@ void MainWindow::send()
         store->object()->setDIMSETimeout(ui->comboBoxDIMSETimeout->currentData().toInt());
         store->object()->setMaxSendPDU(ui->comboBoxMaxSendPDU->currentData().toInt() * 1024);
         store->object()->setMaxReceivePDU(ui->comboBoxMaxReceivePDU->currentData().toInt() * 1024);
-        store->object()->setCompressionLevel(ui->comboBoxCompressionLevel->currentData().toInt());
-        store->object()->setDecompressionMode(ui->comboBoxDecompressionMode->currentData().toInt());
     }
 
     auto fnDone = [&](const bool result, const QString &log)
@@ -402,6 +369,11 @@ void MainWindow::send()
         {
             addColorLog(result, " " + log);
         }
+    };
+
+    auto fnProgress = [&](const int percent)
+    {
+        qDebug() << "Progress:" << percent;
     };
 
     auto fnProcessed = [&](const QPair<int, int> &index, const bool result, const QString &log)
@@ -420,6 +392,7 @@ void MainWindow::send()
     };
 
     connect(store, &StoreThread::done, this, fnDone);
+    connect(store, &StoreThread::progress, this, fnProgress);
     connect(store, &StoreThread::processed, this, fnProcessed);
     connect(store, &StoreThread::finished, this, fnFinished);
     connect(store, &StoreThread::finished, store, &QObject::deleteLater);
