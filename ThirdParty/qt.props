@@ -3,8 +3,13 @@
   <PropertyGroup>
     <OutDir>$(SolutionDir)bin\$(PlatformTarget)\$(Configuration)\</OutDir>
     <IntDir>$(SolutionDir)build\$(PlatformTarget)\apps\$(Configuration)\$(ProjectName)\</IntDir>
-	<QtVarsOutputDir>$(SolutionDir)build\$(PlatformTarget)\apps\$(Configuration)\$(ProjectName)\qmake\</QtVarsOutputDir>
+    <QtVarsOutputDir>$(SolutionDir)build\$(PlatformTarget)\apps\$(Configuration)\$(ProjectName)\qmake\</QtVarsOutputDir>
   </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)'=='Release'">
+    <ClCompile>
+      <PreprocessorDefinitions>QT_NO_DEBUG_OUTPUT</PreprocessorDefinitions>
+    </ClCompile>
+  </ItemDefinitionGroup>
   <ImportGroup Label="PropertySheets" Condition="Exists('$(QtMsBuild)\Qt.props')">
     <Import Project="$(QtMsBuild)\Qt.props" />
   </ImportGroup>
