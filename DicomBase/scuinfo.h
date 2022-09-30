@@ -46,12 +46,6 @@ public:
     int maxReceivePDU() const;
     void setMaxReceivePDU(const int max);
 
-    int compressionLevel() const;
-    void setCompressionLevel(const int level);
-
-    int decompressionMode() const;
-    void setDecompressionMode(const int mode);
-
 private:
     QString m_localAE;
     QString m_targetAE;
@@ -64,6 +58,4 @@ private:
     int m_DIMSETimeout;
     int m_maxSendPDU;
     int m_maxReceivePDU;
-    int m_compressionLevel;
-    int m_decompressionMode;
 };

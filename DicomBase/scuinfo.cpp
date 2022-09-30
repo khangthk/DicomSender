@@ -3,7 +3,7 @@
 SCUInfo::SCUInfo(QObject *parent)
     : QObject(parent), m_localAE("AE"), m_targetAE("AE"), m_host("localhost"), m_port(104),
     m_stopWhenError(true), m_connectionTimeout(-1), m_socketTimeout(60), m_ACSETimeout(30), m_DIMSETimeout(0),
-    m_maxSendPDU(16 * 1024), m_maxReceivePDU(16 * 1024), m_compressionLevel(6), m_decompressionMode(1)
+    m_maxSendPDU(16 * 1024), m_maxReceivePDU(16 * 1024)
 {}
 
 SCUInfo::~SCUInfo()
@@ -117,24 +117,4 @@ int SCUInfo::maxReceivePDU() const
 void SCUInfo::setMaxReceivePDU(const int max)
 {
     m_maxReceivePDU = max;
-}
-
-int SCUInfo::compressionLevel() const
-{
-    return m_compressionLevel;
-}
-
-void SCUInfo::setCompressionLevel(const int level)
-{
-    m_compressionLevel = level;
-}
-
-int SCUInfo::decompressionMode() const
-{
-    return m_decompressionMode;
-}
-
-void SCUInfo::setDecompressionMode(const int mode)
-{
-    m_decompressionMode = mode;
 }

@@ -27,12 +27,12 @@ void EchoGdcm::echo()
     try
     {
         if (!theManager.EstablishConnection(localAE().toStdString(),
-            targetAE().toStdString(),
-            host().toStdString(),
-            0,
-            port(),
-            connectionTimeout(),
-            generator.GetPresentationContexts()))
+                                            targetAE().toStdString(),
+                                            host().toStdString(),
+                                            0,
+                                            port(),
+                                            connectionTimeout(),
+                                            generator.GetPresentationContexts()))
         {
             connect = false;
         }
@@ -60,7 +60,7 @@ void EchoGdcm::echo()
 
     // Check the Success Status
     DataSet ds = network::PresentationDataValue::ConcatenatePDVBlobs(theValues);
-    Attribute<0x0, 0x0900> at;
+    Attribute<0x0, 0x0900> at{};
     if (ds.FindDataElement(at.GetTag()))
     {
         at.SetFromDataSet(ds);

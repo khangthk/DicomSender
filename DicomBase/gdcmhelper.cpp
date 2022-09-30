@@ -8,13 +8,13 @@ using namespace gdcm;
 bool GdcmHelper::isDicom(const QString &file)
 {
     Reader reader;
-    reader.SetFileName(file.toUtf8());
+    reader.SetFileName(qPrintable(file));
     return reader.Read();
 }
 
 bool GdcmHelper::isImage(const QString &file)
 {
     ImageReader reader;
-    reader.SetFileName(file.toUtf8());
+    reader.SetFileName(qPrintable(file));
     return reader.Read();
 }

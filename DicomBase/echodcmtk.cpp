@@ -1,9 +1,9 @@
 #include "echodcmtk.h"
 
-#include <dcmtk/config/osconfig.h>    /* make sure OS specific configuration is included first */
+#include <dcmtk/config/osconfig.h>
 #include <dcmtk/dcmnet/dimse.h>
 #include <dcmtk/dcmnet/diutil.h>
-#include <dcmtk/dcmnet/dcmtrans.h>    /* for dcmSocketSend/ReceiveTimeout */
+#include <dcmtk/dcmnet/dcmtrans.h>
 #include <dcmtk/dcmdata/dcdict.h>
 
 #include <QDebug>
@@ -62,15 +62,15 @@ void EchoDcmtk::echo()
 
     /* sets this application's title and the called application's title in the params */
     /* structure. The default values to be set here are "STORESCU" and "ANY-SCP". */
-    ASC_setAPTitles(params, localAE().toLocal8Bit(), targetAE().toLocal8Bit(), nullptr);
+    ASC_setAPTitles(params, qPrintable(localAE()), qPrintable(targetAE()), nullptr);
 
     /* Figure out the presentation addresses and copy the */
     /* corresponding values into the association parameters.*/
-    ASC_setPresentationAddresses(params, OFStandard::getHostName().c_str(), QString("%1:%2").arg(host()).arg(port()).toLocal8Bit());
+    ASC_setPresentationAddresses(params, OFStandard::getHostName().c_str(), qPrintable(QString("%1:%2").arg(host()).arg(port())));
 
     /* Set the presentation contexts which will be negotiated */
     /* when the network connection will be established */
-    const char* transferSyntaxes[] = { UID_LittleEndianImplicitTransferSyntax }; // default transfer syntax
+    const char *transferSyntaxes[] = { UID_LittleEndianImplicitTransferSyntax }; // default transfer syntax
     cond = ASC_addPresentationContext(params, 1, UID_VerificationSOPClass, transferSyntaxes, DIM_OF(transferSyntaxes));
     if (cond.bad())
     {
