@@ -44,7 +44,12 @@ HEADERS += \
     storebase.h \
     storedcmtk.h \
     storegdcm.h \
-    storethread.h
+    storethread.h \
+    version.h
+
+RC_FILE = DicomBase.rc
+
+OTHER_FILES += DicomBase.rc
 
 # Default rules for deployment.
 unix {

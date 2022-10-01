@@ -137,9 +137,13 @@
     <QtMoc Include="echogdcm.h" />
     <QtMoc Include="echothread.h" />
     <ClInclude Include="dcmtkhelper.h" />
+    <ClInclude Include="dicombase.h" />
     <ClInclude Include="gdcmhelper.h" />
     <ClInclude Include="global.h" />
-    <ClInclude Include="dicombase.h" />
+    <ClInclude Include="version.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DicomBase.rc" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Condition="Exists('$(QtMsBuild)\qt.targets')">

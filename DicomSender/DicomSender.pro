@@ -24,6 +24,8 @@ RESOURCES += \
 
 RC_FILE = DicomSender.rc
 
+OTHER_FILES += DicomSender.rc
+
 INCLUDEPATH += $$PWD/../DicomBase
 DEPENDPATH  += $$PWD/../DicomBase
 

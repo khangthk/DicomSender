@@ -23,7 +23,7 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="global.h">
+    <ClInclude Include="dcmtkhelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="dicombase.h">
@@ -32,7 +32,10 @@
     <ClInclude Include="gdcmhelper.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="dcmtkhelper.h">
+    <ClInclude Include="global.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="version.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -114,5 +117,10 @@
     <QtMoc Include="scuinfo.h">
       <Filter>Header Files</Filter>
     </QtMoc>
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="DicomBase.rc">
+      <Filter>Resource Files</Filter>
+    </ResourceCompile>
   </ItemGroup>
 </Project>
