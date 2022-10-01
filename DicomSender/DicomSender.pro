@@ -1,6 +1,6 @@
 QT      += core gui widgets
 
-CONFIG  += c++17
+CONFIG  += c++17 no_batch
 
 DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000
 
