@@ -75,14 +75,14 @@ void StoreDcmtk::store()
 
     /* sets this application's title and the called application's title in the params */
     /* structure. The default values to be set here are "STORESCU" and "ANY-SCP". */
-    ASC_setAPTitles(params, qPrintable(localAE()), qPrintable(targetAE()), nullptr);
+    ASC_setAPTitles(params, localAE().toStdString().c_str(), targetAE().toStdString().c_str(), nullptr);
 
     /* Figure out the presentation addresses and copy the */
     /* corresponding values into the association parameters.*/
-    ASC_setPresentationAddresses(params, OFStandard::getHostName().c_str(), qPrintable(QString("%1:%2").arg(host()).arg(port())));
+    ASC_setPresentationAddresses(params, OFStandard::getHostName().c_str(), QString("%1:%2").arg(host()).arg(port()).toStdString().c_str());
 
     /* Add presentation context to params */
-    cond = AddPresentationContext(params);
+    cond = addPresentationContext(params);
 
     if (cond.bad())
     {
@@ -152,7 +152,7 @@ void StoreDcmtk::store()
         QString fileName = QFileInfo(file).fileName();
         qDebug().noquote() << QString("--->Processing[%1/%2]: %3").arg(index).arg(total).arg(fileName);
 
-        cond = storeSCU(assoc, qPrintable(file));
+        cond = storeSCU(assoc, file);
         if (cond.good())
         {
             emit processed(qMakePair(index, total), true, QString("Send \"%1\" successfully").arg(fileName));
@@ -242,7 +242,7 @@ void StoreDcmtk::store()
 }
 
 /* refer to DcmStorageSCU::checkSOPInstance */
-OFCondition StoreDcmtk::CheckSOPInstance(const OFString &sopClassUID, const OFString &sopInstanceUID,
+OFCondition StoreDcmtk::checkSOPInstance(const OFString &sopClassUID, const OFString &sopInstanceUID,
                                          const OFString &transferSyntaxUID, const bool checkValues)
 {
     OFCondition status = EC_Normal;
@@ -364,7 +364,7 @@ OFCondition StoreDcmtk::CheckSOPInstance(const OFString &sopClassUID, const OFSt
     return status;
 }
 
-OFCondition StoreDcmtk::AddPresentationContext(T_ASC_Parameters *params)
+OFCondition StoreDcmtk::addPresentationContext(T_ASC_Parameters *params)
 {
     OFCondition cond = EC_Normal;
 
@@ -376,11 +376,11 @@ OFCondition StoreDcmtk::AddPresentationContext(T_ASC_Parameters *params)
         {
             /* get relevant information from the DICOM file */
             OFString sopClassUID, sopInstanceUID, transferSyntaxUID;
-            cond = DcmDataUtil::getSOPInstanceFromFile(qPrintable(file), sopClassUID, sopInstanceUID, transferSyntaxUID, ERM_fileOnly);
+            cond = DcmDataUtil::getSOPInstanceFromFile(file.toStdWString().c_str(), sopClassUID, sopInstanceUID, transferSyntaxUID, ERM_autoDetect);
             if (cond.good())
             {
                 /* check the SOP instance before adding it */
-                cond = CheckSOPInstance(sopClassUID, sopInstanceUID, transferSyntaxUID, true);
+                //cond = CheckSOPInstance(sopClassUID, sopInstanceUID, transferSyntaxUID, true);
                 if (cond.good())
                 {
                     auto preCtx = std::make_pair(std::string(sopClassUID.c_str()), std::string(transferSyntaxUID.c_str()));
@@ -445,7 +445,7 @@ OFCondition StoreDcmtk::AddPresentationContext(T_ASC_Parameters *params)
  *   assoc - [in] The association (network connection to another DICOM application).
  *   fname - [in] Name of the file which shall be processed.
  */
-OFCondition StoreDcmtk::storeSCU(T_ASC_Association *assoc, const char *fname)
+OFCondition StoreDcmtk::storeSCU(T_ASC_Association *assoc, const QString &file)
 {
     DIC_US msgId = assoc->nextMsgID++;
     T_ASC_PresentationContextID presID;
@@ -461,12 +461,12 @@ OFCondition StoreDcmtk::storeSCU(T_ASC_Association *assoc, const char *fname)
     /* In detail, it will be available through calls to DcmFileFormat::getMetaInfo() (for */
     /* meta header information) and DcmFileFormat::getDataset() (for data set information). */
     DcmFileFormat dcmff;
-    OFCondition cond = dcmff.loadFile(fname, EXS_Unknown, EGL_noChange, DCM_MaxReadLength, ERM_autoDetect);
+    OFCondition cond = dcmff.loadFile(file.toStdWString().c_str(), EXS_Unknown, EGL_noChange, DCM_MaxReadLength, ERM_autoDetect);
 
     /* figure out if an error occurred while the file was read */
     if (cond.bad())
     {
-        qDebug() << "Bad DICOM file: " << fname << ": " << cond.text();
+        qDebug() << "Bad DICOM file: " << file << ": " << cond.text();
         return cond;
     }
 
@@ -474,7 +474,7 @@ OFCondition StoreDcmtk::storeSCU(T_ASC_Association *assoc, const char *fname)
     if (!DU_findSOPClassAndInstanceInDataSet(dcmff.getDataset(),
         sopClass, sizeof(sopClass), sopInstance, sizeof(sopInstance), false))
     {
-        qDebug() << "No SOP Class or Instance UID in file: " << fname;
+        qDebug() << "No SOP Class or Instance UID in file: " << file;
         return DIMSE_BADDATA;
     }
 
@@ -526,7 +526,7 @@ OFCondition StoreDcmtk::storeSCU(T_ASC_Association *assoc, const char *fname)
     cond = DIMSE_storeUser(assoc, presID, &req,
         nullptr, dcmff.getDataset(), progressCallback, this,
         timeout == 0 ? T_DIMSE_BlockingMode::DIMSE_BLOCKING : T_DIMSE_BlockingMode::DIMSE_NONBLOCKING,
-        timeout, &rsp, &statusDetail, nullptr, OFstatic_cast(long, OFStandard::getFileSize(fname)));
+        timeout, &rsp, &statusDetail, nullptr, OFstatic_cast(long, OFStandard::getFileSize(file.toStdWString().c_str())));
 
     /* dump some more general information */
     if (cond == EC_Normal)
@@ -536,7 +536,7 @@ OFCondition StoreDcmtk::storeSCU(T_ASC_Association *assoc, const char *fname)
     }
     else
     {
-        qDebug() << "Store Failed, file: " << fname << ":" << Qt::endl << DimseCondition::dump(temp_str, cond).c_str();
+        qDebug() << "Store Failed, file: " << file << ":" << Qt::endl << DimseCondition::dump(temp_str, cond).c_str();
     }
 
     if (statusDetail != nullptr)

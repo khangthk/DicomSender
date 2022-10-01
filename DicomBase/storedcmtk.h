@@ -26,10 +26,10 @@ protected:
     void store() override;
 
 private:
-    OFCondition CheckSOPInstance(const OFString &sopClassUID, const OFString &sopInstanceUID,
+    OFCondition checkSOPInstance(const OFString &sopClassUID, const OFString &sopInstanceUID,
                                  const OFString &transferSyntaxUID, const bool checkValues);
-    OFCondition AddPresentationContext(T_ASC_Parameters *params);
-    OFCondition storeSCU(T_ASC_Association *assoc, const char *fname);
+    OFCondition addPresentationContext(T_ASC_Parameters *params);
+    OFCondition storeSCU(T_ASC_Association *assoc, const QString &file);
     static void progressCallback(void *parent, T_DIMSE_StoreProgress *progress, T_DIMSE_C_StoreRQ *req);
 
     QDebug m_qDebugDelay;

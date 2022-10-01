@@ -139,7 +139,7 @@ void StoreGdcm::store()
             qDebug().noquote() << QString("--->Processing[%1/%2]: %3").arg(index).arg(total).arg(fileName);
 
             Reader reader;
-            reader.SetFileName(qPrintable(file));
+            reader.SetFileName(file.toStdString().c_str());
             if (!reader.Read())
             {
                 emit processed(qMakePair(index, total), false, QString("Send \"%1\" failed. Error: Unable to read file.").arg(fileName));

@@ -62,11 +62,11 @@ void EchoDcmtk::echo()
 
     /* sets this application's title and the called application's title in the params */
     /* structure. The default values to be set here are "STORESCU" and "ANY-SCP". */
-    ASC_setAPTitles(params, qPrintable(localAE()), qPrintable(targetAE()), nullptr);
+    ASC_setAPTitles(params, localAE().toStdString().c_str(), targetAE().toStdString().c_str(), nullptr);
 
     /* Figure out the presentation addresses and copy the */
     /* corresponding values into the association parameters.*/
-    ASC_setPresentationAddresses(params, OFStandard::getHostName().c_str(), qPrintable(QString("%1:%2").arg(host()).arg(port())));
+    ASC_setPresentationAddresses(params, OFStandard::getHostName().c_str(), QString("%1:%2").arg(host()).arg(port()).toStdString().c_str());
 
     /* Set the presentation contexts which will be negotiated */
     /* when the network connection will be established */
