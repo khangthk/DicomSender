@@ -341,8 +341,6 @@ void MainWindow::send()
     if (m_sendFiles.isEmpty())
     {
         ui->buttonSend->setEnabled(true);
-        addColorLog(false, " No files to send");
-        logDone();
         return;
     }
 
@@ -485,16 +483,24 @@ void MainWindow::onSend()
     auto fnDone = [&](const int count)
     {
         qDebug() << "File(s): " << count;
-        send();
+        addColorLog(true, QString(" Found %1 file(s)").arg(count));
     };
 
     auto fnStarted = [&]()
     {
+        addLog("Scanning...");
         ui->buttonSend->setEnabled(false);
+    };
+
+    auto fnFinished = [&]()
+    {
+        logDone();
+        send();
     };
 
     connect(scan, &ScanThread::done, this, fnDone);
     connect(scan, &ScanThread::started, this, fnStarted);
+    connect(scan, &ScanThread::finished, this, fnFinished);
     connect(scan, &ScanThread::finished, scan, &QObject::deleteLater);
     scan->start();
 }
