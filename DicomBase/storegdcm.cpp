@@ -147,9 +147,8 @@ void StoreGdcm::store()
                 goto doneOneFile;
             }
 
-            const File &file = reader.GetFile();
             std::vector<DataSet> theDataSets;
-            theDataSets = theManager.SendStore(file);
+            theDataSets = theManager.SendStore(reader.GetFile());
             if (theDataSets.empty())
             {
                 emit processed(qMakePair(index, total), false, QString("Send \"%1\" failed. Error: Unable to send file.").arg(fileName));
