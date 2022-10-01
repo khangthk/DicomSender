@@ -1,5 +1,7 @@
 #pragma once
 
+#include <dicombase.h>
+
 #include <QString>
 #include <QStringList>
 
@@ -24,8 +26,8 @@ public:
     static void savePort(const int port);
     static int getPort();
 
-    static void saveLibrary(const QString &library);
-    static QString getLibrary();
+    static void saveLibrary(const Library library);
+    static Library getLibrary();
 
     static void saveStopWhenError(const bool stop);
     static bool getStopWhenError();

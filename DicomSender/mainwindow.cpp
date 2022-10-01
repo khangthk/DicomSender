@@ -104,8 +104,8 @@ void MainWindow::loadSetting()
     ui->spinBoxPort->setValue(Setting::getPort());
 
     // Library group
-    ui->radioDcmtk->setChecked(Setting::getLibrary() == "dcmtk");
-    ui->radioGdcm->setChecked(Setting::getLibrary() == "gdcm");
+    ui->radioDcmtk->setChecked(Setting::getLibrary() == Library::dcmtk);
+    ui->radioGdcm->setChecked(Setting::getLibrary() == Library::gdcm);
     if (!ui->radioDcmtk->isChecked() && !ui->radioGdcm->isChecked())
     {
         ui->radioDcmtk->setChecked(true);
@@ -237,7 +237,7 @@ void MainWindow::saveSetting()
     Setting::saveTargetAE(ui->editTargetAE->text().trimmed());
     Setting::saveHost(ui->editHost->text().trimmed());
     Setting::savePort(ui->spinBoxPort->value());
-    Setting::saveLibrary(ui->radioDcmtk->isChecked() ? "dcmtk" : "gdcm");
+    Setting::saveLibrary(ui->radioDcmtk->isChecked() ? Library::dcmtk : Library::gdcm);
     Setting::saveStopWhenError(ui->checkBoxStopWhenError->isChecked());
     Setting::saveConnectionTimeout(ui->comboBoxConnectionTimeout->currentData().toInt());
     Setting::saveSocketTimeout(ui->comboBoxSocketTimeout->currentData().toInt());

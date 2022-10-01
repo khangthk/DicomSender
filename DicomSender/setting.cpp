@@ -83,16 +83,17 @@ int Setting::getPort()
     return setting.value("Port", 104).toInt();
 }
 
-void Setting::saveLibrary(const QString &library)
+void Setting::saveLibrary(const Library library)
 {
     QSettings setting;
-    setting.setValue("Library", library);
+    setting.setValue("Library", library == Library::dcmtk ? "dcmtk" : "gdcm");
 }
 
-QString Setting::getLibrary()
+Library Setting::getLibrary()
 {
     QSettings setting;
-    return setting.value("Library", "dcmtk").toString();
+    auto value = setting.value("Library", "dcmtk").toString();
+    return value == "dcmtk" ? Library::dcmtk : Library::gdcm;
 }
 
 void Setting::saveStopWhenError(const bool stop)
