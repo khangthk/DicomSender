@@ -1,4 +1,11 @@
 <RCC>
-    <qresource prefix="MainWindow">
+    <qresource prefix="/MainWindow"/>
+    <qresource prefix="/">
+        <file>icons/Collapse.ico</file>
+        <file>icons/Expand.ico</file>
+        <file>icons/Export.ico</file>
+        <file>icons/OpenFile.ico</file>
+        <file>icons/OpenFolder.ico</file>
+        <file>icons/Refresh.ico</file>
     </qresource>
 </RCC>

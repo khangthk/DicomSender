@@ -1,4 +1,4 @@
-QT      += core gui svg widgets
+QT      += core gui widgets
 
 CONFIG  += c++17
 
@@ -21,6 +21,8 @@ RESOURCES += \
     mainwindow.qrc
 
 RC_FILE = DicomTags.rc
+
+OTHER_FILES += DicomTags.rc
 
 INCLUDEPATH += $$PWD/../DicomBase
 DEPENDPATH  += $$PWD/../DicomBase
