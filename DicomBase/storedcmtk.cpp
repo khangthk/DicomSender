@@ -380,7 +380,7 @@ OFCondition StoreDcmtk::addPresentationContext(T_ASC_Parameters *params)
             if (cond.good())
             {
                 /* check the SOP instance before adding it */
-                //cond = CheckSOPInstance(sopClassUID, sopInstanceUID, transferSyntaxUID, true);
+                cond = checkSOPInstance(sopClassUID, sopInstanceUID, transferSyntaxUID, true);
                 if (cond.good())
                 {
                     auto preCtx = std::make_pair(std::string(sopClassUID.c_str()), std::string(transferSyntaxUID.c_str()));
