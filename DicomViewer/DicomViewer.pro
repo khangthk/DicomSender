@@ -1,33 +1,34 @@
-QT      += core gui svg widgets
+QT          += core gui svg widgets
 
-CONFIG  += c++17
+CONFIG      += c++17
 
-DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000
+DEFINES     += QT_DISABLE_DEPRECATED_BEFORE=0x060000
 
 include($$PWD/../ThirdParty/qt.pri)
 
-SOURCES += \
+SOURCES     += \
     main.cpp \
     mainwindow.cpp
 
-HEADERS += \
+HEADERS     += \
     mainwindow.h \
     version.h
 
-FORMS   += \
+FORMS       += \
     mainwindow.ui
 
-RESOURCES += \
+RESOURCES   += \
     mainwindow.qrc
 
-RC_FILE = DicomViewer.rc
+RC_FILE     += \
+    DicomViewer.rc
+
+OTHER_FILES += \
+    DicomViewer.rc
 
 INCLUDEPATH += $$PWD/../DicomBase
 DEPENDPATH  += $$PWD/../DicomBase
-
-win32:CONFIG(release, debug|release): LIBS += -L$$OUT_PWD/../DicomBase/release/ -lDicomBase
-else:win32:CONFIG(debug, debug|release): LIBS += -L$$OUT_PWD/../DicomBase/debug/ -lDicomBase
-else:unix: LIBS += -L$$OUT_PWD/../DicomBase/ -lDicomBase
+LIBS        += -L$$DESTDIR -lDicomBase
 
 # Default rules for deployment.
 qnx: target.path = /tmp/$${TARGET}/bin

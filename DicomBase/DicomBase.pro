@@ -1,19 +1,19 @@
-QT      -= gui
+QT          -= gui
 
-TEMPLATE = lib
+TEMPLATE     = lib
 
-DEFINES += DICOMBASE_LIBRARY
+DEFINES     += DICOMBASE_LIBRARY
 
-CONFIG  += c++17
+CONFIG      += c++17
 
-DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000
+DEFINES     += QT_DISABLE_DEPRECATED_BEFORE=0x060000
 
 include($$PWD/../ThirdParty/dcmtk.pri)
 include($$PWD/../ThirdParty/gdcm.pri)
 include($$PWD/../ThirdParty/zlib.pri)
 include($$PWD/../ThirdParty/qt.pri)
 
-SOURCES += \
+SOURCES     += \
     dcmtkhelper.cpp \
     echodcmtk.cpp \
     echogdcm.cpp \
@@ -27,7 +27,7 @@ SOURCES += \
     storegdcm.cpp \
     storethread.cpp
 
-HEADERS += \
+HEADERS     += \
     dcmtkhelper.h \
     dicombase.h \
     echobase.h \
@@ -47,9 +47,11 @@ HEADERS += \
     storethread.h \
     version.h
 
-RC_FILE = DicomBase.rc
+RC_FILE     += \
+    DicomBase.rc
 
-OTHER_FILES += DicomBase.rc
+OTHER_FILES += \
+    DicomBase.rc
 
 # Default rules for deployment.
 unix {
