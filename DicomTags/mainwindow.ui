@@ -42,12 +42,16 @@
    </attribute>
    <addaction name="actionOpenFile"/>
    <addaction name="actionOpenFolder"/>
+   <addaction name="actionExplorer"/>
    <addaction name="separator"/>
    <addaction name="actionCollapse"/>
    <addaction name="actionExpand"/>
    <addaction name="actionRefresh"/>
-   <addaction name="separator"/>
    <addaction name="actionExport"/>
+   <addaction name="actionCompare"/>
+   <addaction name="separator"/>
+   <addaction name="actionSetting"/>
+   <addaction name="actionAbout"/>
   </widget>
   <action name="actionOpenFile">
    <property name="icon">
@@ -118,7 +122,58 @@
     <string>Export</string>
    </property>
    <property name="toolTip">
-    <string>Export to text file</string>
+    <string>Export tags to a text file</string>
+   </property>
+  </action>
+  <action name="actionExplorer">
+   <property name="checkable">
+    <bool>true</bool>
+   </property>
+   <property name="icon">
+    <iconset resource="mainwindow.qrc">
+     <normaloff>:/icons/Explorer.ico</normaloff>:/icons/Explorer.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Explorer</string>
+   </property>
+   <property name="toolTip">
+    <string>Explorer</string>
+   </property>
+  </action>
+  <action name="actionSetting">
+   <property name="icon">
+    <iconset resource="mainwindow.qrc">
+     <normaloff>:/icons/Setting.ico</normaloff>:/icons/Setting.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Setting</string>
+   </property>
+   <property name="toolTip">
+    <string>Setting</string>
+   </property>
+  </action>
+  <action name="actionAbout">
+   <property name="icon">
+    <iconset resource="mainwindow.qrc">
+     <normaloff>:/icons/About.ico</normaloff>:/icons/About.ico</iconset>
+   </property>
+   <property name="text">
+    <string>About</string>
+   </property>
+   <property name="toolTip">
+    <string>About</string>
+   </property>
+  </action>
+  <action name="actionCompare">
+   <property name="icon">
+    <iconset resource="mainwindow.qrc">
+     <normaloff>:/icons/Compare.ico</normaloff>:/icons/Compare.ico</iconset>
+   </property>
+   <property name="text">
+    <string>Compare</string>
+   </property>
+   <property name="toolTip">
+    <string>Compare tags of two dicom files</string>
    </property>
   </action>
  </widget>
