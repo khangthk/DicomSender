@@ -4,6 +4,7 @@
 #include "setting.h"
 
 #include <dicombase.h>
+#include <utility>
 
 #include <QString>
 #include <QDebug>
@@ -374,7 +375,7 @@ void MainWindow::send()
         qDebug() << "Progress:" << percent;
     };
 
-    auto fnProcessed = [&](const QPair<int, int> &index, const bool result, const QString &log)
+    auto fnProcessed = [&](const std::pair<int, int> &index, const bool result, const QString &log)
     {
         qDebug() << index.first << "/" << index.second << " " << log;
         QString totalStr = QString("%1").arg(index.second);
