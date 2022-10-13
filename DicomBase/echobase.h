@@ -8,8 +8,8 @@ class DICOMBASE_EXPORT EchoBase : public SCUInfo
     Q_OBJECT
 
 public:
-    EchoBase(QObject *parent = nullptr) : SCUInfo(parent) {};
-    ~EchoBase() {};
+    EchoBase(QObject *parent = nullptr);
+    ~EchoBase();
 
     virtual void echo() = 0;
 

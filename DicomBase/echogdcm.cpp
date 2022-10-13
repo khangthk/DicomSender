@@ -4,6 +4,8 @@
 #include <gdcmULConnectionManager.h>
 #include <gdcmPresentationContextGenerator.h>
 
+#include <QDebug>
+
 using namespace gdcm;
 
 EchoGdcm::EchoGdcm(QObject *parent)
@@ -11,7 +13,9 @@ EchoGdcm::EchoGdcm(QObject *parent)
 {}
 
 EchoGdcm::~EchoGdcm()
-{}
+{
+    qDebug() << "~EchoDcmtk";
+}
 
 void EchoGdcm::echo()
 {

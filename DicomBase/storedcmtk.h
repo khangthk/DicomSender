@@ -34,13 +34,3 @@ private:
 
     QDebug m_qDebugDelay;
 };
-
-inline QDebug &StoreDcmtk::qDebugDelay()
-{
-    return m_qDebugDelay;
-}
-
-inline void StoreDcmtk::resetQDebugDelay()
-{
-    m_qDebugDelay = QDebug(QtDebugMsg);
-}

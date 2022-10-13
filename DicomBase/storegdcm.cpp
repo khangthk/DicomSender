@@ -8,6 +8,8 @@
 #include <gdcmProgressEvent.h>
 #include <gdcmPresentationContextGenerator.h>
 
+#include <utility>
+
 #include <QDebug>
 #include <QFileInfo>
 
@@ -67,7 +69,9 @@ StoreGdcm::StoreGdcm(QObject *parent)
 {}
 
 StoreGdcm::~StoreGdcm()
-{}
+{
+    qDebug() << "~StoreGdcm";
+}
 
 void StoreGdcm::store()
 {
@@ -142,7 +146,7 @@ void StoreGdcm::store()
             reader.SetFileName(file.toStdString().c_str());
             if (!reader.Read())
             {
-                emit processed(qMakePair(index, total), false, QString("Send \"%1\" failed. Error: Unable to read file.").arg(fileName));
+                emit processed(std::make_pair(index, total), false, QString("Send \"%1\" failed. Error: Unable to read file.").arg(fileName));
                 error = true;
                 goto doneOneFile;
             }
@@ -151,7 +155,7 @@ void StoreGdcm::store()
             theDataSets = theManager.SendStore(reader.GetFile());
             if (theDataSets.empty())
             {
-                emit processed(qMakePair(index, total), false, QString("Send \"%1\" failed. Error: Unable to send file.").arg(fileName));
+                emit processed(std::make_pair(index, total), false, QString("Send \"%1\" failed. Error: Unable to send file.").arg(fileName));
                 error = true;
                 goto doneOneFile;
             }
@@ -168,12 +172,12 @@ void StoreGdcm::store()
             // http://dicom.nema.org/medical/dicom/current/output/chtml/part07/chapter_C.html
             if (theVal == 0x0) // Success
             {
-                emit processed(qMakePair(index, total), true, QString("Send \"%1\" successfully").arg(fileName));
+                emit processed(std::make_pair(index, total), true, QString("Send \"%1\" successfully").arg(fileName));
                 error = false;
             }
             else if (theVal == 0x0001 || (theVal & 0xf000) == 0xb000) // Warning
             {
-                emit processed(qMakePair(index, total), true, QString("Send \"%1\" successfully but with warning").arg(fileName));
+                emit processed(std::make_pair(index, total), true, QString("Send \"%1\" successfully but with warning").arg(fileName));
                 error = false;
             }
             else if ((theVal & 0xf000) == 0xa000 || (theVal & 0xf000) == 0xc000) // Failure
@@ -182,12 +186,12 @@ void StoreGdcm::store()
                 errormsg.SetFromDataSet(ds);
                 const char *themsg = errormsg.GetValue();
                 assert(themsg); (void)themsg;
-                emit processed(qMakePair(index, total), false, QString("Send \"%1\" failed. Response Status: %2").arg(fileName).arg(QString(themsg)));
+                emit processed(std::make_pair(index, total), false, QString("Send \"%1\" failed. Response Status: %2").arg(fileName).arg(QString(themsg)));
                 error = true;
             }
             else
             {
-                emit processed(qMakePair(index, total), false, QString("Send \"%1\" failed. Unhandled error code: %2").arg(fileName).arg(QString(theVal)));
+                emit processed(std::make_pair(index, total), false, QString("Send \"%1\" failed. Unhandled error code: %2").arg(fileName).arg(QString(theVal)));
                 error = true;
             }
 
@@ -197,12 +201,12 @@ void StoreGdcm::store()
         {
             // If you reach here this is basically because GDCM does not support encoding other
             // than raw transfer syntax (Little Endian Explicit/Implicit...)
-            emit processed(qMakePair(index, total), false, QString("Send \"%1\" failed. Error: %2").arg(fileErr).arg(QString(ex.GetDescription())));
+            emit processed(std::make_pair(index, total), false, QString("Send \"%1\" failed. Error: %2").arg(fileErr).arg(QString(ex.GetDescription())));
             error = true;
         }
         catch (...)
         {
-            emit processed(qMakePair(index, total), false, QString("Send \"%1\" failed").arg(fileErr));
+            emit processed(std::make_pair(index, total), false, QString("Send \"%1\" failed").arg(fileErr));
             error = true;
         }
 

@@ -12,5 +12,5 @@ public:
     ~ScanGdcm();
 
 protected:
-    bool isDicom(const QString &file) override;
+    bool isValid(const QString &file) override;
 };

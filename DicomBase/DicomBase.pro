@@ -15,14 +15,18 @@ include($$PWD/../ThirdParty/qt.pri)
 
 SOURCES     += \
     dcmtkhelper.cpp \
+    echobase.cpp \
     echodcmtk.cpp \
     echogdcm.cpp \
     echothread.cpp \
     gdcmhelper.cpp \
+    listfilesthread.cpp \
+    scanbase.cpp \
     scandcmtk.cpp \
     scangdcm.cpp \
     scanthread.cpp \
     scuinfo.cpp \
+    storebase.cpp \
     storedcmtk.cpp \
     storegdcm.cpp \
     storethread.cpp
@@ -36,6 +40,7 @@ HEADERS     += \
     echothread.h \
     gdcmhelper.h \
     global.h \
+    listfilesthread.h \
     scanbase.h \
     scandcmtk.h \
     scangdcm.h \

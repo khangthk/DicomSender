@@ -22,7 +22,9 @@ EchoDcmtk::EchoDcmtk(QObject *parent)
 {}
 
 EchoDcmtk::~EchoDcmtk()
-{}
+{
+    qDebug() << "~EchoDcmtk";
+}
 
 void EchoDcmtk::echo()
 {

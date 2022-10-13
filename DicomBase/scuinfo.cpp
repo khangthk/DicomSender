@@ -1,5 +1,7 @@
 #include "scuinfo.h"
 
+#include <QDebug>
+
 SCUInfo::SCUInfo(QObject *parent)
     : QObject(parent), m_localAE("AE"), m_targetAE("AE"), m_host("localhost"), m_port(104),
     m_stopWhenError(true), m_connectionTimeout(-1), m_socketTimeout(60), m_ACSETimeout(30), m_DIMSETimeout(0),
@@ -7,7 +9,9 @@ SCUInfo::SCUInfo(QObject *parent)
 {}
 
 SCUInfo::~SCUInfo()
-{}
+{
+    qDebug() << "~SCUInfo";
+}
 
 const QString &SCUInfo::localAE() const
 {

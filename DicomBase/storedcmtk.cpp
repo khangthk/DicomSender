@@ -31,7 +31,19 @@ StoreDcmtk::StoreDcmtk(QObject *parent)
 {}
 
 StoreDcmtk::~StoreDcmtk()
-{}
+{
+    qDebug() << "~StoreDcmtk";
+}
+
+QDebug &StoreDcmtk::qDebugDelay()
+{
+    return m_qDebugDelay;
+}
+
+void StoreDcmtk::resetQDebugDelay()
+{
+    m_qDebugDelay = QDebug(QtDebugMsg);
+}
 
 void StoreDcmtk::store()
 {
@@ -155,12 +167,12 @@ void StoreDcmtk::store()
         cond = storeSCU(assoc, file);
         if (cond.good())
         {
-            emit processed(qMakePair(index, total), true, QString("Send \"%1\" successfully").arg(fileName));
+            emit processed(std::make_pair(index, total), true, QString("Send \"%1\" successfully").arg(fileName));
         }
         else
         {
             DimseCondition::dump(temp_str, cond);
-            emit processed(qMakePair(index, total), false, QString("Send \"%1\" failed. Error: %2").arg(fileName, temp_str.c_str()));
+            emit processed(std::make_pair(index, total), false, QString("Send \"%1\" failed. Error: %2").arg(fileName, temp_str.c_str()));
         }
 
         setPercentOfProcessedFiles(oneFilePercent * index);

@@ -3,6 +3,8 @@
 #include "global.h"
 #include "storebase.h"
 
+#include <utility>
+
 #include <QThread>
 
 class DICOMBASE_EXPORT StoreThread : public QThread
@@ -23,6 +25,6 @@ private:
 
 signals:
     void progress(const int percent);
-    void processed(const QPair<int, int> &index, const bool result, const QString &log);
+    void processed(const std::pair<int, int> &index, const bool result, const QString &log);
     void done(const bool result, const QString &log);
 };
