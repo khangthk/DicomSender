@@ -1,5 +1,5 @@
 diff --git "a/Source/DataStructureAndEncodingDefinition/gdcmTagToVR.cxx" "b/Source/DataStructureAndEncodingDefinition/gdcmTagToVR.cxx"
-index 57085b11f..a8b86436d 100644
+index 57085b11f..7824f155d 100644
 --- "a/Source/DataStructureAndEncodingDefinition/gdcmTagToVR.cxx"
 +++ "b/Source/DataStructureAndEncodingDefinition/gdcmTagToVR.cxx"
 @@ -78,6 +78,18 @@ case 0x00020010:return VR::UI;
@@ -73,7 +73,7 @@ index 57085b11f..a8b86436d 100644
  case 0x0008010f:return VR::CS;
  case 0x00080110:return VR::SQ;
  case 0x00080112:return VR::LO;
-@@ -163,7 +188,75 @@ case 0x00080114:return VR::ST;
+@@ -163,7 +188,76 @@ case 0x00080114:return VR::ST;
  case 0x00080115:return VR::ST;
  case 0x00080116:return VR::ST;
  case 0x00080117:return VR::UI;
@@ -146,10 +146,11 @@ index 57085b11f..a8b86436d 100644
 +case 0x00080426:return VR::CS;
 +case 0x00080427:return VR::UL;
 +case 0x00080428:return VR::UV;
++case 0x00080429:return VR::UV;
  case 0x00081000:return VR::AE;
  case 0x00081010:return VR::SH;
  case 0x00081030:return VR::LO;
-@@ -171,6 +264,7 @@ case 0x00081032:return VR::SQ;
+@@ -171,6 +265,7 @@ case 0x00081032:return VR::SQ;
  case 0x0008103e:return VR::LO;
  case 0x0008103f:return VR::SQ;
  case 0x00081040:return VR::LO;
@@ -157,7 +158,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00081048:return VR::PN;
  case 0x00081049:return VR::SQ;
  case 0x00081050:return VR::PN;
-@@ -181,6 +275,7 @@ case 0x00081070:return VR::PN;
+@@ -181,6 +276,7 @@ case 0x00081070:return VR::PN;
  case 0x00081072:return VR::SQ;
  case 0x00081080:return VR::LO;
  case 0x00081084:return VR::SQ;
@@ -165,7 +166,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00081090:return VR::LO;
  case 0x00081100:return VR::SQ;
  case 0x00081110:return VR::SQ;
-@@ -197,6 +292,7 @@ case 0x0008114a:return VR::SQ;
+@@ -197,6 +293,7 @@ case 0x0008114a:return VR::SQ;
  case 0x0008114b:return VR::SQ;
  case 0x00081150:return VR::UI;
  case 0x00081155:return VR::UI;
@@ -173,7 +174,7 @@ index 57085b11f..a8b86436d 100644
  case 0x0008115a:return VR::UI;
  case 0x00081160:return VR::IS;
  case 0x00081161:return VR::UL;
-@@ -204,10 +300,13 @@ case 0x00081162:return VR::UL;
+@@ -204,10 +301,13 @@ case 0x00081162:return VR::UL;
  case 0x00081163:return VR::FD;
  case 0x00081164:return VR::SQ;
  case 0x00081167:return VR::UI;
@@ -187,7 +188,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00081200:return VR::SQ;
  case 0x00081250:return VR::SQ;
  case 0x00082110:return VR::CS;
-@@ -250,7 +349,10 @@ case 0x00082259:return VR::SQ;
+@@ -250,7 +350,10 @@ case 0x00082259:return VR::SQ;
  case 0x0008225a:return VR::SQ;
  case 0x0008225c:return VR::SQ;
  case 0x00083001:return VR::SQ;
@@ -198,7 +199,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00084000:return VR::LT;
  case 0x00089007:return VR::CS;
  case 0x00089092:return VR::SQ;
-@@ -274,12 +376,32 @@ case 0x00100020:return VR::LO;
+@@ -274,12 +377,32 @@ case 0x00100020:return VR::LO;
  case 0x00100021:return VR::LO;
  case 0x00100022:return VR::CS;
  case 0x00100024:return VR::SQ;
@@ -231,7 +232,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00101000:return VR::LO;
  case 0x00101001:return VR::PN;
  case 0x00101002:return VR::SQ;
-@@ -287,6 +409,9 @@ case 0x00101005:return VR::PN;
+@@ -287,6 +410,9 @@ case 0x00101005:return VR::PN;
  case 0x00101010:return VR::AS;
  case 0x00101020:return VR::DS;
  case 0x00101021:return VR::SQ;
@@ -241,7 +242,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00101030:return VR::DS;
  case 0x00101040:return VR::LO;
  case 0x00101050:return VR::LO;
-@@ -294,11 +419,13 @@ case 0x00101060:return VR::PN;
+@@ -294,11 +420,13 @@ case 0x00101060:return VR::PN;
  case 0x00101080:return VR::LO;
  case 0x00101081:return VR::LO;
  case 0x00101090:return VR::LO;
@@ -255,16 +256,17 @@ index 57085b11f..a8b86436d 100644
  case 0x00102160:return VR::SH;
  case 0x00102180:return VR::SH;
  case 0x001021a0:return VR::CS;
-@@ -329,6 +456,8 @@ case 0x00120040:return VR::LO;
+@@ -329,6 +457,9 @@ case 0x00120040:return VR::LO;
  case 0x00120042:return VR::LO;
  case 0x00120050:return VR::LO;
  case 0x00120051:return VR::ST;
 +case 0x00120052:return VR::FD;
 +case 0x00120053:return VR::CS;
++case 0x00120054:return VR::SQ;
  case 0x00120060:return VR::LO;
  case 0x00120062:return VR::CS;
  case 0x00120063:return VR::LO;
-@@ -340,6 +469,8 @@ case 0x00120082:return VR::LO;
+@@ -340,6 +471,8 @@ case 0x00120082:return VR::LO;
  case 0x00120083:return VR::SQ;
  case 0x00120084:return VR::CS;
  case 0x00120085:return VR::CS;
@@ -273,7 +275,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00140023:return VR::ST;
  case 0x00140024:return VR::ST;
  case 0x00140025:return VR::ST;
-@@ -355,6 +486,23 @@ case 0x00140050:return VR::CS;
+@@ -355,6 +488,23 @@ case 0x00140050:return VR::CS;
  case 0x00140052:return VR::CS;
  case 0x00140054:return VR::DS;
  case 0x00140056:return VR::DS;
@@ -297,7 +299,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00141010:return VR::ST;
  case 0x00141020:return VR::DA;
  case 0x00141040:return VR::ST;
-@@ -404,6 +552,8 @@ case 0x00143076:return VR::DA;
+@@ -404,6 +554,8 @@ case 0x00143076:return VR::DA;
  case 0x00143077:return VR::TM;
  case 0x00143080:return VR::OB;
  case 0x00143099:return VR::LT;
@@ -306,7 +308,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00144002:return VR::SQ;
  case 0x00144004:return VR::CS;
  case 0x00144006:return VR::LT;
-@@ -425,6 +575,7 @@ case 0x00144019:return VR::DS;
+@@ -425,6 +577,7 @@ case 0x00144019:return VR::DS;
  case 0x0014401a:return VR::DS;
  case 0x0014401b:return VR::DS;
  case 0x0014401c:return VR::DS;
@@ -314,7 +316,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00144020:return VR::SQ;
  case 0x00144022:return VR::DS;
  case 0x00144024:return VR::DS;
-@@ -462,10 +613,177 @@ case 0x00144078:return VR::DA;
+@@ -462,10 +615,177 @@ case 0x00144078:return VR::DA;
  case 0x0014407a:return VR::DA;
  case 0x0014407c:return VR::TM;
  case 0x0014407e:return VR::DA;
@@ -492,7 +494,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00180014:return VR::SQ;
  case 0x00180015:return VR::CS;
  case 0x00180020:return VR::CS;
-@@ -494,6 +812,7 @@ case 0x00180040:return VR::IS;
+@@ -494,6 +814,7 @@ case 0x00180040:return VR::IS;
  case 0x00180042:return VR::CS;
  case 0x00180050:return VR::DS;
  case 0x00180060:return VR::DS;
@@ -500,7 +502,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00180070:return VR::IS;
  case 0x00180071:return VR::CS;
  case 0x00180072:return VR::DS;
-@@ -523,6 +842,9 @@ case 0x00181005:return VR::LO;
+@@ -523,6 +844,9 @@ case 0x00181005:return VR::LO;
  case 0x00181006:return VR::LO;
  case 0x00181007:return VR::LO;
  case 0x00181008:return VR::LO;
@@ -510,7 +512,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00181010:return VR::LO;
  case 0x00181011:return VR::LO;
  case 0x00181012:return VR::DA;
-@@ -628,8 +950,31 @@ case 0x00181190:return VR::DS;
+@@ -628,8 +952,31 @@ case 0x00181190:return VR::DS;
  case 0x00181191:return VR::CS;
  case 0x001811a0:return VR::DS;
  case 0x001811a2:return VR::DS;
@@ -542,7 +544,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00181210:return VR::SH;
  case 0x00181240:return VR::IS;
  case 0x00181242:return VR::IS;
-@@ -639,6 +984,8 @@ case 0x00181250:return VR::SH;
+@@ -639,6 +986,8 @@ case 0x00181250:return VR::SH;
  case 0x00181251:return VR::SH;
  case 0x00181260:return VR::SH;
  case 0x00181261:return VR::LO;
@@ -551,7 +553,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00181300:return VR::DS;
  case 0x00181301:return VR::CS;
  case 0x00181302:return VR::IS;
-@@ -648,6 +995,7 @@ case 0x00181314:return VR::DS;
+@@ -648,6 +997,7 @@ case 0x00181314:return VR::DS;
  case 0x00181315:return VR::CS;
  case 0x00181316:return VR::DS;
  case 0x00181318:return VR::DS;
@@ -559,7 +561,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00181400:return VR::LO;
  case 0x00181401:return VR::LO;
  case 0x00181402:return VR::CS;
-@@ -683,6 +1031,15 @@ case 0x00181620:return VR::IS;
+@@ -683,6 +1033,15 @@ case 0x00181620:return VR::IS;
  case 0x00181622:return VR::US;
  case 0x00181623:return VR::US;
  case 0x00181624:return VR::US;
@@ -575,7 +577,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00181700:return VR::CS;
  case 0x00181702:return VR::IS;
  case 0x00181704:return VR::IS;
-@@ -704,6 +1061,12 @@ case 0x00182006:return VR::SH;
+@@ -704,6 +1063,12 @@ case 0x00182006:return VR::SH;
  case 0x00182010:return VR::DS;
  case 0x00182020:return VR::CS;
  case 0x00182030:return VR::DS;
@@ -588,7 +590,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00183100:return VR::CS;
  case 0x00183101:return VR::DS;
  case 0x00183102:return VR::DS;
-@@ -713,6 +1076,7 @@ case 0x00183105:return VR::IS;
+@@ -713,6 +1078,7 @@ case 0x00183105:return VR::IS;
  case 0x00184000:return VR::LT;
  case 0x00185000:return VR::SH;
  case 0x00185010:return VR::LO;
@@ -596,7 +598,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00185012:return VR::DS;
  case 0x00185020:return VR::LO;
  case 0x00185021:return VR::LO;
-@@ -777,6 +1141,7 @@ case 0x00186056:return VR::UL;
+@@ -777,6 +1143,7 @@ case 0x00186056:return VR::UL;
  case 0x00186058:return VR::UL;
  case 0x0018605a:return VR::FL;
  case 0x00186060:return VR::FL;
@@ -604,7 +606,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00187000:return VR::CS;
  case 0x00187001:return VR::DS;
  case 0x00187004:return VR::CS;
-@@ -981,6 +1346,8 @@ case 0x0018925f:return VR::UL;
+@@ -981,6 +1348,8 @@ case 0x0018925f:return VR::UL;
  case 0x00189260:return VR::SQ;
  case 0x00189295:return VR::FD;
  case 0x00189296:return VR::FD;
@@ -613,7 +615,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00189301:return VR::SQ;
  case 0x00189302:return VR::CS;
  case 0x00189303:return VR::FD;
-@@ -1028,6 +1395,42 @@ case 0x00189351:return VR::FL;
+@@ -1028,6 +1397,42 @@ case 0x00189351:return VR::FL;
  case 0x00189352:return VR::FL;
  case 0x00189353:return VR::FL;
  case 0x00189360:return VR::SQ;
@@ -656,7 +658,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00189401:return VR::SQ;
  case 0x00189402:return VR::FL;
  case 0x00189403:return VR::FL;
-@@ -1092,6 +1495,8 @@ case 0x00189514:return VR::FL;
+@@ -1092,6 +1497,8 @@ case 0x00189514:return VR::FL;
  case 0x00189515:return VR::FL;
  case 0x00189516:return VR::DT;
  case 0x00189517:return VR::DT;
@@ -665,7 +667,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00189524:return VR::LO;
  case 0x00189525:return VR::LO;
  case 0x00189526:return VR::LO;
-@@ -1100,6 +1505,25 @@ case 0x00189528:return VR::LO;
+@@ -1100,6 +1507,25 @@ case 0x00189528:return VR::LO;
  case 0x00189530:return VR::SQ;
  case 0x00189531:return VR::LO;
  case 0x00189538:return VR::SQ;
@@ -691,7 +693,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00189601:return VR::SQ;
  case 0x00189602:return VR::FD;
  case 0x00189603:return VR::FD;
-@@ -1107,6 +1531,10 @@ case 0x00189604:return VR::FD;
+@@ -1107,6 +1533,10 @@ case 0x00189604:return VR::FD;
  case 0x00189605:return VR::FD;
  case 0x00189606:return VR::FD;
  case 0x00189607:return VR::FD;
@@ -702,7 +704,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00189701:return VR::DT;
  case 0x00189715:return VR::FD;
  case 0x00189716:return VR::FD;
-@@ -1163,6 +1591,66 @@ case 0x0018980c:return VR::CS;
+@@ -1163,6 +1593,66 @@ case 0x0018980c:return VR::CS;
  case 0x0018980d:return VR::SQ;
  case 0x0018980e:return VR::SQ;
  case 0x0018980f:return VR::SQ;
@@ -769,7 +771,7 @@ index 57085b11f..a8b86436d 100644
  case 0x0018a001:return VR::SQ;
  case 0x0018a002:return VR::DT;
  case 0x0018a003:return VR::ST;
-@@ -1182,6 +1670,7 @@ case 0x00200020:return VR::CS;
+@@ -1182,6 +1672,7 @@ case 0x00200020:return VR::CS;
  case 0x00200022:return VR::IS;
  case 0x00200024:return VR::IS;
  case 0x00200026:return VR::IS;
@@ -777,7 +779,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00200030:return VR::DS;
  case 0x00200032:return VR::DS;
  case 0x00200035:return VR::DS;
-@@ -1205,6 +1694,7 @@ case 0x00201003:return VR::IS;
+@@ -1205,6 +1696,7 @@ case 0x00201003:return VR::IS;
  case 0x00201004:return VR::IS;
  case 0x00201005:return VR::IS;
  case 0x00201020:return VR::LO;
@@ -785,7 +787,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00201040:return VR::LO;
  case 0x00201041:return VR::DS;
  case 0x00201070:return VR::IS;
-@@ -1243,6 +1733,9 @@ case 0x00209163:return VR::US;
+@@ -1243,6 +1735,9 @@ case 0x00209163:return VR::US;
  case 0x00209164:return VR::UI;
  case 0x00209165:return VR::AT;
  case 0x00209167:return VR::AT;
@@ -795,7 +797,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00209213:return VR::LO;
  case 0x00209221:return VR::SQ;
  case 0x00209222:return VR::SQ;
-@@ -1268,6 +1761,7 @@ case 0x00209307:return VR::CS;
+@@ -1268,6 +1763,7 @@ case 0x00209307:return VR::CS;
  case 0x00209308:return VR::FD;
  case 0x00209309:return VR::FD;
  case 0x0020930a:return VR::FD;
@@ -803,7 +805,7 @@ index 57085b11f..a8b86436d 100644
  case 0x0020930c:return VR::CS;
  case 0x0020930d:return VR::FD;
  case 0x0020930e:return VR::SQ;
-@@ -1314,6 +1808,7 @@ case 0x0022001e:return VR::FL;
+@@ -1314,6 +1810,7 @@ case 0x0022001e:return VR::FL;
  case 0x00220020:return VR::SQ;
  case 0x00220021:return VR::SQ;
  case 0x00220022:return VR::SQ;
@@ -811,7 +813,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00220030:return VR::FL;
  case 0x00220031:return VR::SQ;
  case 0x00220032:return VR::FL;
-@@ -1343,10 +1838,18 @@ case 0x00221028:return VR::SQ;
+@@ -1343,10 +1840,18 @@ case 0x00221028:return VR::SQ;
  case 0x00221029:return VR::LO;
  case 0x00221033:return VR::FL;
  case 0x00221035:return VR::SQ;
@@ -830,7 +832,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00221050:return VR::SQ;
  case 0x00221053:return VR::FL;
  case 0x00221054:return VR::FL;
-@@ -1368,6 +1871,9 @@ case 0x00221122:return VR::FL;
+@@ -1368,6 +1873,9 @@ case 0x00221122:return VR::FL;
  case 0x00221125:return VR::SQ;
  case 0x00221127:return VR::SQ;
  case 0x00221128:return VR::SQ;
@@ -840,7 +842,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00221130:return VR::FL;
  case 0x00221131:return VR::FL;
  case 0x00221132:return VR::SQ;
-@@ -1390,10 +1896,60 @@ case 0x00221255:return VR::SQ;
+@@ -1390,10 +1898,60 @@ case 0x00221255:return VR::SQ;
  case 0x00221257:return VR::SQ;
  case 0x00221260:return VR::SQ;
  case 0x00221262:return VR::SQ;
@@ -901,7 +903,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00240010:return VR::FL;
  case 0x00240011:return VR::FL;
  case 0x00240012:return VR::CS;
-@@ -1547,6 +2103,10 @@ case 0x00280110:return VR::US_SS;
+@@ -1547,6 +2105,10 @@ case 0x00280110:return VR::US_SS;
  case 0x00280111:return VR::US_SS;
  case 0x00280120:return VR::US_SS;
  case 0x00280121:return VR::US_SS;
@@ -912,7 +914,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00280200:return VR::US;
  case 0x00280300:return VR::CS;
  case 0x00280301:return VR::CS;
-@@ -1600,6 +2160,10 @@ case 0x00281214:return VR::UI;
+@@ -1600,6 +2162,10 @@ case 0x00281214:return VR::UI;
  case 0x00281221:return VR::OW;
  case 0x00281222:return VR::OW;
  case 0x00281223:return VR::OW;
@@ -923,7 +925,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00281300:return VR::CS;
  case 0x00281350:return VR::CS;
  case 0x00281351:return VR::ST;
-@@ -1620,6 +2184,7 @@ case 0x0028140e:return VR::CS;
+@@ -1620,6 +2186,7 @@ case 0x0028140e:return VR::CS;
  case 0x0028140f:return VR::CS;
  case 0x00281410:return VR::CS;
  case 0x00282000:return VR::OB;
@@ -931,7 +933,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00282110:return VR::CS;
  case 0x00282112:return VR::DS;
  case 0x00282114:return VR::CS;
-@@ -1627,6 +2192,7 @@ case 0x00283000:return VR::SQ;
+@@ -1627,6 +2194,7 @@ case 0x00283000:return VR::SQ;
  case 0x00283002:return VR::US_SS;
  case 0x00283003:return VR::LO;
  case 0x00283004:return VR::LO;
@@ -939,7 +941,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00283010:return VR::SQ;
  case 0x00283110:return VR::SQ;
  case 0x00284000:return VR::LT;
-@@ -1645,7 +2211,54 @@ case 0x00286112:return VR::US;
+@@ -1645,7 +2213,54 @@ case 0x00286112:return VR::US;
  case 0x00286114:return VR::FL;
  case 0x00286120:return VR::SS;
  case 0x00286190:return VR::ST;
@@ -995,7 +997,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00289001:return VR::UL;
  case 0x00289002:return VR::UL;
  case 0x00289003:return VR::CS;
-@@ -1699,8 +2312,23 @@ case 0x00321051:return VR::TM;
+@@ -1699,8 +2314,23 @@ case 0x00321051:return VR::TM;
  case 0x00321055:return VR::CS;
  case 0x00321060:return VR::LO;
  case 0x00321064:return VR::SQ;
@@ -1019,7 +1021,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00380004:return VR::SQ;
  case 0x00380008:return VR::CS;
  case 0x00380010:return VR::LO;
-@@ -1724,6 +2352,8 @@ case 0x00380061:return VR::LO;
+@@ -1724,6 +2354,8 @@ case 0x00380061:return VR::LO;
  case 0x00380062:return VR::LO;
  case 0x00380064:return VR::SQ;
  case 0x00380100:return VR::SQ;
@@ -1028,7 +1030,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00380300:return VR::LO;
  case 0x00380400:return VR::LO;
  case 0x00380500:return VR::LO;
-@@ -1767,6 +2397,31 @@ case 0x003a0248:return VR::FL;
+@@ -1767,6 +2399,31 @@ case 0x003a0248:return VR::FL;
  case 0x003a0300:return VR::SQ;
  case 0x003a0301:return VR::IS;
  case 0x003a0302:return VR::CS;
@@ -1060,17 +1062,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00400001:return VR::AE;
  case 0x00400002:return VR::DA;
  case 0x00400003:return VR::TM;
-@@ -1849,15 +2504,16 @@ case 0x00400553:return VR::ST;
- case 0x00400554:return VR::UI;
- case 0x00400555:return VR::SQ;
- case 0x00400556:return VR::ST;
--case 0x0040059a:return VR::SQ;
- case 0x00400560:return VR::SQ;
- case 0x00400562:return VR::SQ;
-+case 0x0040059a:return VR::SQ;
- case 0x00400600:return VR::LO;
- case 0x00400602:return VR::UT;
- case 0x00400610:return VR::SQ;
+@@ -1858,6 +2515,7 @@ case 0x00400610:return VR::SQ;
  case 0x00400612:return VR::SQ;
  case 0x00400620:return VR::SQ;
  case 0x004006fa:return VR::LO;
@@ -1078,7 +1070,7 @@ index 57085b11f..a8b86436d 100644
  case 0x0040071a:return VR::SQ;
  case 0x0040072a:return VR::DS;
  case 0x0040073a:return VR::DS;
-@@ -1883,6 +2539,7 @@ case 0x00401060:return VR::LO;
+@@ -1883,6 +2541,7 @@ case 0x00401060:return VR::LO;
  case 0x00401101:return VR::SQ;
  case 0x00401102:return VR::ST;
  case 0x00401103:return VR::LO;
@@ -1086,7 +1078,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00401400:return VR::LT;
  case 0x00402001:return VR::LO;
  case 0x00402004:return VR::DA;
-@@ -1892,6 +2549,7 @@ case 0x00402007:return VR::SH;
+@@ -1892,6 +2551,7 @@ case 0x00402007:return VR::SH;
  case 0x00402008:return VR::PN;
  case 0x00402009:return VR::SH;
  case 0x00402010:return VR::SH;
@@ -1094,7 +1086,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00402016:return VR::LO;
  case 0x00402017:return VR::LO;
  case 0x00402400:return VR::LT;
-@@ -1903,6 +2561,7 @@ case 0x00404004:return VR::SQ;
+@@ -1903,6 +2563,7 @@ case 0x00404004:return VR::SQ;
  case 0x00404005:return VR::DT;
  case 0x00404006:return VR::CS;
  case 0x00404007:return VR::SQ;
@@ -1102,7 +1094,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00404009:return VR::SQ;
  case 0x00404010:return VR::DT;
  case 0x00404011:return VR::DT;
-@@ -1932,14 +2591,24 @@ case 0x00404041:return VR::CS;
+@@ -1932,14 +2593,24 @@ case 0x00404041:return VR::CS;
  case 0x00404050:return VR::DT;
  case 0x00404051:return VR::DT;
  case 0x00404052:return VR::DT;
@@ -1127,7 +1119,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00409224:return VR::FD;
  case 0x00409225:return VR::FD;
  case 0x0040a007:return VR::CS;
-@@ -1954,6 +2623,7 @@ case 0x0040a027:return VR::LO;
+@@ -1954,6 +2625,7 @@ case 0x0040a027:return VR::LO;
  case 0x0040a028:return VR::SQ;
  case 0x0040a030:return VR::DT;
  case 0x0040a032:return VR::DT;
@@ -1135,7 +1127,7 @@ index 57085b11f..a8b86436d 100644
  case 0x0040a040:return VR::CS;
  case 0x0040a043:return VR::SQ;
  case 0x0040a047:return VR::LO;
-@@ -1993,6 +2663,9 @@ case 0x0040a136:return VR::US;
+@@ -1993,6 +2665,9 @@ case 0x0040a136:return VR::US;
  case 0x0040a138:return VR::DS;
  case 0x0040a13a:return VR::DT;
  case 0x0040a160:return VR::UT;
@@ -1145,7 +1137,7 @@ index 57085b11f..a8b86436d 100644
  case 0x0040a167:return VR::SQ;
  case 0x0040a168:return VR::SQ;
  case 0x0040a16a:return VR::ST;
-@@ -2046,6 +2719,14 @@ case 0x0040a730:return VR::SQ;
+@@ -2046,6 +2721,14 @@ case 0x0040a730:return VR::SQ;
  case 0x0040a731:return VR::SQ;
  case 0x0040a732:return VR::SQ;
  case 0x0040a744:return VR::SQ;
@@ -1160,7 +1152,7 @@ index 57085b11f..a8b86436d 100644
  case 0x0040a992:return VR::ST;
  case 0x0040b020:return VR::SQ;
  case 0x0040db00:return VR::CS;
-@@ -2059,13 +2740,14 @@ case 0x0040e001:return VR::ST;
+@@ -2059,13 +2742,14 @@ case 0x0040e001:return VR::ST;
  case 0x0040e004:return VR::DT;
  case 0x0040e006:return VR::SQ;
  case 0x0040e008:return VR::SQ;
@@ -1176,7 +1168,7 @@ index 57085b11f..a8b86436d 100644
  case 0x0040e030:return VR::UI;
  case 0x0040e031:return VR::UI;
  case 0x00420010:return VR::ST;
-@@ -2073,6 +2755,7 @@ case 0x00420011:return VR::OB;
+@@ -2073,6 +2757,7 @@ case 0x00420011:return VR::OB;
  case 0x00420012:return VR::LO;
  case 0x00420013:return VR::SQ;
  case 0x00420014:return VR::LO;
@@ -1184,7 +1176,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00440001:return VR::ST;
  case 0x00440002:return VR::CS;
  case 0x00440003:return VR::LT;
-@@ -2087,6 +2770,17 @@ case 0x00440011:return VR::LO;
+@@ -2087,6 +2772,17 @@ case 0x00440011:return VR::LO;
  case 0x00440012:return VR::LO;
  case 0x00440013:return VR::SQ;
  case 0x00440019:return VR::SQ;
@@ -1202,7 +1194,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00460012:return VR::LO;
  case 0x00460014:return VR::SQ;
  case 0x00460015:return VR::SQ;
-@@ -2102,6 +2796,7 @@ case 0x00460040:return VR::FD;
+@@ -2102,6 +2798,7 @@ case 0x00460040:return VR::FD;
  case 0x00460042:return VR::FD;
  case 0x00460044:return VR::FD;
  case 0x00460046:return VR::FD;
@@ -1210,7 +1202,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00460050:return VR::SQ;
  case 0x00460052:return VR::SQ;
  case 0x00460060:return VR::FD;
-@@ -2125,6 +2820,15 @@ case 0x00460101:return VR::SQ;
+@@ -2125,6 +2822,15 @@ case 0x00460101:return VR::SQ;
  case 0x00460102:return VR::SQ;
  case 0x00460104:return VR::FD;
  case 0x00460106:return VR::FD;
@@ -1226,7 +1218,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00460121:return VR::SQ;
  case 0x00460122:return VR::SQ;
  case 0x00460123:return VR::SQ;
-@@ -2136,6 +2840,36 @@ case 0x00460139:return VR::LO;
+@@ -2136,6 +2842,36 @@ case 0x00460139:return VR::LO;
  case 0x00460145:return VR::SQ;
  case 0x00460146:return VR::FD;
  case 0x00460147:return VR::FD;
@@ -1263,7 +1255,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00480001:return VR::FL;
  case 0x00480002:return VR::FL;
  case 0x00480003:return VR::FL;
-@@ -2167,6 +2901,8 @@ case 0x0048021a:return VR::SQ;
+@@ -2167,6 +2903,8 @@ case 0x0048021a:return VR::SQ;
  case 0x0048021e:return VR::SL;
  case 0x0048021f:return VR::SL;
  case 0x00480301:return VR::CS;
@@ -1272,7 +1264,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00500004:return VR::CS;
  case 0x00500010:return VR::SQ;
  case 0x00500012:return VR::SQ;
-@@ -2183,6 +2919,7 @@ case 0x0050001c:return VR::FD;
+@@ -2183,6 +2921,7 @@ case 0x0050001c:return VR::FD;
  case 0x0050001d:return VR::FD;
  case 0x0050001e:return VR::LO;
  case 0x00500020:return VR::LO;
@@ -1280,7 +1272,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00520001:return VR::FL;
  case 0x00520002:return VR::FD;
  case 0x00520003:return VR::FD;
-@@ -2261,6 +2998,7 @@ case 0x00540410:return VR::SQ;
+@@ -2261,6 +3000,7 @@ case 0x00540410:return VR::SQ;
  case 0x00540412:return VR::SQ;
  case 0x00540414:return VR::SQ;
  case 0x00540500:return VR::CS;
@@ -1288,7 +1280,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00541000:return VR::CS;
  case 0x00541001:return VR::CS;
  case 0x00541002:return VR::CS;
-@@ -2302,6 +3040,7 @@ case 0x00620003:return VR::SQ;
+@@ -2302,6 +3042,7 @@ case 0x00620003:return VR::SQ;
  case 0x00620004:return VR::US;
  case 0x00620005:return VR::LO;
  case 0x00620006:return VR::ST;
@@ -1296,7 +1288,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00620008:return VR::CS;
  case 0x00620009:return VR::LO;
  case 0x0062000a:return VR::SQ;
-@@ -2311,6 +3050,11 @@ case 0x0062000d:return VR::US;
+@@ -2311,6 +3052,11 @@ case 0x0062000d:return VR::US;
  case 0x0062000e:return VR::US;
  case 0x0062000f:return VR::SQ;
  case 0x00620010:return VR::CS;
@@ -1308,7 +1300,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00640002:return VR::SQ;
  case 0x00640003:return VR::UI;
  case 0x00640005:return VR::SQ;
-@@ -2345,6 +3089,7 @@ case 0x0066001e:return VR::UL;
+@@ -2345,6 +3091,7 @@ case 0x0066001e:return VR::UL;
  case 0x0066001f:return VR::US;
  case 0x00660020:return VR::FL;
  case 0x00660021:return VR::OF;
@@ -1316,7 +1308,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00660023:return VR::OW;
  case 0x00660024:return VR::OW;
  case 0x00660025:return VR::OW;
-@@ -2364,6 +3109,28 @@ case 0x00660032:return VR::LT;
+@@ -2364,6 +3111,28 @@ case 0x00660032:return VR::LT;
  case 0x00660034:return VR::SQ;
  case 0x00660035:return VR::SQ;
  case 0x00660036:return VR::LO;
@@ -1345,7 +1337,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00686210:return VR::LO;
  case 0x00686221:return VR::LO;
  case 0x00686222:return VR::SQ;
-@@ -2382,7 +3149,7 @@ case 0x006862c0:return VR::SQ;
+@@ -2382,7 +3151,7 @@ case 0x006862c0:return VR::SQ;
  case 0x006862d0:return VR::US;
  case 0x006862d5:return VR::LO;
  case 0x006862e0:return VR::SQ;
@@ -1354,7 +1346,7 @@ index 57085b11f..a8b86436d 100644
  case 0x006862f2:return VR::FD;
  case 0x00686300:return VR::OB;
  case 0x00686310:return VR::US;
-@@ -2434,6 +3201,27 @@ case 0x006865e0:return VR::SQ;
+@@ -2434,6 +3203,27 @@ case 0x006865e0:return VR::SQ;
  case 0x006865f0:return VR::FD;
  case 0x00686610:return VR::FD;
  case 0x00686620:return VR::FD;
@@ -1382,7 +1374,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00700001:return VR::SQ;
  case 0x00700002:return VR::CS;
  case 0x00700003:return VR::CS;
-@@ -2524,6 +3312,7 @@ case 0x00700306:return VR::CS;
+@@ -2524,6 +3314,7 @@ case 0x00700306:return VR::CS;
  case 0x00700308:return VR::SQ;
  case 0x00700309:return VR::SQ;
  case 0x0070030a:return VR::SQ;
@@ -1390,7 +1382,7 @@ index 57085b11f..a8b86436d 100644
  case 0x0070030c:return VR::CS;
  case 0x0070030d:return VR::SQ;
  case 0x0070030f:return VR::ST;
-@@ -2531,15 +3320,96 @@ case 0x00700310:return VR::SH;
+@@ -2531,15 +3322,96 @@ case 0x00700310:return VR::SH;
  case 0x00700311:return VR::SQ;
  case 0x00700312:return VR::FD;
  case 0x00700314:return VR::SQ;
@@ -1487,7 +1479,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00720002:return VR::SH;
  case 0x00720004:return VR::LO;
  case 0x00720006:return VR::CS;
-@@ -2567,23 +3437,40 @@ case 0x00720050:return VR::CS;
+@@ -2567,23 +3439,40 @@ case 0x00720050:return VR::CS;
  case 0x00720052:return VR::AT;
  case 0x00720054:return VR::LO;
  case 0x00720056:return VR::LO;
@@ -1528,7 +1520,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00720100:return VR::US;
  case 0x00720102:return VR::SQ;
  case 0x00720104:return VR::US;
-@@ -2653,13 +3540,15 @@ case 0x00741000:return VR::CS;
+@@ -2653,13 +3542,15 @@ case 0x00741000:return VR::CS;
  case 0x00741002:return VR::SQ;
  case 0x00741004:return VR::DS;
  case 0x00741006:return VR::ST;
@@ -1545,7 +1537,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00741026:return VR::FD;
  case 0x00741027:return VR::FD;
  case 0x00741028:return VR::FD;
-@@ -2705,6 +3594,20 @@ case 0x00741246:return VR::CS;
+@@ -2705,6 +3596,20 @@ case 0x00741246:return VR::CS;
  case 0x00741324:return VR::UL;
  case 0x00741338:return VR::FD;
  case 0x0074133a:return VR::FD;
@@ -1566,7 +1558,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00760001:return VR::LO;
  case 0x00760003:return VR::LO;
  case 0x00760006:return VR::LO;
-@@ -2716,7 +3619,7 @@ case 0x00760010:return VR::SQ;
+@@ -2716,7 +3621,7 @@ case 0x00760010:return VR::SQ;
  case 0x00760020:return VR::SQ;
  case 0x00760030:return VR::LO;
  case 0x00760032:return VR::SQ;
@@ -1575,7 +1567,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00760036:return VR::CS;
  case 0x00760038:return VR::CS;
  case 0x00760040:return VR::SQ;
-@@ -2746,6 +3649,43 @@ case 0x007800b2:return VR::LO;
+@@ -2746,6 +3651,43 @@ case 0x007800b2:return VR::LO;
  case 0x007800b4:return VR::SQ;
  case 0x007800b6:return VR::US;
  case 0x007800b8:return VR::US;
@@ -1619,7 +1611,7 @@ index 57085b11f..a8b86436d 100644
  case 0x00880130:return VR::SH;
  case 0x00880140:return VR::UI;
  case 0x00880200:return VR::SQ;
-@@ -2768,6 +3708,7 @@ case 0x04000115:return VR::OB;
+@@ -2768,6 +3710,7 @@ case 0x04000115:return VR::OB;
  case 0x04000120:return VR::OB;
  case 0x04000305:return VR::CS;
  case 0x04000310:return VR::OB;
@@ -1627,7 +1619,7 @@ index 57085b11f..a8b86436d 100644
  case 0x04000401:return VR::SQ;
  case 0x04000402:return VR::SQ;
  case 0x04000403:return VR::SQ;
-@@ -2776,11 +3717,14 @@ case 0x04000500:return VR::SQ;
+@@ -2776,11 +3719,14 @@ case 0x04000500:return VR::SQ;
  case 0x04000510:return VR::UI;
  case 0x04000520:return VR::OB;
  case 0x04000550:return VR::SQ;
@@ -1642,7 +1634,7 @@ index 57085b11f..a8b86436d 100644
  case 0x20000010:return VR::IS;
  case 0x2000001e:return VR::SQ;
  case 0x20000020:return VR::CS;
-@@ -2926,6 +3870,7 @@ case 0x30020052:return VR::SH;
+@@ -2926,6 +3872,7 @@ case 0x30020052:return VR::SH;
  case 0x30040001:return VR::CS;
  case 0x30040002:return VR::CS;
  case 0x30040004:return VR::CS;
@@ -1650,7 +1642,7 @@ index 57085b11f..a8b86436d 100644
  case 0x30040006:return VR::LO;
  case 0x30040008:return VR::DS;
  case 0x3004000a:return VR::CS;
-@@ -2955,6 +3900,7 @@ case 0x30060010:return VR::SQ;
+@@ -2955,6 +3902,7 @@ case 0x30060010:return VR::SQ;
  case 0x30060012:return VR::SQ;
  case 0x30060014:return VR::SQ;
  case 0x30060016:return VR::SQ;
@@ -1658,7 +1650,7 @@ index 57085b11f..a8b86436d 100644
  case 0x30060020:return VR::SQ;
  case 0x30060022:return VR::IS;
  case 0x30060024:return VR::UI;
-@@ -2965,6 +3911,7 @@ case 0x3006002c:return VR::DS;
+@@ -2965,6 +3913,7 @@ case 0x3006002c:return VR::DS;
  case 0x30060030:return VR::SQ;
  case 0x30060033:return VR::CS;
  case 0x30060036:return VR::CS;
@@ -1666,7 +1658,7 @@ index 57085b11f..a8b86436d 100644
  case 0x30060038:return VR::LO;
  case 0x30060039:return VR::SQ;
  case 0x30060040:return VR::SQ;
-@@ -2974,6 +3921,7 @@ case 0x30060045:return VR::DS;
+@@ -2974,6 +3923,7 @@ case 0x30060045:return VR::DS;
  case 0x30060046:return VR::IS;
  case 0x30060048:return VR::IS;
  case 0x30060049:return VR::IS;
@@ -1674,7 +1666,7 @@ index 57085b11f..a8b86436d 100644
  case 0x30060050:return VR::DS;
  case 0x30060080:return VR::SQ;
  case 0x30060082:return VR::IS;
-@@ -2990,11 +3938,15 @@ case 0x300600b4:return VR::DS;
+@@ -2990,11 +3940,15 @@ case 0x300600b4:return VR::DS;
  case 0x300600b6:return VR::SQ;
  case 0x300600b7:return VR::US;
  case 0x300600b8:return VR::FL;
@@ -1690,7 +1682,7 @@ index 57085b11f..a8b86436d 100644
  case 0x30080010:return VR::SQ;
  case 0x30080012:return VR::ST;
  case 0x30080014:return VR::CS;
-@@ -3034,6 +3986,7 @@ case 0x30080063:return VR::IS;
+@@ -3034,6 +3988,7 @@ case 0x30080063:return VR::IS;
  case 0x30080064:return VR::IS;
  case 0x30080065:return VR::AT;
  case 0x30080066:return VR::ST;
@@ -1698,7 +1690,7 @@ index 57085b11f..a8b86436d 100644
  case 0x30080068:return VR::SQ;
  case 0x3008006a:return VR::FL;
  case 0x30080070:return VR::SQ;
-@@ -3050,6 +4003,7 @@ case 0x300800a0:return VR::SQ;
+@@ -3050,6 +4005,7 @@ case 0x300800a0:return VR::SQ;
  case 0x300800b0:return VR::SQ;
  case 0x300800c0:return VR::SQ;
  case 0x300800d0:return VR::SQ;
@@ -1706,7 +1698,7 @@ index 57085b11f..a8b86436d 100644
  case 0x300800e0:return VR::SQ;
  case 0x300800f0:return VR::SQ;
  case 0x300800f2:return VR::SQ;
-@@ -3077,6 +4031,9 @@ case 0x30080162:return VR::DA;
+@@ -3077,6 +4033,9 @@ case 0x30080162:return VR::DA;
  case 0x30080164:return VR::TM;
  case 0x30080166:return VR::DA;
  case 0x30080168:return VR::TM;
@@ -1716,7 +1708,7 @@ index 57085b11f..a8b86436d 100644
  case 0x30080200:return VR::CS;
  case 0x30080202:return VR::ST;
  case 0x30080220:return VR::SQ;
-@@ -3141,11 +4098,22 @@ case 0x300a007a:return VR::IS;
+@@ -3141,11 +4100,22 @@ case 0x300a007a:return VR::IS;
  case 0x300a007b:return VR::LT;
  case 0x300a0080:return VR::IS;
  case 0x300a0082:return VR::DS;
@@ -1739,7 +1731,7 @@ index 57085b11f..a8b86436d 100644
  case 0x300a00a0:return VR::IS;
  case 0x300a00a2:return VR::DS;
  case 0x300a00a4:return VR::DS;
-@@ -3163,6 +4131,7 @@ case 0x300a00c0:return VR::IS;
+@@ -3163,6 +4133,7 @@ case 0x300a00c0:return VR::IS;
  case 0x300a00c2:return VR::LO;
  case 0x300a00c3:return VR::ST;
  case 0x300a00c4:return VR::CS;
@@ -1747,7 +1739,7 @@ index 57085b11f..a8b86436d 100644
  case 0x300a00c6:return VR::CS;
  case 0x300a00c7:return VR::CS;
  case 0x300a00c8:return VR::IS;
-@@ -3183,6 +4152,7 @@ case 0x300a00da:return VR::DS;
+@@ -3183,6 +4154,7 @@ case 0x300a00da:return VR::DS;
  case 0x300a00db:return VR::FL;
  case 0x300a00dc:return VR::SH;
  case 0x300a00dd:return VR::ST;
@@ -1755,7 +1747,7 @@ index 57085b11f..a8b86436d 100644
  case 0x300a00e0:return VR::IS;
  case 0x300a00e1:return VR::SH;
  case 0x300a00e2:return VR::DS;
-@@ -3198,6 +4168,7 @@ case 0x300a00eb:return VR::DS;
+@@ -3198,6 +4170,7 @@ case 0x300a00eb:return VR::DS;
  case 0x300a00ec:return VR::DS;
  case 0x300a00ed:return VR::IS;
  case 0x300a00ee:return VR::CS;
@@ -1763,7 +1755,7 @@ index 57085b11f..a8b86436d 100644
  case 0x300a00f0:return VR::IS;
  case 0x300a00f2:return VR::DS;
  case 0x300a00f3:return VR::FL;
-@@ -3245,6 +4216,9 @@ case 0x300a012a:return VR::DS;
+@@ -3245,6 +4218,9 @@ case 0x300a012a:return VR::DS;
  case 0x300a012c:return VR::DS;
  case 0x300a012e:return VR::DS;
  case 0x300a0130:return VR::DS;
@@ -1773,7 +1765,7 @@ index 57085b11f..a8b86436d 100644
  case 0x300a0134:return VR::DS;
  case 0x300a0140:return VR::FL;
  case 0x300a0142:return VR::CS;
-@@ -3254,6 +4228,12 @@ case 0x300a0148:return VR::FL;
+@@ -3254,6 +4230,12 @@ case 0x300a0148:return VR::FL;
  case 0x300a014a:return VR::FL;
  case 0x300a014c:return VR::CS;
  case 0x300a014e:return VR::FL;
@@ -1786,7 +1778,7 @@ index 57085b11f..a8b86436d 100644
  case 0x300a0180:return VR::SQ;
  case 0x300a0182:return VR::IS;
  case 0x300a0183:return VR::LO;
-@@ -3290,6 +4270,8 @@ case 0x300a0214:return VR::CS;
+@@ -3290,6 +4272,8 @@ case 0x300a0214:return VR::CS;
  case 0x300a0216:return VR::LO;
  case 0x300a0218:return VR::DS;
  case 0x300a021a:return VR::DS;
@@ -1795,7 +1787,7 @@ index 57085b11f..a8b86436d 100644
  case 0x300a0222:return VR::DS;
  case 0x300a0224:return VR::DS;
  case 0x300a0226:return VR::LO;
-@@ -3315,6 +4297,10 @@ case 0x300a0264:return VR::CS;
+@@ -3315,6 +4299,10 @@ case 0x300a0264:return VR::CS;
  case 0x300a0266:return VR::LO;
  case 0x300a026a:return VR::DS;
  case 0x300a026c:return VR::DS;
@@ -1806,7 +1798,7 @@ index 57085b11f..a8b86436d 100644
  case 0x300a0280:return VR::SQ;
  case 0x300a0282:return VR::IS;
  case 0x300a0284:return VR::DS;
-@@ -3331,6 +4317,7 @@ case 0x300a0298:return VR::LO;
+@@ -3331,6 +4319,7 @@ case 0x300a0298:return VR::LO;
  case 0x300a029c:return VR::DS;
  case 0x300a029e:return VR::DS;
  case 0x300a02a0:return VR::DS;
@@ -1814,7 +1806,7 @@ index 57085b11f..a8b86436d 100644
  case 0x300a02a2:return VR::IS;
  case 0x300a02a4:return VR::DS;
  case 0x300a02b0:return VR::SQ;
-@@ -3359,6 +4346,7 @@ case 0x300a0302:return VR::IS;
+@@ -3359,6 +4348,7 @@ case 0x300a0302:return VR::IS;
  case 0x300a0304:return VR::IS;
  case 0x300a0306:return VR::SS;
  case 0x300a0308:return VR::CS;
@@ -1822,7 +1814,7 @@ index 57085b11f..a8b86436d 100644
  case 0x300a030a:return VR::FL;
  case 0x300a030c:return VR::SQ;
  case 0x300a030d:return VR::FL;
-@@ -3386,6 +4374,7 @@ case 0x300a034c:return VR::SH;
+@@ -3386,6 +4376,7 @@ case 0x300a034c:return VR::SH;
  case 0x300a0350:return VR::CS;
  case 0x300a0352:return VR::SH;
  case 0x300a0354:return VR::LO;
@@ -1830,7 +1822,7 @@ index 57085b11f..a8b86436d 100644
  case 0x300a0356:return VR::FL;
  case 0x300a0358:return VR::FL;
  case 0x300a035a:return VR::FL;
-@@ -3402,11 +4391,16 @@ case 0x300a0384:return VR::FL;
+@@ -3402,11 +4393,16 @@ case 0x300a0384:return VR::FL;
  case 0x300a0386:return VR::FL;
  case 0x300a0388:return VR::FL;
  case 0x300a038a:return VR::FL;
@@ -1847,7 +1839,7 @@ index 57085b11f..a8b86436d 100644
  case 0x300a039a:return VR::IS;
  case 0x300a03a0:return VR::SQ;
  case 0x300a03a2:return VR::SQ;
-@@ -3424,12 +4418,241 @@ case 0x300a0421:return VR::SH;
+@@ -3424,12 +4420,241 @@ case 0x300a0421:return VR::SH;
  case 0x300a0422:return VR::ST;
  case 0x300a0423:return VR::CS;
  case 0x300a0424:return VR::IS;
@@ -2089,7 +2081,7 @@ index 57085b11f..a8b86436d 100644
  case 0x300c0002:return VR::SQ;
  case 0x300c0004:return VR::SQ;
  case 0x300c0006:return VR::IS;
-@@ -3461,10 +4684,176 @@ case 0x300c00f6:return VR::IS;
+@@ -3461,10 +4686,176 @@ case 0x300c00f6:return VR::IS;
  case 0x300c0100:return VR::IS;
  case 0x300c0102:return VR::IS;
  case 0x300c0104:return VR::IS;
@@ -2266,7 +2258,7 @@ index 57085b11f..a8b86436d 100644
  case 0x40000010:return VR::LT;
  case 0x40004000:return VR::LT;
  case 0x40080040:return VR::SH;
-@@ -3564,6 +4953,23 @@ case 0x40101067:return VR::CS;
+@@ -3564,6 +4955,23 @@ case 0x40101067:return VR::CS;
  case 0x40101068:return VR::LT;
  case 0x40101069:return VR::FL;
  case 0x4010106c:return VR::OB;
@@ -2290,7 +2282,7 @@ index 57085b11f..a8b86436d 100644
  case 0x4ffe0001:return VR::SQ;
  case 0x50000005:return VR::US;
  case 0x50000010:return VR::US;
-@@ -3635,6 +5041,11 @@ case 0x60001302:return VR::DS;
+@@ -3635,6 +5043,11 @@ case 0x60001302:return VR::DS;
  case 0x60001303:return VR::DS;
  case 0x60001500:return VR::LO;
  case 0x60004000:return VR::LT;

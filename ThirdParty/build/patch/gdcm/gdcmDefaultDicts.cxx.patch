@@ -1,5 +1,5 @@
 diff --git "a/Source/DataDictionary/gdcmDefaultDicts.cxx" "b/Source/DataDictionary/gdcmDefaultDicts.cxx"
-index cbd2562b1..9220ef4be 100644
+index cbd2562b1..afedd281c 100644
 --- "a/Source/DataDictionary/gdcmDefaultDicts.cxx"
 +++ "b/Source/DataDictionary/gdcmDefaultDicts.cxx"
 @@ -94,6 +94,16 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
@@ -65,7 +65,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0008,0x0220,VR::SQ,VM::VM1,"Responsible Group Code Sequence","ResponsibleGroupCodeSequence",false },
    {0x0008,0x0221,VR::CS,VM::VM1,"Equipment Modality","EquipmentModality",false },
    {0x0008,0x0222,VR::LO,VM::VM1,"Manufacturer's Related Model Group","ManufacturerRelatedModelGroup",false },
-@@ -214,6 +231,47 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -214,6 +231,48 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0008,0x030e,VR::UT,VM::VM1,"Private Data Element Description","PrivateDataElementDescription",false },
    {0x0008,0x030f,VR::UT,VM::VM1,"Private Data Element Encoding","PrivateDataElementEncoding",false },
    {0x0008,0x0310,VR::SQ,VM::VM1,"Private Data Element Definition Sequence","PrivateDataElementDefinitionSequence",false },
@@ -110,10 +110,11 @@ index cbd2562b1..9220ef4be 100644
 +  {0x0008,0x0426,VR::CS,VM::VM1,"Inventory Completion Status","InventoryCompletionStatus",false },
 +  {0x0008,0x0427,VR::UL,VM::VM1,"Number of Study Records in Instance","NumberOfStudyRecordsInInstance",false },
 +  {0x0008,0x0428,VR::UV,VM::VM1,"Total Number of Study Records","TotalNumberOfStudyRecords",false },
++  {0x0008,0x0429,VR::UV,VM::VM1,"Maximum Number of Records","MaximumNumberOfRecords",false },
    {0x0008,0x1000,VR::AE,VM::VM1,"Network ID","NetworkID",true },
    {0x0008,0x1010,VR::SH,VM::VM1,"Station Name","StationName",false },
    {0x0008,0x1030,VR::LO,VM::VM1,"Study Description","StudyDescription",false },
-@@ -221,6 +279,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -221,6 +280,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0008,0x103e,VR::LO,VM::VM1,"Series Description","SeriesDescription",false },
    {0x0008,0x103f,VR::SQ,VM::VM1,"Series Description Code Sequence","SeriesDescriptionCodeSequence",false },
    {0x0008,0x1040,VR::LO,VM::VM1,"Institutional Department Name","InstitutionalDepartmentName",false },
@@ -121,7 +122,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0008,0x1048,VR::PN,VM::VM1_n,"Physician(s) of Record","PhysiciansOfRecord",false },
    {0x0008,0x1049,VR::SQ,VM::VM1,"Physician(s) of Record Identification Sequence","PhysiciansOfRecordIdentificationSequence",false },
    {0x0008,0x1050,VR::PN,VM::VM1_n,"Performing Physician's Name","PerformingPhysicianName",false },
-@@ -231,6 +290,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -231,6 +291,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0008,0x1072,VR::SQ,VM::VM1,"Operator Identification Sequence","OperatorIdentificationSequence",false },
    {0x0008,0x1080,VR::LO,VM::VM1_n,"Admitting Diagnoses Description","AdmittingDiagnosesDescription",false },
    {0x0008,0x1084,VR::SQ,VM::VM1,"Admitting Diagnoses Code Sequence","AdmittingDiagnosesCodeSequence",false },
@@ -129,7 +130,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0008,0x1090,VR::LO,VM::VM1,"Manufacturer's Model Name","ManufacturerModelName",false },
    {0x0008,0x1100,VR::SQ,VM::VM1,"Referenced Results Sequence","ReferencedResultsSequence",true },
    {0x0008,0x1110,VR::SQ,VM::VM1,"Referenced Study Sequence","ReferencedStudySequence",false },
-@@ -247,6 +307,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -247,6 +308,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0008,0x114b,VR::SQ,VM::VM1,"Referenced Real World Value Mapping Instance Sequence","ReferencedRealWorldValueMappingInstanceSequence",false },
    {0x0008,0x1150,VR::UI,VM::VM1,"Referenced SOP Class UID","ReferencedSOPClassUID",false },
    {0x0008,0x1155,VR::UI,VM::VM1,"Referenced SOP Instance UID","ReferencedSOPInstanceUID",false },
@@ -137,7 +138,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0008,0x115a,VR::UI,VM::VM1_n,"SOP Classes Supported","SOPClassesSupported",false },
    {0x0008,0x1160,VR::IS,VM::VM1_n,"Referenced Frame Number","ReferencedFrameNumber",false },
    {0x0008,0x1161,VR::UL,VM::VM1_n,"Simple Frame List","SimpleFrameList",false },
-@@ -287,7 +348,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -287,7 +349,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0008,0x2218,VR::SQ,VM::VM1,"Anatomic Region Sequence","AnatomicRegionSequence",false },
    {0x0008,0x2220,VR::SQ,VM::VM1,"Anatomic Region Modifier Sequence","AnatomicRegionModifierSequence",false },
    {0x0008,0x2228,VR::SQ,VM::VM1,"Primary Anatomic Structure Sequence","PrimaryAnatomicStructureSequence",false },
@@ -146,7 +147,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0008,0x2230,VR::SQ,VM::VM1,"Primary Anatomic Structure Modifier Sequence","PrimaryAnatomicStructureModifierSequence",false },
    {0x0008,0x2240,VR::SQ,VM::VM1,"Transducer Position Sequence","TransducerPositionSequence",true },
    {0x0008,0x2242,VR::SQ,VM::VM1,"Transducer Position Modifier Sequence","TransducerPositionModifierSequence",true },
-@@ -303,6 +364,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -303,6 +365,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0008,0x225a,VR::SQ,VM::VM1,"Anatomic Structure Space Or Region Modifier Code Sequence (Trial)","AnatomicStructureSpaceOrRegionModifierCodeSequenceTrial",true },
    {0x0008,0x225c,VR::SQ,VM::VM1,"On Axis Background Anatomic Structure Code Sequence (Trial)","OnAxisBackgroundAnatomicStructureCodeSequenceTrial",true },
    {0x0008,0x3001,VR::SQ,VM::VM1,"Alternate Representation Sequence","AlternateRepresentationSequence",false },
@@ -154,7 +155,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0008,0x3010,VR::UI,VM::VM1_n,"Irradiation Event UID","IrradiationEventUID",false },
    {0x0008,0x3011,VR::SQ,VM::VM1,"Source Irradiation Event Sequence","SourceIrradiationEventSequence",false },
    {0x0008,0x3012,VR::UI,VM::VM1,"Radiopharmaceutical Administration Event UID","RadiopharmaceuticalAdministrationEventUID",false },
-@@ -351,7 +413,11 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -351,7 +414,11 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0010,0x0217,VR::LO,VM::VM1,"Strain Source","StrainSource",false },
    {0x0010,0x0218,VR::UT,VM::VM1,"Strain Additional Information","StrainAdditionalInformation",false },
    {0x0010,0x0219,VR::SQ,VM::VM1,"Strain Code Sequence","StrainCodeSequence",false },
@@ -167,7 +168,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0010,0x1001,VR::PN,VM::VM1_n,"Other Patient Names","OtherPatientNames",false },
    {0x0010,0x1002,VR::SQ,VM::VM1,"Other Patient IDs Sequence","OtherPatientIDsSequence",false },
    {0x0010,0x1005,VR::PN,VM::VM1,"Patient's Birth Name","PatientBirthName",false },
-@@ -367,7 +433,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -367,7 +434,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0010,0x1060,VR::PN,VM::VM1,"Patient's Mother's Birth Name","PatientMotherBirthName",false },
    {0x0010,0x1080,VR::LO,VM::VM1,"Military Rank","MilitaryRank",false },
    {0x0010,0x1081,VR::LO,VM::VM1,"Branch of Service","BranchOfService",false },
@@ -176,16 +177,17 @@ index cbd2562b1..9220ef4be 100644
    {0x0010,0x1100,VR::SQ,VM::VM1,"Referenced Patient Photo Sequence","ReferencedPatientPhotoSequence",false },
    {0x0010,0x2000,VR::LO,VM::VM1_n,"Medical Alerts","MedicalAlerts",false },
    {0x0010,0x2110,VR::LO,VM::VM1_n,"Allergies","Allergies",false },
-@@ -405,6 +471,8 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -405,6 +472,9 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0012,0x0042,VR::LO,VM::VM1,"Clinical Trial Subject Reading ID","ClinicalTrialSubjectReadingID",false },
    {0x0012,0x0050,VR::LO,VM::VM1,"Clinical Trial Time Point ID","ClinicalTrialTimePointID",false },
    {0x0012,0x0051,VR::ST,VM::VM1,"Clinical Trial Time Point Description","ClinicalTrialTimePointDescription",false },
 +  {0x0012,0x0052,VR::FD,VM::VM1,"Longitudinal Temporal Offset from Event","LongitudinalTemporalOffsetFromEvent",false },
 +  {0x0012,0x0053,VR::CS,VM::VM1,"Longitudinal Temporal Event Type","LongitudinalTemporalEventType",false },
++  {0x0012,0x0054,VR::SQ,VM::VM1,"Clinical Trial Time Point Type Code Sequence","ClinicalTrialTimePointTypeCodeSequence",false },
    {0x0012,0x0060,VR::LO,VM::VM1,"Clinical Trial Coordinating Center Name","ClinicalTrialCoordinatingCenterName",false },
    {0x0012,0x0062,VR::CS,VM::VM1,"Patient Identity Removed","PatientIdentityRemoved",false },
    {0x0012,0x0063,VR::LO,VM::VM1_n,"De-identification Method","DeidentificationMethod",false },
-@@ -442,6 +510,14 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -442,6 +512,14 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0014,0x0106,VR::SQ,VM::VM1,"Multiple Component Approval Sequence","MultipleComponentApprovalSequence",false },
    {0x0014,0x0107,VR::CS,VM::VM1_n,"Other Approval Status","OtherApprovalStatus",false },
    {0x0014,0x0108,VR::CS,VM::VM1_n,"Other Secondary Approval Status","OtherSecondaryApprovalStatus",false },
@@ -200,7 +202,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0014,0x1010,VR::ST,VM::VM1,"Actual Environmental Conditions","ActualEnvironmentalConditions",false },
    {0x0014,0x1020,VR::DA,VM::VM1,"Expiry Date","ExpiryDate",false },
    {0x0014,0x1040,VR::ST,VM::VM1,"Environmental Conditions","EnvironmentalConditions",false },
-@@ -493,6 +569,8 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -493,6 +571,8 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0014,0x3077,VR::TM,VM::VM1,"Time of Gain Calibration","TimeOfGainCalibration",false },
    {0x0014,0x3080,VR::OB,VM::VM1,"Bad Pixel Image","BadPixelImage",false },
    {0x0014,0x3099,VR::LT,VM::VM1,"Calibration Notes","CalibrationNotes",false },
@@ -209,7 +211,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0014,0x4002,VR::SQ,VM::VM1,"Pulser Equipment Sequence","PulserEquipmentSequence",false },
    {0x0014,0x4004,VR::CS,VM::VM1,"Pulser Type","PulserType",false },
    {0x0014,0x4006,VR::LT,VM::VM1,"Pulser Notes","PulserNotes",false },
-@@ -573,9 +651,9 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -573,9 +653,9 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0014,0x409c,VR::DS,VM::VM1,"Translation Rate X","TranslationRateX",false },
    {0x0014,0x409d,VR::DS,VM::VM1,"Translation Rate Y","TranslationRateY",false },
    {0x0014,0x409f,VR::DS,VM::VM1,"Channel Overlap","ChannelOverlap",false },
@@ -222,7 +224,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0014,0x5002,VR::IS,VM::VM1,"LINAC Energy","LINACEnergy",false },
    {0x0014,0x5004,VR::IS,VM::VM1,"LINAC Output","LINACOutput",false },
    {0x0014,0x5100,VR::US,VM::VM1,"Active Aperture","ActiveAperture",false },
-@@ -610,6 +688,116 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -610,6 +690,116 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0014,0x511d,VR::DS,VM::VM1,"Wedge Chamfer Height","WedgeChamferHeight",false },
    {0x0014,0x511e,VR::CS,VM::VM1,"Wedge Curve","WedgeCurve",false },
    {0x0014,0x511f,VR::DS,VM::VM1,"Radius Along the Wedge","RadiusAlongWedge",false },
@@ -339,7 +341,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0018,0x0010,VR::LO,VM::VM1,"Contrast/Bolus Agent","ContrastBolusAgent",false },
    {0x0018,0x0012,VR::SQ,VM::VM1,"Contrast/Bolus Agent Sequence","ContrastBolusAgentSequence",false },
    {0x0018,0x0013,VR::FL,VM::VM1,"Contrast/Bolus T1 Relaxivity","ContrastBolusT1Relaxivity",false },
-@@ -673,6 +861,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -673,6 +863,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0018,0x1008,VR::LO,VM::VM1,"Gantry ID","GantryID",false },
    {0x0018,0x1009,VR::UT,VM::VM1,"Unique Device Identifier","UniqueDeviceIdentifier",false },
    {0x0018,0x100a,VR::SQ,VM::VM1,"UDI Sequence","UDISequence",false },
@@ -347,7 +349,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0018,0x1010,VR::LO,VM::VM1,"Secondary Capture Device ID","SecondaryCaptureDeviceID",false },
    {0x0018,0x1011,VR::LO,VM::VM1,"Hardcopy Creation Device ID","HardcopyCreationDeviceID",true },
    {0x0018,0x1012,VR::DA,VM::VM1,"Date of Secondary Capture","DateOfSecondaryCapture",false },
-@@ -683,7 +872,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -683,7 +874,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0018,0x1019,VR::LO,VM::VM1_n,"Secondary Capture Device Software Versions","SecondaryCaptureDeviceSoftwareVersions",false },
    {0x0018,0x101a,VR::LO,VM::VM1_n,"Hardcopy Device Software Version","HardcopyDeviceSoftwareVersion",true },
    {0x0018,0x101b,VR::LO,VM::VM1,"Hardcopy Device Manufacturer's Model Name","HardcopyDeviceManufacturerModelName",true },
@@ -356,7 +358,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0018,0x1022,VR::SH,VM::VM1,"Video Image Format Acquired","VideoImageFormatAcquired",false },
    {0x0018,0x1023,VR::LO,VM::VM1,"Digital Image Format Acquired","DigitalImageFormatAcquired",false },
    {0x0018,0x1030,VR::LO,VM::VM1,"Protocol Name","ProtocolName",false },
-@@ -778,10 +967,31 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -778,10 +969,31 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0018,0x1191,VR::CS,VM::VM1,"Anode Target Material","AnodeTargetMaterial",false },
    {0x0018,0x11a0,VR::DS,VM::VM1,"Body Part Thickness","BodyPartThickness",false },
    {0x0018,0x11a2,VR::DS,VM::VM1,"Compression Force","CompressionForce",false },
@@ -388,7 +390,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0018,0x1210,VR::SH,VM::VM1_n,"Convolution Kernel","ConvolutionKernel",false },
    {0x0018,0x1240,VR::IS,VM::VM1_n,"Upper/Lower Pixel Values","UpperLowerPixelValues",true },
    {0x0018,0x1242,VR::IS,VM::VM1,"Actual Frame Duration","ActualFrameDuration",false },
-@@ -838,6 +1048,15 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -838,6 +1050,15 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0018,0x1622,VR::US,VM::VM1,"Shutter Presentation Value","ShutterPresentationValue",false },
    {0x0018,0x1623,VR::US,VM::VM1,"Shutter Overlay Group","ShutterOverlayGroup",false },
    {0x0018,0x1624,VR::US,VM::VM3,"Shutter Presentation Color CIELab Value","ShutterPresentationColorCIELabValue",false },
@@ -404,7 +406,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0018,0x1700,VR::CS,VM::VM1_3,"Collimator Shape","CollimatorShape",false },
    {0x0018,0x1702,VR::IS,VM::VM1,"Collimator Left Vertical Edge","CollimatorLeftVerticalEdge",false },
    {0x0018,0x1704,VR::IS,VM::VM1,"Collimator Right Vertical Edge","CollimatorRightVerticalEdge",false },
-@@ -874,6 +1093,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -874,6 +1095,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0018,0x4000,VR::LT,VM::VM1,"Acquisition Comments","AcquisitionComments",true },
    {0x0018,0x5000,VR::SH,VM::VM1_n,"Output Power","OutputPower",false },
    {0x0018,0x5010,VR::LO,VM::VM1_n,"Transducer Data","TransducerData",false },
@@ -412,7 +414,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0018,0x5012,VR::DS,VM::VM1,"Focus Depth","FocusDepth",false },
    {0x0018,0x5020,VR::LO,VM::VM1,"Processing Function","ProcessingFunction",false },
    {0x0018,0x5021,VR::LO,VM::VM1,"Postprocessing Function","PostprocessingFunction",true },
-@@ -938,6 +1158,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -938,6 +1160,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0018,0x6058,VR::UL,VM::VM1_n,"Table of Pixel Values","TableOfPixelValues",false },
    {0x0018,0x605a,VR::FL,VM::VM1_n,"Table of Parameter Values","TableOfParameterValues",false },
    {0x0018,0x6060,VR::FL,VM::VM1_n,"R Wave Time Vector","RWaveTimeVector",false },
@@ -420,7 +422,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0018,0x7000,VR::CS,VM::VM1,"Detector Conditions Nominal Flag","DetectorConditionsNominalFlag",false },
    {0x0018,0x7001,VR::DS,VM::VM1,"Detector Temperature","DetectorTemperature",false },
    {0x0018,0x7004,VR::CS,VM::VM1,"Detector Type","DetectorType",false },
-@@ -1167,7 +1388,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -1167,7 +1390,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0018,0x9321,VR::SQ,VM::VM1,"CT Exposure Sequence","CTExposureSequence",false },
    {0x0018,0x9322,VR::FD,VM::VM2,"Reconstruction Pixel Spacing","ReconstructionPixelSpacing",false },
    {0x0018,0x9323,VR::CS,VM::VM1_n,"Exposure Modulation Type","ExposureModulationType",false },
@@ -429,7 +431,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0018,0x9325,VR::SQ,VM::VM1,"CT X-Ray Details Sequence","CTXRayDetailsSequence",false },
    {0x0018,0x9326,VR::SQ,VM::VM1,"CT Position Sequence","CTPositionSequence",false },
    {0x0018,0x9327,VR::FD,VM::VM1,"Table Position","TablePosition",false },
-@@ -1191,6 +1412,42 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -1191,6 +1414,42 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0018,0x9352,VR::FL,VM::VM3,"Calcium Scoring Mass Factor Device","CalciumScoringMassFactorDevice",false },
    {0x0018,0x9353,VR::FL,VM::VM1,"Energy Weighting Factor","EnergyWeightingFactor",false },
    {0x0018,0x9360,VR::SQ,VM::VM1,"CT Additional X-Ray Source Sequence","CTAdditionalXRaySourceSequence",false },
@@ -472,7 +474,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0018,0x9401,VR::SQ,VM::VM1,"Projection Pixel Calibration Sequence","ProjectionPixelCalibrationSequence",false },
    {0x0018,0x9402,VR::FL,VM::VM1,"Distance Source to Isocenter","DistanceSourceToIsocenter",false },
    {0x0018,0x9403,VR::FL,VM::VM1,"Distance Object to Table Top","DistanceObjectToTableTop",false },
-@@ -1431,6 +1688,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -1431,6 +1690,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0020,0x0022,VR::IS,VM::VM1,"Overlay Number","OverlayNumber",true },
    {0x0020,0x0024,VR::IS,VM::VM1,"Curve Number","CurveNumber",true },
    {0x0020,0x0026,VR::IS,VM::VM1,"LUT Number","LUTNumber",true },
@@ -480,7 +482,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0020,0x0030,VR::DS,VM::VM3,"Image Position","ImagePosition",true },
    {0x0020,0x0032,VR::DS,VM::VM3,"Image Position (Patient)","ImagePositionPatient",false },
    {0x0020,0x0035,VR::DS,VM::VM6,"Image Orientation","ImageOrientation",true },
-@@ -1854,10 +2112,18 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -1854,10 +2114,18 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0022,0x1029,VR::LO,VM::VM1,"IOL Formula Detail","IOLFormulaDetail",false },
    {0x0022,0x1033,VR::FL,VM::VM1,"Keratometer Index","KeratometerIndex",false },
    {0x0022,0x1035,VR::SQ,VM::VM1,"Source of Ophthalmic Axial Length Code Sequence","SourceOfOphthalmicAxialLengthCodeSequence",false },
@@ -499,7 +501,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0022,0x1050,VR::SQ,VM::VM1,"Ophthalmic Axial Length Measurements Sequence","OphthalmicAxialLengthMeasurementsSequence",false },
    {0x0022,0x1053,VR::FL,VM::VM1,"IOL Power","IOLPower",false },
    {0x0022,0x1054,VR::FL,VM::VM1,"Predicted Refractive Error","PredictedRefractiveError",false },
-@@ -1879,6 +2145,9 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -1879,6 +2147,9 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0022,0x1125,VR::SQ,VM::VM1,"Anterior Chamber Depth Definition Code Sequence","AnteriorChamberDepthDefinitionCodeSequence",false },
    {0x0022,0x1127,VR::SQ,VM::VM1,"Lens Thickness Sequence","LensThicknessSequence",false },
    {0x0022,0x1128,VR::SQ,VM::VM1,"Anterior Chamber Depth Sequence","AnteriorChamberDepthSequence",false },
@@ -509,7 +511,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0022,0x1130,VR::FL,VM::VM1,"Lens Thickness","LensThickness",false },
    {0x0022,0x1131,VR::FL,VM::VM1,"Anterior Chamber Depth","AnteriorChamberDepth",false },
    {0x0022,0x1132,VR::SQ,VM::VM1,"Source of Lens Thickness Data Code Sequence","SourceOfLensThicknessDataCodeSequence",false },
-@@ -1936,6 +2205,25 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -1936,6 +2207,25 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0022,0x1529,VR::FL,VM::VM1,"Y Coordinates Center Pixel View Angle","YCoordinatesCenterPixelViewAngle",false },
    {0x0022,0x1530,VR::UL,VM::VM1,"Number of Map Points","NumberOfMapPoints",false },
    {0x0022,0x1531,VR::OF,VM::VM1,"Two Dimensional to Three Dimensional Map Data","TwoDimensionalToThreeDimensionalMapData",false },
@@ -535,7 +537,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0024,0x0010,VR::FL,VM::VM1,"Visual Field Horizontal Extent","VisualFieldHorizontalExtent",false },
    {0x0024,0x0011,VR::FL,VM::VM1,"Visual Field Vertical Extent","VisualFieldVerticalExtent",false },
    {0x0024,0x0012,VR::CS,VM::VM1,"Visual Field Shape","VisualFieldShape",false },
-@@ -2105,6 +2393,10 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2105,6 +2395,10 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0028,0x0402,VR::US,VM::VM1,"Number of Transform Steps","NumberOfTransformSteps",true },
    {0x0028,0x0403,VR::LO,VM::VM1_n,"Sequence of Compressed Data","SequenceOfCompressedData",true },
    {0x0028,0x0404,VR::AT,VM::VM1_n,"Details of Coefficients","DetailsOfCoefficients",true },
@@ -546,7 +548,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0028,0x0700,VR::LO,VM::VM1,"DCT Label","DCTLabel",true },
    {0x0028,0x0701,VR::CS,VM::VM1_n,"Data Block Description","DataBlockDescription",true },
    {0x0028,0x0702,VR::AT,VM::VM1_n,"Data Block","DataBlock",true },
-@@ -2114,6 +2406,11 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2114,6 +2408,11 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0028,0x0722,VR::US,VM::VM1,"Zonal Map Format","ZonalMapFormat",true },
    {0x0028,0x0730,VR::US,VM::VM1,"Adaptive Map Format","AdaptiveMapFormat",true },
    {0x0028,0x0740,VR::US,VM::VM1,"Code Number Format","CodeNumberFormat",true },
@@ -558,7 +560,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0028,0x0a02,VR::CS,VM::VM1,"Pixel Spacing Calibration Type","PixelSpacingCalibrationType",false },
    {0x0028,0x0a04,VR::LO,VM::VM1,"Pixel Spacing Calibration Description","PixelSpacingCalibrationDescription",false },
    {0x0028,0x1040,VR::CS,VM::VM1,"Pixel Intensity Relationship","PixelIntensityRelationship",false },
-@@ -2186,7 +2483,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2186,7 +2485,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0028,0x4000,VR::LT,VM::VM1,"Image Presentation Comments","ImagePresentationComments",true },
    {0x0028,0x5000,VR::SQ,VM::VM1,"Bi-Plane Acquisition Sequence","BiPlaneAcquisitionSequence",true },
    {0x0028,0x6010,VR::US,VM::VM1,"Representative Frame Number","RepresentativeFrameNumber",false },
@@ -567,7 +569,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0028,0x6022,VR::LO,VM::VM1_n,"Frame of Interest Description","FrameOfInterestDescription",false },
    {0x0028,0x6023,VR::CS,VM::VM1_n,"Frame of Interest Type","FrameOfInterestType",false },
    {0x0028,0x6030,VR::US,VM::VM1_n,"Mask Pointer(s)","MaskPointers",true },
-@@ -2300,8 +2597,23 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2300,8 +2599,23 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0032,0x1055,VR::CS,VM::VM1,"Study Component Status ID","StudyComponentStatusID",true },
    {0x0032,0x1060,VR::LO,VM::VM1,"Requested Procedure Description","RequestedProcedureDescription",false },
    {0x0032,0x1064,VR::SQ,VM::VM1,"Requested Procedure Code Sequence","RequestedProcedureCodeSequence",false },
@@ -591,7 +593,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0038,0x0004,VR::SQ,VM::VM1,"Referenced Patient Alias Sequence","ReferencedPatientAliasSequence",false },
    {0x0038,0x0008,VR::CS,VM::VM1,"Visit Status ID","VisitStatusID",false },
    {0x0038,0x0010,VR::LO,VM::VM1,"Admission ID","AdmissionID",false },
-@@ -2370,6 +2682,31 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2370,6 +2684,31 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x003a,0x0300,VR::SQ,VM::VM1,"Multiplexed Audio Channels Description Code Sequence","MultiplexedAudioChannelsDescriptionCodeSequence",false },
    {0x003a,0x0301,VR::IS,VM::VM1,"Channel Identification Code","ChannelIdentificationCode",false },
    {0x003a,0x0302,VR::CS,VM::VM1,"Channel Mode","ChannelMode",false },
@@ -623,7 +625,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0040,0x0001,VR::AE,VM::VM1_n,"Scheduled Station AE Title","ScheduledStationAETitle",false },
    {0x0040,0x0002,VR::DA,VM::VM1,"Scheduled Procedure Step Start Date","ScheduledProcedureStepStartDate",false },
    {0x0040,0x0003,VR::TM,VM::VM1,"Scheduled Procedure Step Start Time","ScheduledProcedureStepStartTime",false },
-@@ -2417,13 +2754,13 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2417,13 +2756,13 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0040,0x0294,VR::DS,VM::VM1,"Quantity","Quantity",false },
    {0x0040,0x0295,VR::SQ,VM::VM1,"Measuring Units Sequence","MeasuringUnitsSequence",false },
    {0x0040,0x0296,VR::SQ,VM::VM1,"Billing Item Sequence","BillingItemSequence",false },
@@ -640,7 +642,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0040,0x0310,VR::ST,VM::VM1,"Comments on Radiation Dose","CommentsOnRadiationDose",false },
    {0x0040,0x0312,VR::DS,VM::VM1,"X-Ray Output","XRayOutput",false },
    {0x0040,0x0314,VR::DS,VM::VM1,"Half Value Layer","HalfValueLayer",false },
-@@ -2461,6 +2798,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2461,6 +2800,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0040,0x0612,VR::SQ,VM::VM1,"Specimen Preparation Step Content Item Sequence","SpecimenPreparationStepContentItemSequence",false },
    {0x0040,0x0620,VR::SQ,VM::VM1,"Specimen Localization Content Item Sequence","SpecimenLocalizationContentItemSequence",false },
    {0x0040,0x06fa,VR::LO,VM::VM1,"Slide Identifier","SlideIdentifier",true },
@@ -648,7 +650,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0040,0x071a,VR::SQ,VM::VM1,"Image Center Point Coordinates Sequence","ImageCenterPointCoordinatesSequence",false },
    {0x0040,0x072a,VR::DS,VM::VM1,"X Offset in Slide Coordinate System","XOffsetInSlideCoordinateSystem",false },
    {0x0040,0x073a,VR::DS,VM::VM1,"Y Offset in Slide Coordinate System","YOffsetInSlideCoordinateSystem",false },
-@@ -2507,7 +2845,8 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2507,7 +2847,8 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0040,0x4004,VR::SQ,VM::VM1,"Scheduled Processing Applications Code Sequence","ScheduledProcessingApplicationsCodeSequence",true },
    {0x0040,0x4005,VR::DT,VM::VM1,"Scheduled Procedure Step Start DateTime","ScheduledProcedureStepStartDateTime",false },
    {0x0040,0x4006,VR::CS,VM::VM1,"Multiple Copies Flag","MultipleCopiesFlag",true },
@@ -658,7 +660,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0040,0x4009,VR::SQ,VM::VM1,"Human Performer Code Sequence","HumanPerformerCodeSequence",false },
    {0x0040,0x4010,VR::DT,VM::VM1,"Scheduled Procedure Step Modification DateTime","ScheduledProcedureStepModificationDateTime",false },
    {0x0040,0x4011,VR::DT,VM::VM1,"Expected Completion DateTime","ExpectedCompletionDateTime",false },
-@@ -2515,7 +2854,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2515,7 +2856,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0040,0x4016,VR::SQ,VM::VM1,"Referenced General Purpose Scheduled Procedure Step Sequence","ReferencedGeneralPurposeScheduledProcedureStepSequence",true },
    {0x0040,0x4018,VR::SQ,VM::VM1,"Scheduled Workitem Code Sequence","ScheduledWorkitemCodeSequence",false },
    {0x0040,0x4019,VR::SQ,VM::VM1,"Performed Workitem Code Sequence","PerformedWorkitemCodeSequence",false },
@@ -667,7 +669,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0040,0x4021,VR::SQ,VM::VM1,"Input Information Sequence","InputInformationSequence",false },
    {0x0040,0x4022,VR::SQ,VM::VM1,"Relevant Information Sequence","RelevantInformationSequence",true },
    {0x0040,0x4023,VR::UI,VM::VM1,"Referenced General Purpose Scheduled Procedure Step Transaction UID","ReferencedGeneralPurposeScheduledProcedureStepTransactionUID",true },
-@@ -2543,6 +2882,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2543,6 +2884,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0040,0x4073,VR::UR,VM::VM1,"Storage URL","StorageURL",false },
    {0x0040,0x4074,VR::SQ,VM::VM1,"XDS Storage Sequence","XDSStorageSequence",false },
    {0x0040,0x8302,VR::DS,VM::VM1,"Entrance Dose in mGy","EntranceDoseInmGy",false },
@@ -675,7 +677,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0040,0x9092,VR::SQ,VM::VM1,"Parametric Map Frame Type Sequence","ParametricMapFrameTypeSequence",false },
    {0x0040,0x9094,VR::SQ,VM::VM1,"Referenced Image Real World Value Mapping Sequence","ReferencedImageRealWorldValueMappingSequence",false },
    {0x0040,0x9096,VR::SQ,VM::VM1,"Real World Value Mapping Sequence","RealWorldValueMappingSequence",false },
-@@ -2568,6 +2908,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2568,6 +2910,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0040,0xa028,VR::SQ,VM::VM1,"Documenting Organization Identifier Code Sequence (Trial)","DocumentingOrganizationIdentifierCodeSequenceTrial",true },
    {0x0040,0xa030,VR::DT,VM::VM1,"Verification DateTime","VerificationDateTime",false },
    {0x0040,0xa032,VR::DT,VM::VM1,"Observation DateTime","ObservationDateTime",false },
@@ -683,7 +685,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0040,0xa040,VR::CS,VM::VM1,"Value Type","ValueType",false },
    {0x0040,0xa043,VR::SQ,VM::VM1,"Concept Name Code Sequence","ConceptNameCodeSequence",false },
    {0x0040,0xa047,VR::LO,VM::VM1,"Measurement Precision Description (Trial)","MeasurementPrecisionDescriptionTrial",true },
-@@ -2603,7 +2944,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2603,7 +2946,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0040,0xa125,VR::CS,VM::VM2,"Report Status ID (Trial)","ReportStatusIDTrial",true },
    {0x0040,0xa130,VR::CS,VM::VM1,"Temporal Range Type","TemporalRangeType",false },
    {0x0040,0xa132,VR::UL,VM::VM1_n,"Referenced Sample Positions","ReferencedSamplePositions",false },
@@ -692,7 +694,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0040,0xa138,VR::DS,VM::VM1_n,"Referenced Time Offsets","ReferencedTimeOffsets",false },
    {0x0040,0xa13a,VR::DT,VM::VM1_n,"Referenced DateTime","ReferencedDateTime",false },
    {0x0040,0xa160,VR::UT,VM::VM1,"Text Value","TextValue",false },
-@@ -2663,6 +3004,14 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2663,6 +3006,14 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0040,0xa731,VR::SQ,VM::VM1,"Relationship Sequence (Trial)","RelationshipSequenceTrial",true },
    {0x0040,0xa732,VR::SQ,VM::VM1,"Relationship Type Code Sequence (Trial)","RelationshipTypeCodeSequenceTrial",true },
    {0x0040,0xa744,VR::SQ,VM::VM1,"Language Code Sequence (Trial)","LanguageCodeSequenceTrial",true },
@@ -707,7 +709,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0040,0xa992,VR::ST,VM::VM1,"Uniform Resource Locator (Trial)","UniformResourceLocatorTrial",true },
    {0x0040,0xb020,VR::SQ,VM::VM1,"Waveform Annotation Sequence","WaveformAnnotationSequence",false },
    {0x0040,0xdb00,VR::CS,VM::VM1,"Template Identifier","TemplateIdentifier",false },
-@@ -2691,6 +3040,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2691,6 +3042,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0042,0x0012,VR::LO,VM::VM1,"MIME Type of Encapsulated Document","MIMETypeOfEncapsulatedDocument",false },
    {0x0042,0x0013,VR::SQ,VM::VM1,"Source Instance Sequence","SourceInstanceSequence",false },
    {0x0042,0x0014,VR::LO,VM::VM1_n,"List of MIME Types","ListOfMIMETypes",false },
@@ -715,7 +717,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0044,0x0001,VR::ST,VM::VM1,"Product Package Identifier","ProductPackageIdentifier",false },
    {0x0044,0x0002,VR::CS,VM::VM1,"Substance Administration Approval","SubstanceAdministrationApproval",false },
    {0x0044,0x0003,VR::LT,VM::VM1,"Approval Status Further Description","ApprovalStatusFurtherDescription",false },
-@@ -2705,6 +3055,17 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2705,6 +3057,17 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0044,0x0012,VR::LO,VM::VM1,"Substance Administration Device ID","SubstanceAdministrationDeviceID",false },
    {0x0044,0x0013,VR::SQ,VM::VM1,"Product Parameter Sequence","ProductParameterSequence",false },
    {0x0044,0x0019,VR::SQ,VM::VM1,"Substance Administration Parameter Sequence","SubstanceAdministrationParameterSequence",false },
@@ -733,7 +735,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0046,0x0012,VR::LO,VM::VM1,"Lens Description","LensDescription",false },
    {0x0046,0x0014,VR::SQ,VM::VM1,"Right Lens Sequence","RightLensSequence",false },
    {0x0046,0x0015,VR::SQ,VM::VM1,"Left Lens Sequence","LeftLensSequence",false },
-@@ -2720,6 +3081,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2720,6 +3083,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0046,0x0042,VR::FD,VM::VM1,"Channel Width","ChannelWidth",false },
    {0x0046,0x0044,VR::FD,VM::VM1,"Pupil Size","PupilSize",false },
    {0x0046,0x0046,VR::FD,VM::VM1,"Corneal Size","CornealSize",false },
@@ -741,7 +743,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0046,0x0050,VR::SQ,VM::VM1,"Autorefraction Right Eye Sequence","AutorefractionRightEyeSequence",false },
    {0x0046,0x0052,VR::SQ,VM::VM1,"Autorefraction Left Eye Sequence","AutorefractionLeftEyeSequence",false },
    {0x0046,0x0060,VR::FD,VM::VM1,"Distance Pupillary Distance","DistancePupillaryDistance",false },
-@@ -2743,6 +3105,15 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2743,6 +3107,15 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0046,0x0102,VR::SQ,VM::VM1,"Add Other Sequence","AddOtherSequence",false },
    {0x0046,0x0104,VR::FD,VM::VM1,"Add Power","AddPower",false },
    {0x0046,0x0106,VR::FD,VM::VM1,"Viewing Distance","ViewingDistance",false },
@@ -757,7 +759,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0046,0x0121,VR::SQ,VM::VM1,"Visual Acuity Type Code Sequence","VisualAcuityTypeCodeSequence",false },
    {0x0046,0x0122,VR::SQ,VM::VM1,"Visual Acuity Right Eye Sequence","VisualAcuityRightEyeSequence",false },
    {0x0046,0x0123,VR::SQ,VM::VM1,"Visual Acuity Left Eye Sequence","VisualAcuityLeftEyeSequence",false },
-@@ -2807,14 +3178,16 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2807,14 +3180,16 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0048,0x0112,VR::DS,VM::VM1,"Objective Lens Power","ObjectiveLensPower",false },
    {0x0048,0x0113,VR::DS,VM::VM1,"Objective Lens Numerical Aperture","ObjectiveLensNumericalAperture",false },
    {0x0048,0x0120,VR::SQ,VM::VM1,"Palette Color Lookup Table Sequence","PaletteColorLookupTableSequence",false },
@@ -777,7 +779,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0050,0x0004,VR::CS,VM::VM1,"Calibration Image","CalibrationImage",false },
    {0x0050,0x0010,VR::SQ,VM::VM1,"Device Sequence","DeviceSequence",false },
    {0x0050,0x0012,VR::SQ,VM::VM1,"Container Component Type Code Sequence","ContainerComponentTypeCodeSequence",false },
-@@ -2831,6 +3204,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2831,6 +3206,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0050,0x001d,VR::FD,VM::VM1,"Container Component Diameter","ContainerComponentDiameter",false },
    {0x0050,0x001e,VR::LO,VM::VM1,"Container Component Description","ContainerComponentDescription",false },
    {0x0050,0x0020,VR::LO,VM::VM1,"Device Description","DeviceDescription",false },
@@ -785,7 +787,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0052,0x0001,VR::FL,VM::VM1,"Contrast/Bolus Ingredient Percent by Volume","ContrastBolusIngredientPercentByVolume",false },
    {0x0052,0x0002,VR::FD,VM::VM1,"OCT Focal Distance","OCTFocalDistance",false },
    {0x0052,0x0003,VR::FD,VM::VM1,"Beam Spot Size","BeamSpotSize",false },
-@@ -2953,7 +3327,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2953,7 +3329,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0062,0x0006,VR::ST,VM::VM1,"Segment Description","SegmentDescription",false },
    {0x0062,0x0007,VR::SQ,VM::VM1,"Segmentation Algorithm Identification Sequence","SegmentationAlgorithmIdentificationSequence",false },
    {0x0062,0x0008,VR::CS,VM::VM1,"Segment Algorithm Type","SegmentAlgorithmType",false },
@@ -794,7 +796,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0062,0x000a,VR::SQ,VM::VM1,"Segment Identification Sequence","SegmentIdentificationSequence",false },
    {0x0062,0x000b,VR::US,VM::VM1_n,"Referenced Segment Number","ReferencedSegmentNumber",false },
    {0x0062,0x000c,VR::US,VM::VM1,"Recommended Display Grayscale Value","RecommendedDisplayGrayscaleValue",false },
-@@ -2963,6 +3337,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2963,6 +3339,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0062,0x0010,VR::CS,VM::VM1,"Segmentation Fractional Type","SegmentationFractionalType",false },
    {0x0062,0x0011,VR::SQ,VM::VM1,"Segmented Property Type Modifier Code Sequence","SegmentedPropertyTypeModifierCodeSequence",false },
    {0x0062,0x0012,VR::SQ,VM::VM1,"Used Segments Sequence","UsedSegmentsSequence",false },
@@ -802,7 +804,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0062,0x0020,VR::UT,VM::VM1,"Tracking ID","TrackingID",false },
    {0x0062,0x0021,VR::UI,VM::VM1,"Tracking UID","TrackingUID",false },
    {0x0064,0x0002,VR::SQ,VM::VM1,"Deformable Registration Sequence","DeformableRegistrationSequence",false },
-@@ -2999,6 +3374,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -2999,6 +3376,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0066,0x001f,VR::US,VM::VM1,"Vector Dimensionality","VectorDimensionality",false },
    {0x0066,0x0020,VR::FL,VM::VM1_n,"Vector Accuracy","VectorAccuracy",false },
    {0x0066,0x0021,VR::OF,VM::VM1,"Vector Coordinate Data","VectorCoordinateData",false },
@@ -810,7 +812,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0066,0x0023,VR::OW,VM::VM1,"Triangle Point Index List","TrianglePointIndexList",true },
    {0x0066,0x0024,VR::OW,VM::VM1,"Edge Point Index List","EdgePointIndexList",true },
    {0x0066,0x0025,VR::OW,VM::VM1,"Vertex Point Index List","VertexPointIndexList",true },
-@@ -3058,7 +3434,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -3058,7 +3436,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0068,0x62d0,VR::US,VM::VM1,"HPGL Document ID","HPGLDocumentID",false },
    {0x0068,0x62d5,VR::LO,VM::VM1,"HPGL Document Label","HPGLDocumentLabel",false },
    {0x0068,0x62e0,VR::SQ,VM::VM1,"View Orientation Code Sequence","ViewOrientationCodeSequence",false },
@@ -819,7 +821,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0068,0x62f2,VR::FD,VM::VM1,"HPGL Document Scaling","HPGLDocumentScaling",false },
    {0x0068,0x6300,VR::OB,VM::VM1,"HPGL Document","HPGLDocument",false },
    {0x0068,0x6310,VR::US,VM::VM1,"HPGL Contour Pen Number","HPGLContourPenNumber",false },
-@@ -3110,6 +3486,27 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -3110,6 +3488,27 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0068,0x65f0,VR::FD,VM::VM4,"2D Plane Intersection","TwoDPlaneIntersection",false },
    {0x0068,0x6610,VR::FD,VM::VM3,"3D Plane Origin","ThreeDPlaneOrigin",false },
    {0x0068,0x6620,VR::FD,VM::VM3,"3D Plane Normal","ThreeDPlaneNormal",false },
@@ -847,7 +849,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0070,0x0001,VR::SQ,VM::VM1,"Graphic Annotation Sequence","GraphicAnnotationSequence",false },
    {0x0070,0x0002,VR::CS,VM::VM1,"Graphic Layer","GraphicLayer",false },
    {0x0070,0x0003,VR::CS,VM::VM1,"Bounding Box Annotation Units","BoundingBoxAnnotationUnits",false },
-@@ -3208,8 +3605,10 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -3208,8 +3607,10 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0070,0x0311,VR::SQ,VM::VM1,"Fiducial Identifier Code Sequence","FiducialIdentifierCodeSequence",false },
    {0x0070,0x0312,VR::FD,VM::VM1,"Contour Uncertainty Radius","ContourUncertaintyRadius",false },
    {0x0070,0x0314,VR::SQ,VM::VM1,"Used Fiducials Sequence","UsedFiducialsSequence",false },
@@ -858,7 +860,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0070,0x031c,VR::SQ,VM::VM1,"Fiducial Set Sequence","FiducialSetSequence",false },
    {0x0070,0x031e,VR::SQ,VM::VM1,"Fiducial Sequence","FiducialSequence",false },
    {0x0070,0x031f,VR::SQ,VM::VM1,"Fiducials Property Category Code Sequence","FiducialsPropertyCategoryCodeSequence",false },
-@@ -3227,9 +3626,14 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -3227,9 +3628,14 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0070,0x1203,VR::US,VM::VM1,"Input Sequence Position Index","InputSequencePositionIndex",false },
    {0x0070,0x1204,VR::CS,VM::VM1,"Crop","Crop",false },
    {0x0070,0x1205,VR::US,VM::VM1_n,"Cropping Specification Index","CroppingSpecificationIndex",false },
@@ -874,7 +876,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0070,0x1301,VR::SQ,VM::VM1,"Volume Cropping Sequence","VolumeCroppingSequence",false },
    {0x0070,0x1302,VR::CS,VM::VM1,"Volume Cropping Method","VolumeCroppingMethod",false },
    {0x0070,0x1303,VR::FD,VM::VM6,"Bounding Box Crop","BoundingBoxCrop",false },
-@@ -3247,6 +3651,18 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -3247,6 +3653,18 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0070,0x150d,VR::OD,VM::VM1,"Volumetric Curve Points","VolumetricCurvePoints",false },
    {0x0070,0x1511,VR::FD,VM::VM3,"MPR View Height Direction","MPRViewHeightDirection",false },
    {0x0070,0x1512,VR::FD,VM::VM1,"MPR View Height","MPRViewHeight",false },
@@ -893,7 +895,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0070,0x1801,VR::SQ,VM::VM1,"Presentation State Classification Component Sequence","PresentationStateClassificationComponentSequence",false },
    {0x0070,0x1802,VR::CS,VM::VM1,"Component Type","ComponentType",false },
    {0x0070,0x1803,VR::SQ,VM::VM1,"Component Input Sequence","ComponentInputSequence",false },
-@@ -3264,6 +3680,21 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -3264,6 +3682,21 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0070,0x1a03,VR::FD,VM::VM1,"Recommended Animation Rate","RecommendedAnimationRate",false },
    {0x0070,0x1a04,VR::SQ,VM::VM1,"Animation Curve Sequence","AnimationCurveSequence",false },
    {0x0070,0x1a05,VR::FD,VM::VM1,"Animation Step Size","AnimationStepSize",false },
@@ -915,7 +917,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0072,0x0002,VR::SH,VM::VM1,"Hanging Protocol Name","HangingProtocolName",false },
    {0x0072,0x0004,VR::LO,VM::VM1,"Hanging Protocol Description","HangingProtocolDescription",false },
    {0x0072,0x0006,VR::CS,VM::VM1,"Hanging Protocol Level","HangingProtocolLevel",false },
-@@ -3322,6 +3753,9 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -3322,6 +3755,9 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0072,0x007e,VR::SS,VM::VM1_n,"Selector SS Value","SelectorSSValue",false },
    {0x0072,0x007f,VR::UI,VM::VM1_n,"Selector UI Value","SelectorUIValue",false },
    {0x0072,0x0080,VR::SQ,VM::VM1,"Selector Code Sequence Value","SelectorCodeSequenceValue",false },
@@ -925,7 +927,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0072,0x0100,VR::US,VM::VM1,"Number of Screens","NumberOfScreens",false },
    {0x0072,0x0102,VR::SQ,VM::VM1,"Nominal Screen Definition Sequence","NominalScreenDefinitionSequence",false },
    {0x0072,0x0104,VR::US,VM::VM1,"Number of Vertical Pixels","NumberOfVerticalPixels",false },
-@@ -3391,6 +3825,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -3391,6 +3827,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0074,0x1002,VR::SQ,VM::VM1,"Procedure Step Progress Information Sequence","ProcedureStepProgressInformationSequence",false },
    {0x0074,0x1004,VR::DS,VM::VM1,"Procedure Step Progress","ProcedureStepProgress",false },
    {0x0074,0x1006,VR::ST,VM::VM1,"Procedure Step Progress Description","ProcedureStepProgressDescription",false },
@@ -933,7 +935,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0074,0x1008,VR::SQ,VM::VM1,"Procedure Step Communications URI Sequence","ProcedureStepCommunicationsURISequence",false },
    {0x0074,0x100a,VR::UR,VM::VM1,"Contact URI","ContactURI",false },
    {0x0074,0x100c,VR::LO,VM::VM1,"Contact Display Name","ContactDisplayName",false },
-@@ -3469,7 +3904,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -3469,7 +3906,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0076,0x0020,VR::SQ,VM::VM1,"Procedure Type Code Sequence","ProcedureTypeCodeSequence",false },
    {0x0076,0x0030,VR::LO,VM::VM1,"Surgical Technique","SurgicalTechnique",false },
    {0x0076,0x0032,VR::SQ,VM::VM1,"Component Types Sequence","ComponentTypesSequence",false },
@@ -942,7 +944,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0076,0x0036,VR::CS,VM::VM1,"Exclusive Component Type","ExclusiveComponentType",false },
    {0x0076,0x0038,VR::CS,VM::VM1,"Mandatory Component Type","MandatoryComponentType",false },
    {0x0076,0x0040,VR::SQ,VM::VM1,"Component Sequence","ComponentSequence",false },
-@@ -3508,8 +3943,8 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -3508,8 +3945,8 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0080,0x0007,VR::US,VM::VM3_3n,"Surface Point Color CIELab Value Data","SurfacePointColorCIELabValueData",false },
    {0x0080,0x0008,VR::SQ,VM::VM1,"UV Mapping Sequence","UVMappingSequence",false },
    {0x0080,0x0009,VR::SH,VM::VM1,"Texture Label","TextureLabel",false },
@@ -953,7 +955,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0080,0x0012,VR::SQ,VM::VM1,"Referenced Texture Sequence","ReferencedTextureSequence",false },
    {0x0080,0x0013,VR::SQ,VM::VM1,"Referenced Surface Data Sequence","ReferencedSurfaceDataSequence",false },
    {0x0082,0x0001,VR::CS,VM::VM1,"Assessment Summary","AssessmentSummary",false },
-@@ -3520,7 +3955,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -3520,7 +3957,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0082,0x0007,VR::SQ,VM::VM1,"Assessment Observations Sequence","AssessmentObservationsSequence",false },
    {0x0082,0x0008,VR::CS,VM::VM1,"Observation Significance","ObservationSignificance",false },
    {0x0082,0x000a,VR::UT,VM::VM1,"Observation Description","ObservationDescription",false },
@@ -962,7 +964,7 @@ index cbd2562b1..9220ef4be 100644
    {0x0082,0x0010,VR::SQ,VM::VM1,"Assessed Attribute Value Sequence","AssessedAttributeValueSequence",false },
    {0x0082,0x0016,VR::LO,VM::VM1,"Assessment Set ID","AssessmentSetID",false },
    {0x0082,0x0017,VR::SQ,VM::VM1,"Assessment Requester Sequence","AssessmentRequesterSequence",false },
-@@ -3567,12 +4002,21 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -3567,12 +4004,21 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x0400,0x0510,VR::UI,VM::VM1,"Encrypted Content Transfer Syntax UID","EncryptedContentTransferSyntaxUID",false },
    {0x0400,0x0520,VR::OB,VM::VM1,"Encrypted Content","EncryptedContent",false },
    {0x0400,0x0550,VR::SQ,VM::VM1,"Modified Attributes Sequence","ModifiedAttributesSequence",false },
@@ -985,7 +987,7 @@ index cbd2562b1..9220ef4be 100644
    {0x1010,0x0001,VR::US,VM::VM1_n,"Zonal Map","ZonalMap",true },
    {0x1010,0x0002,VR::US,VM::VM1_n,"Zonal Map","ZonalMap",true },
    {0x1010,0x0003,VR::US,VM::VM1_n,"Zonal Map","ZonalMap",true },
-@@ -3927,8 +4371,8 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -3927,8 +4373,8 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x2130,0x0050,VR::SQ,VM::VM1,"Annotation Content Sequence","AnnotationContentSequence",true },
    {0x2130,0x0060,VR::SQ,VM::VM1,"Image Overlay Box Content Sequence","ImageOverlayBoxContentSequence",true },
    {0x2130,0x0080,VR::SQ,VM::VM1,"Presentation LUT Content Sequence","PresentationLUTContentSequence",true },
@@ -996,7 +998,7 @@ index cbd2562b1..9220ef4be 100644
    {0x2200,0x0001,VR::CS,VM::VM1,"Label Using Information Extracted From Instances","LabelUsingInformationExtractedFromInstances",false },
    {0x2200,0x0002,VR::UT,VM::VM1,"Label Text","LabelText",false },
    {0x2200,0x0003,VR::CS,VM::VM1,"Label Style Selection","LabelStyleSelection",false },
-@@ -4014,22 +4458,24 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -4014,22 +4460,24 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x3006,0x0030,VR::SQ,VM::VM1,"RT Related ROI Sequence","RTRelatedROISequence",false },
    {0x3006,0x0033,VR::CS,VM::VM1,"RT ROI Relationship","RTROIRelationship",false },
    {0x3006,0x0036,VR::CS,VM::VM1,"ROI Generation Algorithm","ROIGenerationAlgorithm",false },
@@ -1026,7 +1028,7 @@ index cbd2562b1..9220ef4be 100644
    {0x3006,0x00a0,VR::SQ,VM::VM1,"Related RT ROI Observations Sequence","RelatedRTROIObservationsSequence",false },
    {0x3006,0x00a4,VR::CS,VM::VM1,"RT ROI Interpreted Type","RTROIInterpretedType",false },
    {0x3006,0x00a6,VR::PN,VM::VM1,"ROI Interpreter","ROIInterpreter",false },
-@@ -4045,6 +4491,9 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -4045,6 +4493,9 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x3006,0x00c4,VR::CS,VM::VM1,"Frame of Reference Transformation Type","FrameOfReferenceTransformationType",true },
    {0x3006,0x00c6,VR::DS,VM::VM16,"Frame of Reference Transformation Matrix","FrameOfReferenceTransformationMatrix",false },
    {0x3006,0x00c8,VR::LO,VM::VM1,"Frame of Reference Transformation Comment","FrameOfReferenceTransformationComment",false },
@@ -1036,7 +1038,7 @@ index cbd2562b1..9220ef4be 100644
    {0x3008,0x0010,VR::SQ,VM::VM1,"Measured Dose Reference Sequence","MeasuredDoseReferenceSequence",false },
    {0x3008,0x0012,VR::ST,VM::VM1,"Measured Dose Description","MeasuredDoseDescription",false },
    {0x3008,0x0014,VR::CS,VM::VM1,"Measured Dose Type","MeasuredDoseType",false },
-@@ -4101,6 +4550,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -4101,6 +4552,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x3008,0x00b0,VR::SQ,VM::VM1,"Recorded Wedge Sequence","RecordedWedgeSequence",false },
    {0x3008,0x00c0,VR::SQ,VM::VM1,"Recorded Compensator Sequence","RecordedCompensatorSequence",false },
    {0x3008,0x00d0,VR::SQ,VM::VM1,"Recorded Block Sequence","RecordedBlockSequence",false },
@@ -1044,7 +1046,7 @@ index cbd2562b1..9220ef4be 100644
    {0x3008,0x00e0,VR::SQ,VM::VM1,"Treatment Summary Measured Dose Reference Sequence","TreatmentSummaryMeasuredDoseReferenceSequence",false },
    {0x3008,0x00f0,VR::SQ,VM::VM1,"Recorded Snout Sequence","RecordedSnoutSequence",false },
    {0x3008,0x00f2,VR::SQ,VM::VM1,"Recorded Range Shifter Sequence","RecordedRangeShifterSequence",false },
-@@ -4147,7 +4597,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -4147,7 +4599,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x300a,0x0007,VR::TM,VM::VM1,"RT Plan Time","RTPlanTime",false },
    {0x300a,0x0009,VR::LO,VM::VM1_n,"Treatment Protocols","TreatmentProtocols",false },
    {0x300a,0x000a,VR::CS,VM::VM1,"Plan Intent","PlanIntent",false },
@@ -1053,7 +1055,7 @@ index cbd2562b1..9220ef4be 100644
    {0x300a,0x000c,VR::CS,VM::VM1,"RT Plan Geometry","RTPlanGeometry",false },
    {0x300a,0x000e,VR::ST,VM::VM1,"Prescription Description","PrescriptionDescription",false },
    {0x300a,0x0010,VR::SQ,VM::VM1,"Dose Reference Sequence","DoseReferenceSequence",false },
-@@ -4194,20 +4644,23 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -4194,20 +4646,23 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x300a,0x007a,VR::IS,VM::VM1,"Repeat Fraction Cycle Length","RepeatFractionCycleLength",false },
    {0x300a,0x007b,VR::LT,VM::VM1,"Fraction Pattern","FractionPattern",false },
    {0x300a,0x0080,VR::IS,VM::VM1,"Number of Beams","NumberOfBeams",false },
@@ -1084,7 +1086,7 @@ index cbd2562b1..9220ef4be 100644
    {0x300a,0x00a0,VR::IS,VM::VM1,"Number of Brachy Application Setups","NumberOfBrachyApplicationSetups",false },
    {0x300a,0x00a2,VR::DS,VM::VM3,"Brachy Application Setup Dose Specification Point","BrachyApplicationSetupDoseSpecificationPoint",false },
    {0x300a,0x00a4,VR::DS,VM::VM1,"Brachy Application Setup Dose","BrachyApplicationSetupDose",false },
-@@ -4391,6 +4844,10 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -4391,6 +4846,10 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x300a,0x0266,VR::LO,VM::VM1,"Brachy Accessory Device Name","BrachyAccessoryDeviceName",false },
    {0x300a,0x026a,VR::DS,VM::VM1,"Brachy Accessory Device Nominal Thickness","BrachyAccessoryDeviceNominalThickness",false },
    {0x300a,0x026c,VR::DS,VM::VM1,"Brachy Accessory Device Nominal Transmission","BrachyAccessoryDeviceNominalTransmission",false },
@@ -1095,7 +1097,7 @@ index cbd2562b1..9220ef4be 100644
    {0x300a,0x0280,VR::SQ,VM::VM1,"Channel Sequence","ChannelSequence",false },
    {0x300a,0x0282,VR::IS,VM::VM1,"Channel Number","ChannelNumber",false },
    {0x300a,0x0284,VR::DS,VM::VM1,"Channel Length","ChannelLength",false },
-@@ -4407,6 +4864,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -4407,6 +4866,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x300a,0x029c,VR::DS,VM::VM1,"Source Applicator Wall Nominal Thickness","SourceApplicatorWallNominalThickness",false },
    {0x300a,0x029e,VR::DS,VM::VM1,"Source Applicator Wall Nominal Transmission","SourceApplicatorWallNominalTransmission",false },
    {0x300a,0x02a0,VR::DS,VM::VM1,"Source Applicator Step Size","SourceApplicatorStepSize",false },
@@ -1103,7 +1105,7 @@ index cbd2562b1..9220ef4be 100644
    {0x300a,0x02a2,VR::IS,VM::VM1,"Transfer Tube Number","TransferTubeNumber",false },
    {0x300a,0x02a4,VR::DS,VM::VM1,"Transfer Tube Length","TransferTubeLength",false },
    {0x300a,0x02b0,VR::SQ,VM::VM1,"Channel Shield Sequence","ChannelShieldSequence",false },
-@@ -4489,6 +4947,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -4489,6 +4949,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x300a,0x0395,VR::CS,VM::VM1,"Scan Spot Reordering Allowed","ScanSpotReorderingAllowed",false },
    {0x300a,0x0396,VR::FL,VM::VM1_n,"Scan Spot Meterset Weights","ScanSpotMetersetWeights",false },
    {0x300a,0x0398,VR::FL,VM::VM2,"Scanning Spot Size","ScanningSpotSize",false },
@@ -1111,7 +1113,7 @@ index cbd2562b1..9220ef4be 100644
    {0x300a,0x039a,VR::IS,VM::VM1,"Number of Paintings","NumberOfPaintings",false },
    {0x300a,0x03a0,VR::SQ,VM::VM1,"Ion Tolerance Table Sequence","IonToleranceTableSequence",false },
    {0x300a,0x03a2,VR::SQ,VM::VM1,"Ion Beam Sequence","IonBeamSequence",false },
-@@ -4507,6 +4966,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -4507,6 +4968,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x300a,0x0423,VR::CS,VM::VM1,"General Accessory Type","GeneralAccessoryType",false },
    {0x300a,0x0424,VR::IS,VM::VM1,"General Accessory Number","GeneralAccessoryNumber",false },
    {0x300a,0x0425,VR::FL,VM::VM1,"Source to General Accessory Distance","SourceToGeneralAccessoryDistance",false },
@@ -1119,7 +1121,7 @@ index cbd2562b1..9220ef4be 100644
    {0x300a,0x0431,VR::SQ,VM::VM1,"Applicator Geometry Sequence","ApplicatorGeometrySequence",false },
    {0x300a,0x0432,VR::CS,VM::VM1,"Applicator Aperture Shape","ApplicatorApertureShape",false },
    {0x300a,0x0433,VR::FL,VM::VM1,"Applicator Opening","ApplicatorOpening",false },
-@@ -4533,6 +4993,213 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -4533,6 +4995,213 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x300a,0x0510,VR::FL,VM::VM2,"Delivered Nominal Range Modulated Region Depths","DeliveredNominalRangeModulatedRegionDepths",false },
    {0x300a,0x0511,VR::CS,VM::VM1,"Delivered Reference Dose Definition","DeliveredReferenceDoseDefinition",false },
    {0x300a,0x0512,VR::CS,VM::VM1,"Reference Dose Definition","ReferenceDoseDefinition",false },
@@ -1333,7 +1335,7 @@ index cbd2562b1..9220ef4be 100644
    {0x300c,0x0002,VR::SQ,VM::VM1,"Referenced RT Plan Sequence","ReferencedRTPlanSequence",false },
    {0x300c,0x0004,VR::SQ,VM::VM1,"Referenced Beam Sequence","ReferencedBeamSequence",false },
    {0x300c,0x0006,VR::IS,VM::VM1,"Referenced Beam Number","ReferencedBeamNumber",false },
-@@ -4567,10 +5234,173 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -4567,10 +5236,173 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x300c,0x0111,VR::SQ,VM::VM1,"Omitted Beam Task Sequence","OmittedBeamTaskSequence",false },
    {0x300c,0x0112,VR::CS,VM::VM1,"Reason for Omission","ReasonForOmission",false },
    {0x300c,0x0113,VR::LO,VM::VM1,"Reason for Omission Description","ReasonForOmissionDescription",false },
@@ -1507,7 +1509,7 @@ index cbd2562b1..9220ef4be 100644
    {0x4000,0x0010,VR::LT,VM::VM1,"Arbitrary","Arbitrary",true },
    {0x4000,0x4000,VR::LT,VM::VM1,"Text Comments","TextComments",true },
    {0x4008,0x0040,VR::SH,VM::VM1,"Results ID","ResultsID",true },
-@@ -4636,7 +5466,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -4636,7 +5468,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x4010,0x1026,VR::DT,VM::VM1,"Route Segment End Time","RouteSegmentEndTime",false },
    {0x4010,0x1027,VR::CS,VM::VM1,"TDR Type","TDRType",false },
    {0x4010,0x1028,VR::CS,VM::VM1,"International Route Segment","InternationalRouteSegment",false },
@@ -1516,7 +1518,7 @@ index cbd2562b1..9220ef4be 100644
    {0x4010,0x102a,VR::SH,VM::VM1,"Assigned Location","AssignedLocation",false },
    {0x4010,0x102b,VR::DT,VM::VM1,"Alarm Decision Time","AlarmDecisionTime",false },
    {0x4010,0x1031,VR::CS,VM::VM1,"Alarm Decision","AlarmDecision",false },
-@@ -13147,6 +13977,9 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -13147,6 +13979,9 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x60fa,0x4000,VR::LT,VM::VM1,"Overlay Comments","OverlayComments",true },
    {0x60fc,0x4000,VR::LT,VM::VM1,"Overlay Comments","OverlayComments",true },
    {0x60fe,0x4000,VR::LT,VM::VM1,"Overlay Comments","OverlayComments",true },
@@ -1526,7 +1528,7 @@ index cbd2562b1..9220ef4be 100644
    {0x7fe0,0x0008,VR::OF,VM::VM1,"Float Pixel Data","FloatPixelData",false },
    {0x7fe0,0x0009,VR::OD,VM::VM1,"Double Float Pixel Data","DoubleFloatPixelData",false },
    {0x7fe0,0x0010,VR::OB_OW,VM::VM1,"Pixel Data","PixelData",false },
-@@ -13265,7 +14098,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -13265,7 +14100,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x7fda,0x0010,VR::OB_OW,VM::VM1,"Variable Pixel Data","VariablePixelData",true },
    {0x7fdc,0x0010,VR::OB_OW,VM::VM1,"Variable Pixel Data","VariablePixelData",true },
    {0x7fde,0x0010,VR::OB_OW,VM::VM1,"Variable Pixel Data","VariablePixelData",true },
@@ -1535,7 +1537,7 @@ index cbd2562b1..9220ef4be 100644
    {0x7fe2,0x0010,VR::OB_OW,VM::VM1,"Variable Pixel Data","VariablePixelData",true },
    {0x7fe4,0x0010,VR::OB_OW,VM::VM1,"Variable Pixel Data","VariablePixelData",true },
    {0x7fe6,0x0010,VR::OB_OW,VM::VM1,"Variable Pixel Data","VariablePixelData",true },
-@@ -13521,7 +14354,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -13521,7 +14356,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x7fda,0x0020,VR::OW,VM::VM1,"Variable Coefficients SDVN","VariableCoefficientsSDVN",true },
    {0x7fdc,0x0020,VR::OW,VM::VM1,"Variable Coefficients SDVN","VariableCoefficientsSDVN",true },
    {0x7fde,0x0020,VR::OW,VM::VM1,"Variable Coefficients SDVN","VariableCoefficientsSDVN",true },
@@ -1544,7 +1546,7 @@ index cbd2562b1..9220ef4be 100644
    {0x7fe2,0x0020,VR::OW,VM::VM1,"Variable Coefficients SDVN","VariableCoefficientsSDVN",true },
    {0x7fe4,0x0020,VR::OW,VM::VM1,"Variable Coefficients SDVN","VariableCoefficientsSDVN",true },
    {0x7fe6,0x0020,VR::OW,VM::VM1,"Variable Coefficients SDVN","VariableCoefficientsSDVN",true },
-@@ -13649,7 +14482,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -13649,7 +14484,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x7fda,0x0030,VR::OW,VM::VM1,"Variable Coefficients SDHN","VariableCoefficientsSDHN",true },
    {0x7fdc,0x0030,VR::OW,VM::VM1,"Variable Coefficients SDHN","VariableCoefficientsSDHN",true },
    {0x7fde,0x0030,VR::OW,VM::VM1,"Variable Coefficients SDHN","VariableCoefficientsSDHN",true },
@@ -1553,7 +1555,7 @@ index cbd2562b1..9220ef4be 100644
    {0x7fe2,0x0030,VR::OW,VM::VM1,"Variable Coefficients SDHN","VariableCoefficientsSDHN",true },
    {0x7fe4,0x0030,VR::OW,VM::VM1,"Variable Coefficients SDHN","VariableCoefficientsSDHN",true },
    {0x7fe6,0x0030,VR::OW,VM::VM1,"Variable Coefficients SDHN","VariableCoefficientsSDHN",true },
-@@ -13777,7 +14610,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -13777,7 +14612,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
    {0x7fda,0x0040,VR::OW,VM::VM1,"Variable Coefficients SDDN","VariableCoefficientsSDDN",true },
    {0x7fdc,0x0040,VR::OW,VM::VM1,"Variable Coefficients SDDN","VariableCoefficientsSDDN",true },
    {0x7fde,0x0040,VR::OW,VM::VM1,"Variable Coefficients SDDN","VariableCoefficientsSDDN",true },
@@ -1562,7 +1564,7 @@ index cbd2562b1..9220ef4be 100644
    {0x7fe2,0x0040,VR::OW,VM::VM1,"Variable Coefficients SDDN","VariableCoefficientsSDDN",true },
    {0x7fe4,0x0040,VR::OW,VM::VM1,"Variable Coefficients SDDN","VariableCoefficientsSDDN",true },
    {0x7fe6,0x0040,VR::OW,VM::VM1,"Variable Coefficients SDDN","VariableCoefficientsSDDN",true },
-@@ -13802,12 +14635,14 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -13802,12 +14637,14 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
  //  {0x0010,0x0000,VR::UL,VM::VM1,"Group Length 0010","",true },
  //  {0x0012,0x0000,VR::UL,VM::VM1,"Group Length 0012","",true },
  //  {0x0014,0x0000,VR::UL,VM::VM1,"Group Length 0014","",true },
@@ -1577,7 +1579,7 @@ index cbd2562b1..9220ef4be 100644
  //  {0x0038,0x0000,VR::UL,VM::VM1,"Group Length 0038","",true },
  //  {0x003a,0x0000,VR::UL,VM::VM1,"Group Length 003a","",true },
  //  {0x0040,0x0000,VR::UL,VM::VM1,"Group Length 0040","",true },
-@@ -13823,6 +14658,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -13823,6 +14660,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
  //  {0x0064,0x0000,VR::UL,VM::VM1,"Group Length 0064","",true },
  //  {0x0066,0x0000,VR::UL,VM::VM1,"Group Length 0066","",true },
  //  {0x0068,0x0000,VR::UL,VM::VM1,"Group Length 0068","",true },
@@ -1585,7 +1587,7 @@ index cbd2562b1..9220ef4be 100644
  //  {0x0070,0x0000,VR::UL,VM::VM1,"Group Length 0070","",true },
  //  {0x0072,0x0000,VR::UL,VM::VM1,"Group Length 0072","",true },
  //  {0x0074,0x0000,VR::UL,VM::VM1,"Group Length 0074","",true },
-@@ -13853,6 +14689,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
+@@ -13853,6 +14691,7 @@ static const DICT_ENTRY DICOMV3DataDict [] = {
  //  {0x300a,0x0000,VR::UL,VM::VM1,"Group Length 300a","",true },
  //  {0x300c,0x0000,VR::UL,VM::VM1,"Group Length 300c","",true },
  //  {0x300e,0x0000,VR::UL,VM::VM1,"Group Length 300e","",true },
@@ -1593,7 +1595,7 @@ index cbd2562b1..9220ef4be 100644
  //  {0x4000,0x0000,VR::UL,VM::VM1,"Group Length 4000","",true },
  //  {0x4008,0x0000,VR::UL,VM::VM1,"Group Length 4008","",true },
  //  {0x4010,0x0000,VR::UL,VM::VM1,"Group Length 4010","",true },
-@@ -13888,12 +14725,5 @@ void Dict::LoadDefault()
+@@ -13888,12 +14727,5 @@ void Dict::LoadDefault()
     }
  }
  

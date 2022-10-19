@@ -1,8 +1,8 @@
 diff --git "a/Utilities/socketxx/socket++/sockstream.cpp" "b/Utilities/socketxx/socket++/sockstream.cpp"
-index f53d39642..c3f181a8a 100644
+index f53d39642..61a12f0fe 100644
 --- "a/Utilities/socketxx/socket++/sockstream.cpp"
 +++ "b/Utilities/socketxx/socket++/sockstream.cpp"
-@@ -525,16 +525,17 @@ sockbuf::int_type sockbuf::overflow (sockbuf::int_type c)
+@@ -525,16 +525,19 @@ sockbuf::int_type sockbuf::overflow (sockbuf::int_type c)
  //                         insert c into buffer, and return c.
  // In all cases, if error happens, throw exception.
  {
@@ -11,11 +11,6 @@ index f53d39642..c3f181a8a 100644
 -
 -  if (c == eof)
 -    return sync ();
--
--  if (pptr () == epptr ())
--    sync ();
--  *pptr () = (char_type)c;
--  pbump (1);
 +  try
 +  {
 +    if (pbase() == nullptr) return eof;
@@ -25,8 +20,14 @@ index f53d39642..c3f181a8a 100644
 +    pbump(1);
 +  }
 +  catch (const sockerr& err)
-+  {}
-+  
++  {
++    (void)err;
++  }
+ 
+-  if (pptr () == epptr ())
+-    sync ();
+-  *pptr () = (char_type)c;
+-  pbump (1);
    return c;
  }
  

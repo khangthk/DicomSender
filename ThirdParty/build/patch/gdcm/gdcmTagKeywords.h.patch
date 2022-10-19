@@ -1,5 +1,5 @@
 diff --git "a/Source/DataDictionary/gdcmTagKeywords.h" "b/Source/DataDictionary/gdcmTagKeywords.h"
-index e68c9a43c..73533ff1a 100644
+index e68c9a43c..1a5fc76be 100644
 --- "a/Source/DataDictionary/gdcmTagKeywords.h"
 +++ "b/Source/DataDictionary/gdcmTagKeywords.h"
 @@ -77,8 +77,11 @@ namespace Keywords {
@@ -54,7 +54,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0008, 0x010f> ContextIdentifier;
      typedef gdcm::Attribute<0x0008, 0x0110> CodingSchemeIdentificationSequence;
      typedef gdcm::Attribute<0x0008, 0x0112> CodingSchemeRegistry;
-@@ -133,7 +146,76 @@ namespace Keywords {
+@@ -133,7 +146,77 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0008, 0x0115> CodingSchemeName;
      typedef gdcm::Attribute<0x0008, 0x0116> CodingSchemeResponsibleOrganization;
      typedef gdcm::Attribute<0x0008, 0x0117> ContextUID;
@@ -128,10 +128,11 @@ index e68c9a43c..73533ff1a 100644
 +    typedef gdcm::Attribute<0x0008, 0x0426> InventoryCompletionStatus;
 +    typedef gdcm::Attribute<0x0008, 0x0427> NumberOfStudyRecordsInInstance;
 +    typedef gdcm::Attribute<0x0008, 0x0428> TotalNumberOfStudyRecords;
++    typedef gdcm::Attribute<0x0008, 0x0429> MaximumNumberOfRecords;
      typedef gdcm::Attribute<0x0008, 0x1000> NetworkID;
      typedef gdcm::Attribute<0x0008, 0x1010> StationName;
      typedef gdcm::Attribute<0x0008, 0x1030> StudyDescription;
-@@ -141,6 +223,7 @@ namespace Keywords {
+@@ -141,6 +224,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0008, 0x103e> SeriesDescription;
      typedef gdcm::Attribute<0x0008, 0x103f> SeriesDescriptionCodeSequence;
      typedef gdcm::Attribute<0x0008, 0x1040> InstitutionalDepartmentName;
@@ -139,7 +140,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0008, 0x1048> PhysiciansOfRecord;
      typedef gdcm::Attribute<0x0008, 0x1049> PhysiciansOfRecordIdentificationSequence;
      typedef gdcm::Attribute<0x0008, 0x1050> PerformingPhysicianName;
-@@ -151,6 +234,7 @@ namespace Keywords {
+@@ -151,6 +235,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0008, 0x1072> OperatorIdentificationSequence;
      typedef gdcm::Attribute<0x0008, 0x1080> AdmittingDiagnosesDescription;
      typedef gdcm::Attribute<0x0008, 0x1084> AdmittingDiagnosesCodeSequence;
@@ -147,7 +148,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0008, 0x1090> ManufacturerModelName;
      typedef gdcm::Attribute<0x0008, 0x1100> ReferencedResultsSequence;
      typedef gdcm::Attribute<0x0008, 0x1110> ReferencedStudySequence;
-@@ -167,6 +251,7 @@ namespace Keywords {
+@@ -167,6 +252,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0008, 0x114b> ReferencedRealWorldValueMappingInstanceSequence;
      typedef gdcm::Attribute<0x0008, 0x1150> ReferencedSOPClassUID;
      typedef gdcm::Attribute<0x0008, 0x1155> ReferencedSOPInstanceUID;
@@ -155,7 +156,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0008, 0x115a> SOPClassesSupported;
      typedef gdcm::Attribute<0x0008, 0x1160> ReferencedFrameNumber;
      typedef gdcm::Attribute<0x0008, 0x1161> SimpleFrameList;
-@@ -174,10 +259,13 @@ namespace Keywords {
+@@ -174,10 +260,13 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0008, 0x1163> TimeRange;
      typedef gdcm::Attribute<0x0008, 0x1164> FrameExtractionSequence;
      typedef gdcm::Attribute<0x0008, 0x1167> MultiFrameSourceSOPInstanceUID;
@@ -169,7 +170,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0008, 0x1200> StudiesContainingOtherReferencedInstancesSequence;
      typedef gdcm::Attribute<0x0008, 0x1250> RelatedSeriesSequence;
      typedef gdcm::Attribute<0x0008, 0x2110> LossyImageCompressionRetired;
-@@ -220,7 +308,10 @@ namespace Keywords {
+@@ -220,7 +309,10 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0008, 0x225a> AnatomicStructureSpaceOrRegionModifierCodeSequenceTrial;
      typedef gdcm::Attribute<0x0008, 0x225c> OnAxisBackgroundAnatomicStructureCodeSequenceTrial;
      typedef gdcm::Attribute<0x0008, 0x3001> AlternateRepresentationSequence;
@@ -180,7 +181,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0008, 0x4000> IdentifyingComments;
      typedef gdcm::Attribute<0x0008, 0x9007> FrameType;
      typedef gdcm::Attribute<0x0008, 0x9092> ReferencedImageEvidenceSequence;
-@@ -244,12 +335,32 @@ namespace Keywords {
+@@ -244,12 +336,32 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0010, 0x0021> IssuerOfPatientID;
      typedef gdcm::Attribute<0x0010, 0x0022> TypeOfPatientID;
      typedef gdcm::Attribute<0x0010, 0x0024> IssuerOfPatientIDQualifiersSequence;
@@ -213,7 +214,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0010, 0x1000> OtherPatientIDs;
      typedef gdcm::Attribute<0x0010, 0x1001> OtherPatientNames;
      typedef gdcm::Attribute<0x0010, 0x1002> OtherPatientIDsSequence;
-@@ -257,6 +368,9 @@ namespace Keywords {
+@@ -257,6 +369,9 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0010, 0x1010> PatientAge;
      typedef gdcm::Attribute<0x0010, 0x1020> PatientSize;
      typedef gdcm::Attribute<0x0010, 0x1021> PatientSizeCodeSequence;
@@ -223,7 +224,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0010, 0x1030> PatientWeight;
      typedef gdcm::Attribute<0x0010, 0x1040> PatientAddress;
      typedef gdcm::Attribute<0x0010, 0x1050> InsurancePlanIdentification;
-@@ -264,11 +378,13 @@ namespace Keywords {
+@@ -264,11 +379,13 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0010, 0x1080> MilitaryRank;
      typedef gdcm::Attribute<0x0010, 0x1081> BranchOfService;
      typedef gdcm::Attribute<0x0010, 0x1090> MedicalRecordLocator;
@@ -237,16 +238,17 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0010, 0x2160> EthnicGroup;
      typedef gdcm::Attribute<0x0010, 0x2180> Occupation;
      typedef gdcm::Attribute<0x0010, 0x21a0> SmokingStatus;
-@@ -299,6 +415,8 @@ namespace Keywords {
+@@ -299,6 +416,9 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0012, 0x0042> ClinicalTrialSubjectReadingID;
      typedef gdcm::Attribute<0x0012, 0x0050> ClinicalTrialTimePointID;
      typedef gdcm::Attribute<0x0012, 0x0051> ClinicalTrialTimePointDescription;
 +    typedef gdcm::Attribute<0x0012, 0x0052> LongitudinalTemporalOffsetFromEvent;
 +    typedef gdcm::Attribute<0x0012, 0x0053> LongitudinalTemporalEventType;
++    typedef gdcm::Attribute<0x0012, 0x0054> ClinicalTrialTimePointTypeCodeSequence;
      typedef gdcm::Attribute<0x0012, 0x0060> ClinicalTrialCoordinatingCenterName;
      typedef gdcm::Attribute<0x0012, 0x0062> PatientIdentityRemoved;
      typedef gdcm::Attribute<0x0012, 0x0063> DeidentificationMethod;
-@@ -310,6 +428,8 @@ namespace Keywords {
+@@ -310,6 +430,8 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0012, 0x0083> ConsentForClinicalTrialUseSequence;
      typedef gdcm::Attribute<0x0012, 0x0084> DistributionType;
      typedef gdcm::Attribute<0x0012, 0x0085> ConsentForDistributionFlag;
@@ -255,7 +257,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0014, 0x0023> CADFileFormat;
      typedef gdcm::Attribute<0x0014, 0x0024> ComponentReferenceSystem;
      typedef gdcm::Attribute<0x0014, 0x0025> ComponentManufacturingProcedure;
-@@ -318,13 +438,30 @@ namespace Keywords {
+@@ -318,13 +440,30 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0014, 0x0032> MaterialPipeDiameter;
      typedef gdcm::Attribute<0x0014, 0x0034> MaterialIsolationDiameter;
      typedef gdcm::Attribute<0x0014, 0x0042> MaterialGrade;
@@ -288,7 +290,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0014, 0x1010> ActualEnvironmentalConditions;
      typedef gdcm::Attribute<0x0014, 0x1020> ExpiryDate;
      typedef gdcm::Attribute<0x0014, 0x1040> EnvironmentalConditions;
-@@ -376,6 +513,8 @@ namespace Keywords {
+@@ -376,6 +515,8 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0014, 0x3077> TimeOfGainCalibration;
      typedef gdcm::Attribute<0x0014, 0x3080> BadPixelImage;
      typedef gdcm::Attribute<0x0014, 0x3099> CalibrationNotes;
@@ -297,7 +299,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0014, 0x4002> PulserEquipmentSequence;
      typedef gdcm::Attribute<0x0014, 0x4004> PulserType;
      typedef gdcm::Attribute<0x0014, 0x4006> PulserNotes;
-@@ -390,13 +529,14 @@ namespace Keywords {
+@@ -390,13 +531,14 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0014, 0x4013> ElementShape;
      typedef gdcm::Attribute<0x0014, 0x4014> ElementDimensionA;
      typedef gdcm::Attribute<0x0014, 0x4015> ElementDimensionB;
@@ -313,7 +315,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0014, 0x4020> PulserSettingsSequence;
      typedef gdcm::Attribute<0x0014, 0x4022> PulseWidth;
      typedef gdcm::Attribute<0x0014, 0x4024> ExcitationFrequency;
-@@ -419,8 +559,8 @@ namespace Keywords {
+@@ -419,8 +561,8 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0014, 0x4054> CouplingTechnique;
      typedef gdcm::Attribute<0x0014, 0x4056> CouplingMedium;
      typedef gdcm::Attribute<0x0014, 0x4057> CouplingVelocity;
@@ -324,7 +326,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0014, 0x405a> SoundPathLength;
      typedef gdcm::Attribute<0x0014, 0x405c> DelayLawIdentifier;
      typedef gdcm::Attribute<0x0014, 0x4060> GateSettingsSequence;
-@@ -434,10 +574,177 @@ namespace Keywords {
+@@ -434,10 +576,177 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0014, 0x407a> ProcedureLastModifiedDate;
      typedef gdcm::Attribute<0x0014, 0x407c> CalibrationTime;
      typedef gdcm::Attribute<0x0014, 0x407e> CalibrationDate;
@@ -502,7 +504,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x0014> ContrastBolusAdministrationRouteSequence;
      typedef gdcm::Attribute<0x0018, 0x0015> BodyPartExamined;
      typedef gdcm::Attribute<0x0018, 0x0020> ScanningSequence;
-@@ -466,6 +773,7 @@ namespace Keywords {
+@@ -466,6 +775,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x0042> InitialCineRunState;
      typedef gdcm::Attribute<0x0018, 0x0050> SliceThickness;
      typedef gdcm::Attribute<0x0018, 0x0060> KVP;
@@ -510,7 +512,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x0070> CountsAccumulated;
      typedef gdcm::Attribute<0x0018, 0x0071> AcquisitionTerminationCondition;
      typedef gdcm::Attribute<0x0018, 0x0072> EffectiveDuration;
-@@ -495,6 +803,9 @@ namespace Keywords {
+@@ -495,6 +805,9 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x1006> GridID;
      typedef gdcm::Attribute<0x0018, 0x1007> CassetteID;
      typedef gdcm::Attribute<0x0018, 0x1008> GantryID;
@@ -520,7 +522,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x1010> SecondaryCaptureDeviceID;
      typedef gdcm::Attribute<0x0018, 0x1011> HardcopyCreationDeviceID;
      typedef gdcm::Attribute<0x0018, 0x1012> DateOfSecondaryCapture;
-@@ -600,8 +911,31 @@ namespace Keywords {
+@@ -600,8 +913,31 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x1191> AnodeTargetMaterial;
      typedef gdcm::Attribute<0x0018, 0x11a0> BodyPartThickness;
      typedef gdcm::Attribute<0x0018, 0x11a2> CompressionForce;
@@ -552,7 +554,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x1210> ConvolutionKernel;
      typedef gdcm::Attribute<0x0018, 0x1240> UpperLowerPixelValues;
      typedef gdcm::Attribute<0x0018, 0x1242> ActualFrameDuration;
-@@ -611,6 +945,8 @@ namespace Keywords {
+@@ -611,6 +947,8 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x1251> TransmitCoilName;
      typedef gdcm::Attribute<0x0018, 0x1260> PlateType;
      typedef gdcm::Attribute<0x0018, 0x1261> PhosphorType;
@@ -561,7 +563,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x1300> ScanVelocity;
      typedef gdcm::Attribute<0x0018, 0x1301> WholeBodyTechnique;
      typedef gdcm::Attribute<0x0018, 0x1302> ScanLength;
-@@ -620,6 +956,7 @@ namespace Keywords {
+@@ -620,6 +958,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x1315> VariableFlipAngleFlag;
      typedef gdcm::Attribute<0x0018, 0x1316> SAR;
      typedef gdcm::Attribute<0x0018, 0x1318> dBdt;
@@ -569,7 +571,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x1400> AcquisitionDeviceProcessingDescription;
      typedef gdcm::Attribute<0x0018, 0x1401> AcquisitionDeviceProcessingCode;
      typedef gdcm::Attribute<0x0018, 0x1402> CassetteOrientation;
-@@ -655,6 +992,15 @@ namespace Keywords {
+@@ -655,6 +994,15 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x1622> ShutterPresentationValue;
      typedef gdcm::Attribute<0x0018, 0x1623> ShutterOverlayGroup;
      typedef gdcm::Attribute<0x0018, 0x1624> ShutterPresentationColorCIELabValue;
@@ -585,7 +587,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x1700> CollimatorShape;
      typedef gdcm::Attribute<0x0018, 0x1702> CollimatorLeftVerticalEdge;
      typedef gdcm::Attribute<0x0018, 0x1704> CollimatorRightVerticalEdge;
-@@ -676,6 +1022,12 @@ namespace Keywords {
+@@ -676,6 +1024,12 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x2010> NominalScannedPixelSpacing;
      typedef gdcm::Attribute<0x0018, 0x2020> DigitizingDeviceTransportDirection;
      typedef gdcm::Attribute<0x0018, 0x2030> RotationOfScannedFilm;
@@ -598,7 +600,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x3100> IVUSAcquisition;
      typedef gdcm::Attribute<0x0018, 0x3101> IVUSPullbackRate;
      typedef gdcm::Attribute<0x0018, 0x3102> IVUSGatedRate;
-@@ -685,6 +1037,7 @@ namespace Keywords {
+@@ -685,6 +1039,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x4000> AcquisitionComments;
      typedef gdcm::Attribute<0x0018, 0x5000> OutputPower;
      typedef gdcm::Attribute<0x0018, 0x5010> TransducerData;
@@ -606,7 +608,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x5012> FocusDepth;
      typedef gdcm::Attribute<0x0018, 0x5020> ProcessingFunction;
      typedef gdcm::Attribute<0x0018, 0x5021> PostprocessingFunction;
-@@ -749,6 +1102,7 @@ namespace Keywords {
+@@ -749,6 +1104,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x6058> TableOfPixelValues;
      typedef gdcm::Attribute<0x0018, 0x605a> TableOfParameterValues;
      typedef gdcm::Attribute<0x0018, 0x6060> RWaveTimeVector;
@@ -614,7 +616,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x7000> DetectorConditionsNominalFlag;
      typedef gdcm::Attribute<0x0018, 0x7001> DetectorTemperature;
      typedef gdcm::Attribute<0x0018, 0x7004> DetectorType;
-@@ -944,7 +1298,7 @@ namespace Keywords {
+@@ -944,7 +1300,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x9257> ASLContext;
      typedef gdcm::Attribute<0x0018, 0x9258> ASLPulseTrainDuration;
      typedef gdcm::Attribute<0x0018, 0x9259> ASLCrusherFlag;
@@ -623,7 +625,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x925b> ASLCrusherDescription;
      typedef gdcm::Attribute<0x0018, 0x925c> ASLBolusCutoffFlag;
      typedef gdcm::Attribute<0x0018, 0x925d> ASLBolusCutoffTimingSequence;
-@@ -953,6 +1307,8 @@ namespace Keywords {
+@@ -953,6 +1309,8 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x9260> ASLSlabSequence;
      typedef gdcm::Attribute<0x0018, 0x9295> ChemicalShiftMinimumIntegrationLimitInppm;
      typedef gdcm::Attribute<0x0018, 0x9296> ChemicalShiftMaximumIntegrationLimitInppm;
@@ -632,7 +634,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x9301> CTAcquisitionTypeSequence;
      typedef gdcm::Attribute<0x0018, 0x9302> AcquisitionType;
      typedef gdcm::Attribute<0x0018, 0x9303> TubeAngle;
-@@ -1000,6 +1356,42 @@ namespace Keywords {
+@@ -1000,6 +1358,42 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x9352> CalciumScoringMassFactorDevice;
      typedef gdcm::Attribute<0x0018, 0x9353> EnergyWeightingFactor;
      typedef gdcm::Attribute<0x0018, 0x9360> CTAdditionalXRaySourceSequence;
@@ -675,7 +677,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x9401> ProjectionPixelCalibrationSequence;
      typedef gdcm::Attribute<0x0018, 0x9402> DistanceSourceToIsocenter;
      typedef gdcm::Attribute<0x0018, 0x9403> DistanceObjectToTableTop;
-@@ -1030,7 +1422,7 @@ namespace Keywords {
+@@ -1030,7 +1424,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x9440> CenterOfCircularExposureControlSensingRegion;
      typedef gdcm::Attribute<0x0018, 0x9441> RadiusOfCircularExposureControlSensingRegion;
      typedef gdcm::Attribute<0x0018, 0x9442> VerticesOfThePolygonalExposureControlSensingRegion;
@@ -684,7 +686,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x9447> ColumnAngulationPatient;
      typedef gdcm::Attribute<0x0018, 0x9449> BeamAngle;
      typedef gdcm::Attribute<0x0018, 0x9451> FrameDetectorParametersSequence;
-@@ -1065,6 +1457,8 @@ namespace Keywords {
+@@ -1065,6 +1459,8 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x9515> SecondaryPositionerIncrement;
      typedef gdcm::Attribute<0x0018, 0x9516> StartAcquisitionDateTime;
      typedef gdcm::Attribute<0x0018, 0x9517> EndAcquisitionDateTime;
@@ -693,7 +695,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x9524> ApplicationName;
      typedef gdcm::Attribute<0x0018, 0x9525> ApplicationVersion;
      typedef gdcm::Attribute<0x0018, 0x9526> ApplicationManufacturer;
-@@ -1073,6 +1467,25 @@ namespace Keywords {
+@@ -1073,6 +1469,25 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x9530> XRay3DReconstructionSequence;
      typedef gdcm::Attribute<0x0018, 0x9531> ReconstructionDescription;
      typedef gdcm::Attribute<0x0018, 0x9538> PerProjectionAcquisitionSequence;
@@ -719,7 +721,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x9601> DiffusionBMatrixSequence;
      typedef gdcm::Attribute<0x0018, 0x9602> DiffusionBValueXX;
      typedef gdcm::Attribute<0x0018, 0x9603> DiffusionBValueXY;
-@@ -1080,6 +1493,10 @@ namespace Keywords {
+@@ -1080,6 +1495,10 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x9605> DiffusionBValueYY;
      typedef gdcm::Attribute<0x0018, 0x9606> DiffusionBValueYZ;
      typedef gdcm::Attribute<0x0018, 0x9607> DiffusionBValueZZ;
@@ -730,7 +732,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x9701> DecayCorrectionDateTime;
      typedef gdcm::Attribute<0x0018, 0x9715> StartDensityThreshold;
      typedef gdcm::Attribute<0x0018, 0x9716> StartRelativeDensityDifferenceThreshold;
-@@ -1125,7 +1542,7 @@ namespace Keywords {
+@@ -1125,7 +1544,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x9772> PatientPhysiologicalStateCodeSequence;
      typedef gdcm::Attribute<0x0018, 0x9801> DepthsOfFocus;
      typedef gdcm::Attribute<0x0018, 0x9803> ExcludedIntervalsSequence;
@@ -739,7 +741,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0x9805> ExclusionDuration;
      typedef gdcm::Attribute<0x0018, 0x9806> USImageDescriptionSequence;
      typedef gdcm::Attribute<0x0018, 0x9807> ImageDataTypeSequence;
-@@ -1136,6 +1553,66 @@ namespace Keywords {
+@@ -1136,6 +1555,66 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0018, 0x980d> TransducerGeometryCodeSequence;
      typedef gdcm::Attribute<0x0018, 0x980e> TransducerBeamSteeringCodeSequence;
      typedef gdcm::Attribute<0x0018, 0x980f> TransducerApplicationCodeSequence;
@@ -806,7 +808,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0018, 0xa001> ContributingEquipmentSequence;
      typedef gdcm::Attribute<0x0018, 0xa002> ContributionDateTime;
      typedef gdcm::Attribute<0x0018, 0xa003> ContributionDescription;
-@@ -1155,6 +1632,7 @@ namespace Keywords {
+@@ -1155,6 +1634,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0020, 0x0022> OverlayNumber;
      typedef gdcm::Attribute<0x0020, 0x0024> CurveNumber;
      typedef gdcm::Attribute<0x0020, 0x0026> LUTNumber;
@@ -814,7 +816,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0020, 0x0030> ImagePosition;
      typedef gdcm::Attribute<0x0020, 0x0032> ImagePositionPatient;
      typedef gdcm::Attribute<0x0020, 0x0035> ImageOrientation;
-@@ -1178,6 +1656,7 @@ namespace Keywords {
+@@ -1178,6 +1658,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0020, 0x1004> AcquisitionsInStudy;
      typedef gdcm::Attribute<0x0020, 0x1005> ImagesInStudy;
      typedef gdcm::Attribute<0x0020, 0x1020> Reference;
@@ -822,7 +824,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0020, 0x1040> PositionReferenceIndicator;
      typedef gdcm::Attribute<0x0020, 0x1041> SliceLocation;
      typedef gdcm::Attribute<0x0020, 0x1070> OtherStudyNumbers;
-@@ -1217,6 +1696,9 @@ namespace Keywords {
+@@ -1217,6 +1698,9 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0020, 0x9164> DimensionOrganizationUID;
      typedef gdcm::Attribute<0x0020, 0x9165> DimensionIndexPointer;
      typedef gdcm::Attribute<0x0020, 0x9167> FunctionalGroupPointer;
@@ -832,7 +834,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0020, 0x9213> DimensionIndexPrivateCreator;
      typedef gdcm::Attribute<0x0020, 0x9221> DimensionOrganizationSequence;
      typedef gdcm::Attribute<0x0020, 0x9222> DimensionIndexSequence;
-@@ -1242,6 +1724,7 @@ namespace Keywords {
+@@ -1242,6 +1726,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0020, 0x9308> ApexPosition;
      typedef gdcm::Attribute<0x0020, 0x9309> VolumeToTransducerMappingMatrix;
      typedef gdcm::Attribute<0x0020, 0x930a> VolumeToTableMappingMatrix;
@@ -840,7 +842,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0020, 0x930c> PatientFrameOfReferenceSource;
      typedef gdcm::Attribute<0x0020, 0x930d> TemporalPositionTimeOffset;
      typedef gdcm::Attribute<0x0020, 0x930e> PlanePositionVolumeSequence;
-@@ -1288,6 +1771,7 @@ namespace Keywords {
+@@ -1288,6 +1773,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0022, 0x0020> StereoPairsSequence;
      typedef gdcm::Attribute<0x0022, 0x0021> LeftImageSequence;
      typedef gdcm::Attribute<0x0022, 0x0022> RightImageSequence;
@@ -848,7 +850,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0022, 0x0030> AxialLengthOfTheEye;
      typedef gdcm::Attribute<0x0022, 0x0031> OphthalmicFrameLocationSequence;
      typedef gdcm::Attribute<0x0022, 0x0032> ReferenceCoordinates;
-@@ -1317,10 +1801,18 @@ namespace Keywords {
+@@ -1317,10 +1803,18 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0022, 0x1029> IOLFormulaDetail;
      typedef gdcm::Attribute<0x0022, 0x1033> KeratometerIndex;
      typedef gdcm::Attribute<0x0022, 0x1035> SourceOfOphthalmicAxialLengthCodeSequence;
@@ -867,7 +869,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0022, 0x1050> OphthalmicAxialLengthMeasurementsSequence;
      typedef gdcm::Attribute<0x0022, 0x1053> IOLPower;
      typedef gdcm::Attribute<0x0022, 0x1054> PredictedRefractiveError;
-@@ -1342,6 +1834,9 @@ namespace Keywords {
+@@ -1342,6 +1836,9 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0022, 0x1125> AnteriorChamberDepthDefinitionCodeSequence;
      typedef gdcm::Attribute<0x0022, 0x1127> LensThicknessSequence;
      typedef gdcm::Attribute<0x0022, 0x1128> AnteriorChamberDepthSequence;
@@ -877,7 +879,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0022, 0x1130> LensThickness;
      typedef gdcm::Attribute<0x0022, 0x1131> AnteriorChamberDepth;
      typedef gdcm::Attribute<0x0022, 0x1132> SourceOfLensThicknessDataCodeSequence;
-@@ -1364,10 +1859,60 @@ namespace Keywords {
+@@ -1364,10 +1861,60 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0022, 0x1257> SelectedSegmentalOphthalmicAxialLengthSequence;
      typedef gdcm::Attribute<0x0022, 0x1260> SelectedTotalOphthalmicAxialLengthSequence;
      typedef gdcm::Attribute<0x0022, 0x1262> OphthalmicAxialLengthQualityMetricSequence;
@@ -938,7 +940,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0024, 0x0010> VisualFieldHorizontalExtent;
      typedef gdcm::Attribute<0x0024, 0x0011> VisualFieldVerticalExtent;
      typedef gdcm::Attribute<0x0024, 0x0012> VisualFieldShape;
-@@ -1410,7 +1955,7 @@ namespace Keywords {
+@@ -1410,7 +1957,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0024, 0x0065> AgeCorrectedSensitivityDeviationAlgorithmSequence;
      typedef gdcm::Attribute<0x0024, 0x0066> GlobalDeviationFromNormal;
      typedef gdcm::Attribute<0x0024, 0x0067> GeneralizedDefectSensitivityDeviationAlgorithmSequence;
@@ -947,7 +949,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0024, 0x0069> PatientReliabilityIndicator;
      typedef gdcm::Attribute<0x0024, 0x0070> VisualFieldMeanSensitivity;
      typedef gdcm::Attribute<0x0024, 0x0071> GlobalDeviationProbability;
-@@ -1481,7 +2026,7 @@ namespace Keywords {
+@@ -1481,7 +2028,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0028, 0x0011> Columns;
      typedef gdcm::Attribute<0x0028, 0x0012> Planes;
      typedef gdcm::Attribute<0x0028, 0x0014> UltrasoundColorDataPresent;
@@ -956,7 +958,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0028, 0x0030> PixelSpacing;
      typedef gdcm::Attribute<0x0028, 0x0031> ZoomFactor;
      typedef gdcm::Attribute<0x0028, 0x0032> ZoomCenter;
-@@ -1522,6 +2067,10 @@ namespace Keywords {
+@@ -1522,6 +2069,10 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0028, 0x0111> LargestImagePixelValueInPlane;
      typedef gdcm::Attribute<0x0028, 0x0120> PixelPaddingValue;
      typedef gdcm::Attribute<0x0028, 0x0121> PixelPaddingRangeLimit;
@@ -967,7 +969,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0028, 0x0200> ImageLocation;
      typedef gdcm::Attribute<0x0028, 0x0300> QualityControlImage;
      typedef gdcm::Attribute<0x0028, 0x0301> BurnedInAnnotation;
-@@ -1585,6 +2134,10 @@ namespace Keywords {
+@@ -1585,6 +2136,10 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0028, 0x1221> SegmentedRedPaletteColorLookupTableData;
      typedef gdcm::Attribute<0x0028, 0x1222> SegmentedGreenPaletteColorLookupTableData;
      typedef gdcm::Attribute<0x0028, 0x1223> SegmentedBluePaletteColorLookupTableData;
@@ -978,7 +980,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0028, 0x1300> BreastImplantPresent;
      typedef gdcm::Attribute<0x0028, 0x1350> PartialView;
      typedef gdcm::Attribute<0x0028, 0x1351> PartialViewDescription;
-@@ -1605,6 +2158,7 @@ namespace Keywords {
+@@ -1605,6 +2160,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0028, 0x140f> RGBLUTTransferFunction;
      typedef gdcm::Attribute<0x0028, 0x1410> AlphaLUTTransferFunction;
      typedef gdcm::Attribute<0x0028, 0x2000> ICCProfile;
@@ -986,7 +988,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0028, 0x2110> LossyImageCompression;
      typedef gdcm::Attribute<0x0028, 0x2112> LossyImageCompressionRatio;
      typedef gdcm::Attribute<0x0028, 0x2114> LossyImageCompressionMethod;
-@@ -1631,6 +2185,53 @@ namespace Keywords {
+@@ -1631,6 +2187,53 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0028, 0x6114> MaskSubPixelShift;
      typedef gdcm::Attribute<0x0028, 0x6120> TIDOffset;
      typedef gdcm::Attribute<0x0028, 0x6190> MaskOperationExplanation;
@@ -1040,7 +1042,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0028, 0x7fe0> PixelDataProviderURL;
      typedef gdcm::Attribute<0x0028, 0x9001> DataPointRows;
      typedef gdcm::Attribute<0x0028, 0x9002> DataPointColumns;
-@@ -1685,8 +2286,23 @@ namespace Keywords {
+@@ -1685,8 +2288,23 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0032, 0x1055> StudyComponentStatusID;
      typedef gdcm::Attribute<0x0032, 0x1060> RequestedProcedureDescription;
      typedef gdcm::Attribute<0x0032, 0x1064> RequestedProcedureCodeSequence;
@@ -1064,7 +1066,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0038, 0x0004> ReferencedPatientAliasSequence;
      typedef gdcm::Attribute<0x0038, 0x0008> VisitStatusID;
      typedef gdcm::Attribute<0x0038, 0x0010> AdmissionID;
-@@ -1710,6 +2326,8 @@ namespace Keywords {
+@@ -1710,6 +2328,8 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0038, 0x0062> ServiceEpisodeDescription;
      typedef gdcm::Attribute<0x0038, 0x0064> IssuerOfServiceEpisodeIDSequence;
      typedef gdcm::Attribute<0x0038, 0x0100> PertinentDocumentsSequence;
@@ -1073,7 +1075,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0038, 0x0300> CurrentPatientLocation;
      typedef gdcm::Attribute<0x0038, 0x0400> PatientInstitutionResidence;
      typedef gdcm::Attribute<0x0038, 0x0500> PatientState;
-@@ -1753,6 +2371,31 @@ namespace Keywords {
+@@ -1753,6 +2373,31 @@ namespace Keywords {
      typedef gdcm::Attribute<0x003a, 0x0300> MultiplexedAudioChannelsDescriptionCodeSequence;
      typedef gdcm::Attribute<0x003a, 0x0301> ChannelIdentificationCode;
      typedef gdcm::Attribute<0x003a, 0x0302> ChannelMode;
@@ -1105,7 +1107,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0040, 0x0001> ScheduledStationAETitle;
      typedef gdcm::Attribute<0x0040, 0x0002> ScheduledProcedureStepStartDate;
      typedef gdcm::Attribute<0x0040, 0x0003> ScheduledProcedureStepStartTime;
-@@ -1844,6 +2487,7 @@ namespace Keywords {
+@@ -1844,6 +2489,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0040, 0x0612> SpecimenPreparationStepContentItemSequence;
      typedef gdcm::Attribute<0x0040, 0x0620> SpecimenLocalizationContentItemSequence;
      typedef gdcm::Attribute<0x0040, 0x06fa> SlideIdentifier;
@@ -1113,7 +1115,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0040, 0x071a> ImageCenterPointCoordinatesSequence;
      typedef gdcm::Attribute<0x0040, 0x072a> XOffsetInSlideCoordinateSystem;
      typedef gdcm::Attribute<0x0040, 0x073a> YOffsetInSlideCoordinateSystem;
-@@ -1869,6 +2513,7 @@ namespace Keywords {
+@@ -1869,6 +2515,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0040, 0x1101> PersonIdentificationCodeSequence;
      typedef gdcm::Attribute<0x0040, 0x1102> PersonAddress;
      typedef gdcm::Attribute<0x0040, 0x1103> PersonTelephoneNumbers;
@@ -1121,7 +1123,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0040, 0x1400> RequestedProcedureComments;
      typedef gdcm::Attribute<0x0040, 0x2001> ReasonForTheImagingServiceRequest;
      typedef gdcm::Attribute<0x0040, 0x2004> IssueDateOfImagingServiceRequest;
-@@ -1878,6 +2523,7 @@ namespace Keywords {
+@@ -1878,6 +2525,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0040, 0x2008> OrderEnteredBy;
      typedef gdcm::Attribute<0x0040, 0x2009> OrderEntererLocation;
      typedef gdcm::Attribute<0x0040, 0x2010> OrderCallbackPhoneNumber;
@@ -1129,7 +1131,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0040, 0x2016> PlacerOrderNumberImagingServiceRequest;
      typedef gdcm::Attribute<0x0040, 0x2017> FillerOrderNumberImagingServiceRequest;
      typedef gdcm::Attribute<0x0040, 0x2400> ImagingServiceRequestComments;
-@@ -1889,6 +2535,7 @@ namespace Keywords {
+@@ -1889,6 +2537,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0040, 0x4005> ScheduledProcedureStepStartDateTime;
      typedef gdcm::Attribute<0x0040, 0x4006> MultipleCopiesFlag;
      typedef gdcm::Attribute<0x0040, 0x4007> PerformedProcessingApplicationsCodeSequence;
@@ -1137,7 +1139,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0040, 0x4009> HumanPerformerCodeSequence;
      typedef gdcm::Attribute<0x0040, 0x4010> ScheduledProcedureStepModificationDateTime;
      typedef gdcm::Attribute<0x0040, 0x4011> ExpectedCompletionDateTime;
-@@ -1918,14 +2565,24 @@ namespace Keywords {
+@@ -1918,14 +2567,24 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0040, 0x4050> PerformedProcedureStepStartDateTime;
      typedef gdcm::Attribute<0x0040, 0x4051> PerformedProcedureStepEndDateTime;
      typedef gdcm::Attribute<0x0040, 0x4052> ProcedureStepCancellationDateTime;
@@ -1162,7 +1164,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0040, 0x9224> RealWorldValueIntercept;
      typedef gdcm::Attribute<0x0040, 0x9225> RealWorldValueSlope;
      typedef gdcm::Attribute<0x0040, 0xa007> FindingsFlagTrial;
-@@ -1940,6 +2597,7 @@ namespace Keywords {
+@@ -1940,6 +2599,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0040, 0xa028> DocumentingOrganizationIdentifierCodeSequenceTrial;
      typedef gdcm::Attribute<0x0040, 0xa030> VerificationDateTime;
      typedef gdcm::Attribute<0x0040, 0xa032> ObservationDateTime;
@@ -1170,7 +1172,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0040, 0xa040> ValueType;
      typedef gdcm::Attribute<0x0040, 0xa043> ConceptNameCodeSequence;
      typedef gdcm::Attribute<0x0040, 0xa047> MeasurementPrecisionDescriptionTrial;
-@@ -1979,11 +2637,14 @@ namespace Keywords {
+@@ -1979,11 +2639,14 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0040, 0xa138> ReferencedTimeOffsets;
      typedef gdcm::Attribute<0x0040, 0xa13a> ReferencedDateTime;
      typedef gdcm::Attribute<0x0040, 0xa160> TextValue;
@@ -1186,7 +1188,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0040, 0xa172> ReferencedObservationUIDTrial;
      typedef gdcm::Attribute<0x0040, 0xa173> ReferencedObservationClassTrial;
      typedef gdcm::Attribute<0x0040, 0xa174> ReferencedObjectObservationClassTrial;
-@@ -2032,6 +2693,14 @@ namespace Keywords {
+@@ -2032,6 +2695,14 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0040, 0xa731> RelationshipSequenceTrial;
      typedef gdcm::Attribute<0x0040, 0xa732> RelationshipTypeCodeSequenceTrial;
      typedef gdcm::Attribute<0x0040, 0xa744> LanguageCodeSequenceTrial;
@@ -1201,7 +1203,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0040, 0xa992> UniformResourceLocatorTrial;
      typedef gdcm::Attribute<0x0040, 0xb020> WaveformAnnotationSequence;
      typedef gdcm::Attribute<0x0040, 0xdb00> TemplateIdentifier;
-@@ -2052,6 +2721,7 @@ namespace Keywords {
+@@ -2052,6 +2723,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0040, 0xe022> DICOMMediaRetrievalSequence;
      typedef gdcm::Attribute<0x0040, 0xe023> WADORetrievalSequence;
      typedef gdcm::Attribute<0x0040, 0xe024> XDSRetrievalSequence;
@@ -1209,7 +1211,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0040, 0xe030> RepositoryUniqueID;
      typedef gdcm::Attribute<0x0040, 0xe031> HomeCommunityID;
      typedef gdcm::Attribute<0x0042, 0x0010> DocumentTitle;
-@@ -2059,6 +2729,7 @@ namespace Keywords {
+@@ -2059,6 +2731,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0042, 0x0012> MIMETypeOfEncapsulatedDocument;
      typedef gdcm::Attribute<0x0042, 0x0013> SourceInstanceSequence;
      typedef gdcm::Attribute<0x0042, 0x0014> ListOfMIMETypes;
@@ -1217,7 +1219,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0044, 0x0001> ProductPackageIdentifier;
      typedef gdcm::Attribute<0x0044, 0x0002> SubstanceAdministrationApproval;
      typedef gdcm::Attribute<0x0044, 0x0003> ApprovalStatusFurtherDescription;
-@@ -2073,6 +2744,17 @@ namespace Keywords {
+@@ -2073,6 +2746,17 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0044, 0x0012> SubstanceAdministrationDeviceID;
      typedef gdcm::Attribute<0x0044, 0x0013> ProductParameterSequence;
      typedef gdcm::Attribute<0x0044, 0x0019> SubstanceAdministrationParameterSequence;
@@ -1235,7 +1237,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0046, 0x0012> LensDescription;
      typedef gdcm::Attribute<0x0046, 0x0014> RightLensSequence;
      typedef gdcm::Attribute<0x0046, 0x0015> LeftLensSequence;
-@@ -2088,6 +2770,7 @@ namespace Keywords {
+@@ -2088,6 +2772,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0046, 0x0042> ChannelWidth;
      typedef gdcm::Attribute<0x0046, 0x0044> PupilSize;
      typedef gdcm::Attribute<0x0046, 0x0046> CornealSize;
@@ -1243,7 +1245,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0046, 0x0050> AutorefractionRightEyeSequence;
      typedef gdcm::Attribute<0x0046, 0x0052> AutorefractionLeftEyeSequence;
      typedef gdcm::Attribute<0x0046, 0x0060> DistancePupillaryDistance;
-@@ -2111,6 +2794,15 @@ namespace Keywords {
+@@ -2111,6 +2796,15 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0046, 0x0102> AddOtherSequence;
      typedef gdcm::Attribute<0x0046, 0x0104> AddPower;
      typedef gdcm::Attribute<0x0046, 0x0106> ViewingDistance;
@@ -1259,7 +1261,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0046, 0x0121> VisualAcuityTypeCodeSequence;
      typedef gdcm::Attribute<0x0046, 0x0122> VisualAcuityRightEyeSequence;
      typedef gdcm::Attribute<0x0046, 0x0123> VisualAcuityLeftEyeSequence;
-@@ -2122,6 +2814,36 @@ namespace Keywords {
+@@ -2122,6 +2816,36 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0046, 0x0145> ReferencedRefractiveMeasurementsSequence;
      typedef gdcm::Attribute<0x0046, 0x0146> SpherePower;
      typedef gdcm::Attribute<0x0046, 0x0147> CylinderPower;
@@ -1296,7 +1298,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0048, 0x0001> ImagedVolumeWidth;
      typedef gdcm::Attribute<0x0048, 0x0002> ImagedVolumeHeight;
      typedef gdcm::Attribute<0x0048, 0x0003> ImagedVolumeDepth;
-@@ -2153,6 +2875,8 @@ namespace Keywords {
+@@ -2153,6 +2877,8 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0048, 0x021e> ColumnPositionInTotalImagePixelMatrix;
      typedef gdcm::Attribute<0x0048, 0x021f> RowPositionInTotalImagePixelMatrix;
      typedef gdcm::Attribute<0x0048, 0x0301> PixelOriginInterpretation;
@@ -1305,7 +1307,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0050, 0x0004> CalibrationImage;
      typedef gdcm::Attribute<0x0050, 0x0010> DeviceSequence;
      typedef gdcm::Attribute<0x0050, 0x0012> ContainerComponentTypeCodeSequence;
-@@ -2169,6 +2893,7 @@ namespace Keywords {
+@@ -2169,6 +2895,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0050, 0x001d> ContainerComponentDiameter;
      typedef gdcm::Attribute<0x0050, 0x001e> ContainerComponentDescription;
      typedef gdcm::Attribute<0x0050, 0x0020> DeviceDescription;
@@ -1313,7 +1315,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0052, 0x0001> ContrastBolusIngredientPercentByVolume;
      typedef gdcm::Attribute<0x0052, 0x0002> OCTFocalDistance;
      typedef gdcm::Attribute<0x0052, 0x0003> BeamSpotSize;
-@@ -2192,7 +2917,7 @@ namespace Keywords {
+@@ -2192,7 +2919,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0052, 0x0033> SeamLineLocation;
      typedef gdcm::Attribute<0x0052, 0x0034> FirstALineLocation;
      typedef gdcm::Attribute<0x0052, 0x0036> SeamLineIndex;
@@ -1322,7 +1324,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0052, 0x0039> InterpolationType;
      typedef gdcm::Attribute<0x0052, 0x003a> RefractiveIndexApplied;
      typedef gdcm::Attribute<0x0054, 0x0010> EnergyWindowVector;
-@@ -2247,6 +2972,7 @@ namespace Keywords {
+@@ -2247,6 +2974,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0054, 0x0412> PatientOrientationModifierCodeSequence;
      typedef gdcm::Attribute<0x0054, 0x0414> PatientGantryRelationshipCodeSequence;
      typedef gdcm::Attribute<0x0054, 0x0500> SliceProgressionDirection;
@@ -1330,7 +1332,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0054, 0x1000> SeriesType;
      typedef gdcm::Attribute<0x0054, 0x1001> Units;
      typedef gdcm::Attribute<0x0054, 0x1002> CountsSource;
-@@ -2288,6 +3014,7 @@ namespace Keywords {
+@@ -2288,6 +3016,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0062, 0x0004> SegmentNumber;
      typedef gdcm::Attribute<0x0062, 0x0005> SegmentLabel;
      typedef gdcm::Attribute<0x0062, 0x0006> SegmentDescription;
@@ -1338,7 +1340,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0062, 0x0008> SegmentAlgorithmType;
      typedef gdcm::Attribute<0x0062, 0x0009> SegmentAlgorithmName;
      typedef gdcm::Attribute<0x0062, 0x000a> SegmentIdentificationSequence;
-@@ -2297,6 +3024,11 @@ namespace Keywords {
+@@ -2297,6 +3026,11 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0062, 0x000e> MaximumFractionalValue;
      typedef gdcm::Attribute<0x0062, 0x000f> SegmentedPropertyTypeCodeSequence;
      typedef gdcm::Attribute<0x0062, 0x0010> SegmentationFractionalType;
@@ -1350,7 +1352,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0064, 0x0002> DeformableRegistrationSequence;
      typedef gdcm::Attribute<0x0064, 0x0003> SourceFrameOfReferenceUID;
      typedef gdcm::Attribute<0x0064, 0x0005> DeformableRegistrationGridSequence;
-@@ -2331,6 +3063,7 @@ namespace Keywords {
+@@ -2331,6 +3065,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0066, 0x001f> VectorDimensionality;
      typedef gdcm::Attribute<0x0066, 0x0020> VectorAccuracy;
      typedef gdcm::Attribute<0x0066, 0x0021> VectorCoordinateData;
@@ -1358,7 +1360,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0066, 0x0023> TrianglePointIndexList;
      typedef gdcm::Attribute<0x0066, 0x0024> EdgePointIndexList;
      typedef gdcm::Attribute<0x0066, 0x0025> VertexPointIndexList;
-@@ -2350,6 +3083,28 @@ namespace Keywords {
+@@ -2350,6 +3085,28 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0066, 0x0034> FacetSequence;
      typedef gdcm::Attribute<0x0066, 0x0035> SurfaceProcessingAlgorithmIdentificationSequence;
      typedef gdcm::Attribute<0x0066, 0x0036> AlgorithmName;
@@ -1387,7 +1389,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0068, 0x6210> ImplantSize;
      typedef gdcm::Attribute<0x0068, 0x6221> ImplantTemplateVersion;
      typedef gdcm::Attribute<0x0068, 0x6222> ReplacedImplantTemplateSequence;
-@@ -2368,7 +3123,7 @@ namespace Keywords {
+@@ -2368,7 +3125,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0068, 0x62d0> HPGLDocumentID;
      typedef gdcm::Attribute<0x0068, 0x62d5> HPGLDocumentLabel;
      typedef gdcm::Attribute<0x0068, 0x62e0> ViewOrientationCodeSequence;
@@ -1396,7 +1398,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0068, 0x62f2> HPGLDocumentScaling;
      typedef gdcm::Attribute<0x0068, 0x6300> HPGLDocument;
      typedef gdcm::Attribute<0x0068, 0x6310> HPGLContourPenNumber;
-@@ -2420,6 +3175,27 @@ namespace Keywords {
+@@ -2420,6 +3177,27 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0068, 0x65f0> TwoDPlaneIntersection;
      typedef gdcm::Attribute<0x0068, 0x6610> ThreeDPlaneOrigin;
      typedef gdcm::Attribute<0x0068, 0x6620> ThreeDPlaneNormal;
@@ -1424,7 +1426,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0070, 0x0001> GraphicAnnotationSequence;
      typedef gdcm::Attribute<0x0070, 0x0002> GraphicLayer;
      typedef gdcm::Attribute<0x0070, 0x0003> BoundingBoxAnnotationUnits;
-@@ -2510,6 +3286,7 @@ namespace Keywords {
+@@ -2510,6 +3288,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0070, 0x0308> RegistrationSequence;
      typedef gdcm::Attribute<0x0070, 0x0309> MatrixRegistrationSequence;
      typedef gdcm::Attribute<0x0070, 0x030a> MatrixSequence;
@@ -1432,7 +1434,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0070, 0x030c> FrameOfReferenceTransformationMatrixType;
      typedef gdcm::Attribute<0x0070, 0x030d> RegistrationTypeCodeSequence;
      typedef gdcm::Attribute<0x0070, 0x030f> FiducialDescription;
-@@ -2517,15 +3294,96 @@ namespace Keywords {
+@@ -2517,15 +3296,96 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0070, 0x0311> FiducialIdentifierCodeSequence;
      typedef gdcm::Attribute<0x0070, 0x0312> ContourUncertaintyRadius;
      typedef gdcm::Attribute<0x0070, 0x0314> UsedFiducialsSequence;
@@ -1529,7 +1531,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0072, 0x0002> HangingProtocolName;
      typedef gdcm::Attribute<0x0072, 0x0004> HangingProtocolDescription;
      typedef gdcm::Attribute<0x0072, 0x0006> HangingProtocolLevel;
-@@ -2553,23 +3411,40 @@ namespace Keywords {
+@@ -2553,23 +3413,40 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0072, 0x0052> SelectorSequencePointer;
      typedef gdcm::Attribute<0x0072, 0x0054> SelectorSequencePointerPrivateCreator;
      typedef gdcm::Attribute<0x0072, 0x0056> SelectorAttributePrivateCreator;
@@ -1570,7 +1572,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0072, 0x0100> NumberOfScreens;
      typedef gdcm::Attribute<0x0072, 0x0102> NominalScreenDefinitionSequence;
      typedef gdcm::Attribute<0x0072, 0x0104> NumberOfVerticalPixels;
-@@ -2639,6 +3514,7 @@ namespace Keywords {
+@@ -2639,6 +3516,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0074, 0x1002> ProcedureStepProgressInformationSequence;
      typedef gdcm::Attribute<0x0074, 0x1004> ProcedureStepProgress;
      typedef gdcm::Attribute<0x0074, 0x1006> ProcedureStepProgressDescription;
@@ -1578,7 +1580,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0074, 0x1008> ProcedureStepCommunicationsURISequence;
      typedef gdcm::Attribute<0x0074, 0x100a> ContactURI;
      typedef gdcm::Attribute<0x0074, 0x100c> ContactDisplayName;
-@@ -2646,6 +3522,7 @@ namespace Keywords {
+@@ -2646,6 +3524,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0074, 0x1020> BeamTaskSequence;
      typedef gdcm::Attribute<0x0074, 0x1022> BeamTaskType;
      typedef gdcm::Attribute<0x0074, 0x1024> BeamOrderIndexTrial;
@@ -1586,7 +1588,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0074, 0x1026> TableTopVerticalAdjustedPosition;
      typedef gdcm::Attribute<0x0074, 0x1027> TableTopLongitudinalAdjustedPosition;
      typedef gdcm::Attribute<0x0074, 0x1028> TableTopLateralAdjustedPosition;
-@@ -2691,6 +3568,20 @@ namespace Keywords {
+@@ -2691,6 +3570,20 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0074, 0x1324> BeamOrderIndex;
      typedef gdcm::Attribute<0x0074, 0x1338> DoubleExposureMeterset;
      typedef gdcm::Attribute<0x0074, 0x133a> DoubleExposureFieldDelta;
@@ -1607,7 +1609,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0076, 0x0001> ImplantAssemblyTemplateName;
      typedef gdcm::Attribute<0x0076, 0x0003> ImplantAssemblyTemplateIssuer;
      typedef gdcm::Attribute<0x0076, 0x0006> ImplantAssemblyTemplateVersion;
-@@ -2732,6 +3623,43 @@ namespace Keywords {
+@@ -2732,6 +3625,43 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0078, 0x00b4> ImplantTemplateGroupVariationDimensionRankSequence;
      typedef gdcm::Attribute<0x0078, 0x00b6> ReferencedImplantTemplateGroupMemberID;
      typedef gdcm::Attribute<0x0078, 0x00b8> ImplantTemplateGroupVariationDimensionRank;
@@ -1651,7 +1653,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0088, 0x0130> StorageMediaFileSetID;
      typedef gdcm::Attribute<0x0088, 0x0140> StorageMediaFileSetUID;
      typedef gdcm::Attribute<0x0088, 0x0200> IconImageSequence;
-@@ -2754,6 +3682,7 @@ namespace Keywords {
+@@ -2754,6 +3684,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0400, 0x0120> Signature;
      typedef gdcm::Attribute<0x0400, 0x0305> CertifiedTimestampType;
      typedef gdcm::Attribute<0x0400, 0x0310> CertifiedTimestamp;
@@ -1659,7 +1661,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x0400, 0x0401> DigitalSignaturePurposeCodeSequence;
      typedef gdcm::Attribute<0x0400, 0x0402> ReferencedDigitalSignatureSequence;
      typedef gdcm::Attribute<0x0400, 0x0403> ReferencedSOPInstanceMACSequence;
-@@ -2762,11 +3691,14 @@ namespace Keywords {
+@@ -2762,11 +3693,14 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0400, 0x0510> EncryptedContentTransferSyntaxUID;
      typedef gdcm::Attribute<0x0400, 0x0520> EncryptedContent;
      typedef gdcm::Attribute<0x0400, 0x0550> ModifiedAttributesSequence;
@@ -1674,7 +1676,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x1000, 0x0000> EscapeTriplet;
      typedef gdcm::Attribute<0x1000, 0x0001> RunLengthTriplet;
      typedef gdcm::Attribute<0x1000, 0x0002> HuffmanTableSize;
-@@ -2919,6 +3851,7 @@ namespace Keywords {
+@@ -2919,6 +3853,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x3004, 0x0001> DVHType;
      typedef gdcm::Attribute<0x3004, 0x0002> DoseUnits;
      typedef gdcm::Attribute<0x3004, 0x0004> DoseType;
@@ -1682,7 +1684,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x3004, 0x0006> DoseComment;
      typedef gdcm::Attribute<0x3004, 0x0008> NormalizationPoint;
      typedef gdcm::Attribute<0x3004, 0x000a> DoseSummationType;
-@@ -2948,6 +3881,7 @@ namespace Keywords {
+@@ -2948,6 +3883,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x3006, 0x0012> RTReferencedStudySequence;
      typedef gdcm::Attribute<0x3006, 0x0014> RTReferencedSeriesSequence;
      typedef gdcm::Attribute<0x3006, 0x0016> ContourImageSequence;
@@ -1690,7 +1692,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x3006, 0x0020> StructureSetROISequence;
      typedef gdcm::Attribute<0x3006, 0x0022> ROINumber;
      typedef gdcm::Attribute<0x3006, 0x0024> ReferencedFrameOfReferenceUID;
-@@ -2958,6 +3892,7 @@ namespace Keywords {
+@@ -2958,6 +3894,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x3006, 0x0030> RTRelatedROISequence;
      typedef gdcm::Attribute<0x3006, 0x0033> RTROIRelationship;
      typedef gdcm::Attribute<0x3006, 0x0036> ROIGenerationAlgorithm;
@@ -1698,7 +1700,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x3006, 0x0038> ROIGenerationDescription;
      typedef gdcm::Attribute<0x3006, 0x0039> ROIContourSequence;
      typedef gdcm::Attribute<0x3006, 0x0040> ContourSequence;
-@@ -2967,6 +3902,7 @@ namespace Keywords {
+@@ -2967,6 +3904,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x3006, 0x0046> NumberOfContourPoints;
      typedef gdcm::Attribute<0x3006, 0x0048> ContourNumber;
      typedef gdcm::Attribute<0x3006, 0x0049> AttachedContours;
@@ -1706,7 +1708,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x3006, 0x0050> ContourData;
      typedef gdcm::Attribute<0x3006, 0x0080> RTROIObservationsSequence;
      typedef gdcm::Attribute<0x3006, 0x0082> ObservationNumber;
-@@ -2983,11 +3919,15 @@ namespace Keywords {
+@@ -2983,11 +3921,15 @@ namespace Keywords {
      typedef gdcm::Attribute<0x3006, 0x00b6> ROIElementalCompositionSequence;
      typedef gdcm::Attribute<0x3006, 0x00b7> ROIElementalCompositionAtomicNumber;
      typedef gdcm::Attribute<0x3006, 0x00b8> ROIElementalCompositionAtomicMassFraction;
@@ -1722,7 +1724,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x3008, 0x0010> MeasuredDoseReferenceSequence;
      typedef gdcm::Attribute<0x3008, 0x0012> MeasuredDoseDescription;
      typedef gdcm::Attribute<0x3008, 0x0014> MeasuredDoseType;
-@@ -3027,6 +3967,7 @@ namespace Keywords {
+@@ -3027,6 +3969,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x3008, 0x0064> MeasuredDoseReferenceNumber;
      typedef gdcm::Attribute<0x3008, 0x0065> ParameterPointer;
      typedef gdcm::Attribute<0x3008, 0x0066> OverrideReason;
@@ -1730,7 +1732,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x3008, 0x0068> CorrectedParameterSequence;
      typedef gdcm::Attribute<0x3008, 0x006a> CorrectionValue;
      typedef gdcm::Attribute<0x3008, 0x0070> CalculatedDoseReferenceSequence;
-@@ -3043,6 +3984,7 @@ namespace Keywords {
+@@ -3043,6 +3986,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x3008, 0x00b0> RecordedWedgeSequence;
      typedef gdcm::Attribute<0x3008, 0x00c0> RecordedCompensatorSequence;
      typedef gdcm::Attribute<0x3008, 0x00d0> RecordedBlockSequence;
@@ -1738,7 +1740,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x3008, 0x00e0> TreatmentSummaryMeasuredDoseReferenceSequence;
      typedef gdcm::Attribute<0x3008, 0x00f0> RecordedSnoutSequence;
      typedef gdcm::Attribute<0x3008, 0x00f2> RecordedRangeShifterSequence;
-@@ -3070,6 +4012,9 @@ namespace Keywords {
+@@ -3070,6 +4014,9 @@ namespace Keywords {
      typedef gdcm::Attribute<0x3008, 0x0164> SafePositionExitTime;
      typedef gdcm::Attribute<0x3008, 0x0166> SafePositionReturnDate;
      typedef gdcm::Attribute<0x3008, 0x0168> SafePositionReturnTime;
@@ -1748,7 +1750,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x3008, 0x0200> CurrentTreatmentStatus;
      typedef gdcm::Attribute<0x3008, 0x0202> TreatmentStatusComment;
      typedef gdcm::Attribute<0x3008, 0x0220> FractionGroupSummarySequence;
-@@ -3134,11 +4079,22 @@ namespace Keywords {
+@@ -3134,11 +4081,22 @@ namespace Keywords {
      typedef gdcm::Attribute<0x300a, 0x007b> FractionPattern;
      typedef gdcm::Attribute<0x300a, 0x0080> NumberOfBeams;
      typedef gdcm::Attribute<0x300a, 0x0082> BeamDoseSpecificationPoint;
@@ -1771,7 +1773,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x300a, 0x00a0> NumberOfBrachyApplicationSetups;
      typedef gdcm::Attribute<0x300a, 0x00a2> BrachyApplicationSetupDoseSpecificationPoint;
      typedef gdcm::Attribute<0x300a, 0x00a4> BrachyApplicationSetupDose;
-@@ -3156,6 +4112,7 @@ namespace Keywords {
+@@ -3156,6 +4114,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x300a, 0x00c2> BeamName;
      typedef gdcm::Attribute<0x300a, 0x00c3> BeamDescription;
      typedef gdcm::Attribute<0x300a, 0x00c4> BeamType;
@@ -1779,7 +1781,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x300a, 0x00c6> RadiationType;
      typedef gdcm::Attribute<0x300a, 0x00c7> HighDoseTechniqueType;
      typedef gdcm::Attribute<0x300a, 0x00c8> ReferenceImageNumber;
-@@ -3176,6 +4133,7 @@ namespace Keywords {
+@@ -3176,6 +4135,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x300a, 0x00db> WedgeThinEdgePosition;
      typedef gdcm::Attribute<0x300a, 0x00dc> BolusID;
      typedef gdcm::Attribute<0x300a, 0x00dd> BolusDescription;
@@ -1787,7 +1789,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x300a, 0x00e0> NumberOfCompensators;
      typedef gdcm::Attribute<0x300a, 0x00e1> MaterialID;
      typedef gdcm::Attribute<0x300a, 0x00e2> TotalCompensatorTrayFactor;
-@@ -3191,6 +4149,7 @@ namespace Keywords {
+@@ -3191,6 +4151,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x300a, 0x00ec> CompensatorThicknessData;
      typedef gdcm::Attribute<0x300a, 0x00ed> NumberOfBoli;
      typedef gdcm::Attribute<0x300a, 0x00ee> CompensatorType;
@@ -1795,7 +1797,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x300a, 0x00f0> NumberOfBlocks;
      typedef gdcm::Attribute<0x300a, 0x00f2> TotalBlockTrayFactor;
      typedef gdcm::Attribute<0x300a, 0x00f3> TotalBlockTrayWaterEquivalentThickness;
-@@ -3238,6 +4197,9 @@ namespace Keywords {
+@@ -3238,6 +4199,9 @@ namespace Keywords {
      typedef gdcm::Attribute<0x300a, 0x012c> IsocenterPosition;
      typedef gdcm::Attribute<0x300a, 0x012e> SurfaceEntryPoint;
      typedef gdcm::Attribute<0x300a, 0x0130> SourceToSurfaceDistance;
@@ -1805,7 +1807,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x300a, 0x0134> CumulativeMetersetWeight;
      typedef gdcm::Attribute<0x300a, 0x0140> TableTopPitchAngle;
      typedef gdcm::Attribute<0x300a, 0x0142> TableTopPitchRotationDirection;
-@@ -3247,6 +4209,12 @@ namespace Keywords {
+@@ -3247,6 +4211,12 @@ namespace Keywords {
      typedef gdcm::Attribute<0x300a, 0x014a> GantryPitchAngle;
      typedef gdcm::Attribute<0x300a, 0x014c> GantryPitchRotationDirection;
      typedef gdcm::Attribute<0x300a, 0x014e> GantryPitchAngleTolerance;
@@ -1818,7 +1820,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x300a, 0x0180> PatientSetupSequence;
      typedef gdcm::Attribute<0x300a, 0x0182> PatientSetupNumber;
      typedef gdcm::Attribute<0x300a, 0x0183> PatientSetupLabel;
-@@ -3283,6 +4251,8 @@ namespace Keywords {
+@@ -3283,6 +4253,8 @@ namespace Keywords {
      typedef gdcm::Attribute<0x300a, 0x0216> SourceManufacturer;
      typedef gdcm::Attribute<0x300a, 0x0218> ActiveSourceDiameter;
      typedef gdcm::Attribute<0x300a, 0x021a> ActiveSourceLength;
@@ -1827,7 +1829,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x300a, 0x0222> SourceEncapsulationNominalThickness;
      typedef gdcm::Attribute<0x300a, 0x0224> SourceEncapsulationNominalTransmission;
      typedef gdcm::Attribute<0x300a, 0x0226> SourceIsotopeName;
-@@ -3308,6 +4278,10 @@ namespace Keywords {
+@@ -3308,6 +4280,10 @@ namespace Keywords {
      typedef gdcm::Attribute<0x300a, 0x0266> BrachyAccessoryDeviceName;
      typedef gdcm::Attribute<0x300a, 0x026a> BrachyAccessoryDeviceNominalThickness;
      typedef gdcm::Attribute<0x300a, 0x026c> BrachyAccessoryDeviceNominalTransmission;
@@ -1838,7 +1840,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x300a, 0x0280> ChannelSequence;
      typedef gdcm::Attribute<0x300a, 0x0282> ChannelNumber;
      typedef gdcm::Attribute<0x300a, 0x0284> ChannelLength;
-@@ -3324,6 +4298,7 @@ namespace Keywords {
+@@ -3324,6 +4300,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x300a, 0x029c> SourceApplicatorWallNominalThickness;
      typedef gdcm::Attribute<0x300a, 0x029e> SourceApplicatorWallNominalTransmission;
      typedef gdcm::Attribute<0x300a, 0x02a0> SourceApplicatorStepSize;
@@ -1846,7 +1848,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x300a, 0x02a2> TransferTubeNumber;
      typedef gdcm::Attribute<0x300a, 0x02a4> TransferTubeLength;
      typedef gdcm::Attribute<0x300a, 0x02b0> ChannelShieldSequence;
-@@ -3352,6 +4327,7 @@ namespace Keywords {
+@@ -3352,6 +4329,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x300a, 0x0304> RadiationAtomicNumber;
      typedef gdcm::Attribute<0x300a, 0x0306> RadiationChargeState;
      typedef gdcm::Attribute<0x300a, 0x0308> ScanMode;
@@ -1854,7 +1856,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x300a, 0x030a> VirtualSourceAxisDistances;
      typedef gdcm::Attribute<0x300a, 0x030c> SnoutSequence;
      typedef gdcm::Attribute<0x300a, 0x030d> SnoutPosition;
-@@ -3379,6 +4355,7 @@ namespace Keywords {
+@@ -3379,6 +4357,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x300a, 0x0350> PatientSupportType;
      typedef gdcm::Attribute<0x300a, 0x0352> PatientSupportID;
      typedef gdcm::Attribute<0x300a, 0x0354> PatientSupportAccessoryCode;
@@ -1862,7 +1864,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x300a, 0x0356> FixationLightAzimuthalAngle;
      typedef gdcm::Attribute<0x300a, 0x0358> FixationLightPolarAngle;
      typedef gdcm::Attribute<0x300a, 0x035a> MetersetRate;
-@@ -3395,11 +4372,16 @@ namespace Keywords {
+@@ -3395,11 +4374,16 @@ namespace Keywords {
      typedef gdcm::Attribute<0x300a, 0x0386> RangeModulatorGatingStartWaterEquivalentThickness;
      typedef gdcm::Attribute<0x300a, 0x0388> RangeModulatorGatingStopWaterEquivalentThickness;
      typedef gdcm::Attribute<0x300a, 0x038a> IsocenterToRangeModulatorDistance;
@@ -1879,7 +1881,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x300a, 0x039a> NumberOfPaintings;
      typedef gdcm::Attribute<0x300a, 0x03a0> IonToleranceTableSequence;
      typedef gdcm::Attribute<0x300a, 0x03a2> IonBeamSequence;
-@@ -3417,12 +4399,241 @@ namespace Keywords {
+@@ -3417,12 +4401,241 @@ namespace Keywords {
      typedef gdcm::Attribute<0x300a, 0x0422> GeneralAccessoryDescription;
      typedef gdcm::Attribute<0x300a, 0x0423> GeneralAccessoryType;
      typedef gdcm::Attribute<0x300a, 0x0424> GeneralAccessoryNumber;
@@ -2121,7 +2123,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x300c, 0x0002> ReferencedRTPlanSequence;
      typedef gdcm::Attribute<0x300c, 0x0004> ReferencedBeamSequence;
      typedef gdcm::Attribute<0x300c, 0x0006> ReferencedBeamNumber;
-@@ -3454,10 +4665,176 @@ namespace Keywords {
+@@ -3454,10 +4667,176 @@ namespace Keywords {
      typedef gdcm::Attribute<0x300c, 0x0100> ReferencedRangeShifterNumber;
      typedef gdcm::Attribute<0x300c, 0x0102> ReferencedLateralSpreadingDeviceNumber;
      typedef gdcm::Attribute<0x300c, 0x0104> ReferencedRangeModulatorNumber;
@@ -2298,7 +2300,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x4000, 0x0010> Arbitrary;
      typedef gdcm::Attribute<0x4000, 0x4000> TextComments;
      typedef gdcm::Attribute<0x4008, 0x0040> ResultsID;
-@@ -3523,7 +4900,7 @@ namespace Keywords {
+@@ -3523,7 +4902,7 @@ namespace Keywords {
      typedef gdcm::Attribute<0x4010, 0x1026> RouteSegmentEndTime;
      typedef gdcm::Attribute<0x4010, 0x1027> TDRType;
      typedef gdcm::Attribute<0x4010, 0x1028> InternationalRouteSegment;
@@ -2307,7 +2309,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x4010, 0x102a> AssignedLocation;
      typedef gdcm::Attribute<0x4010, 0x102b> AlarmDecisionTime;
      typedef gdcm::Attribute<0x4010, 0x1031> AlarmDecision;
-@@ -3557,6 +4934,23 @@ namespace Keywords {
+@@ -3557,6 +4936,23 @@ namespace Keywords {
      typedef gdcm::Attribute<0x4010, 0x1068> OOITypeDescriptor;
      typedef gdcm::Attribute<0x4010, 0x1069> TotalProcessingTime;
      typedef gdcm::Attribute<0x4010, 0x106c> DetectorCalibrationData;
@@ -2331,7 +2333,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x4ffe, 0x0001> MACParametersSequence;
      typedef gdcm::Attribute<0x5000, 0x0005> CurveDimensions;
      typedef gdcm::Attribute<0x5000, 0x0010> NumberOfPoints;
-@@ -3635,6 +5029,11 @@ namespace Keywords {
+@@ -3635,6 +5031,11 @@ namespace Keywords {
      typedef gdcm::Attribute<0x6000, 0x1500> OverlayLabel;
      typedef gdcm::Attribute<0x6000, 0x3000> OverlayData;
      typedef gdcm::Attribute<0x6000, 0x4000> OverlayComments;
@@ -2343,7 +2345,7 @@ index e68c9a43c..73533ff1a 100644
      typedef gdcm::Attribute<0x7fe0, 0x0010> PixelData;
      typedef gdcm::Attribute<0x7fe0, 0x0020> CoefficientsSDVN;
      typedef gdcm::Attribute<0x7fe0, 0x0030> CoefficientsSDHN;
-@@ -3657,6 +5056,18 @@ namespace Keywords {
+@@ -3657,6 +5058,18 @@ namespace Keywords {
      typedef gdcm::Attribute<0x0002, 0x0012> ImplementationClassUID;
      typedef gdcm::Attribute<0x0002, 0x0013> ImplementationVersionName;
      typedef gdcm::Attribute<0x0002, 0x0016> SourceApplicationEntityTitle;

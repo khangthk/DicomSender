@@ -1,4 +1,4 @@
-1. Patch for dicom standard 2022c
+1. Patch for dicom standard 2022d
     gdcmDefaultDicts.cxx.patch
     gdcmTagKeywords.h.patch
     gdcmTagToType.h.patch
