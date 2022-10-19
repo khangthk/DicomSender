@@ -4,7 +4,6 @@
 #include "setting.h"
 
 #include <dicombase.h>
-#include <utility>
 
 #include <QString>
 #include <QDebug>
@@ -15,7 +14,7 @@
 #define MAX_PATH 10
 
 MainWindow::MainWindow(QWidget *parent)
-    : QMainWindow(parent), ui(new Ui::MainWindow)
+    : QMainWindow(parent), ui(new Ui::MainWindow), m_files(nullptr)
 {
     ui->setupUi(this);
     setAcceptDrops(true);
@@ -29,6 +28,7 @@ MainWindow::MainWindow(QWidget *parent)
 
 MainWindow::~MainWindow()
 {
+    qDebug() << "~MainWindow";
     saveSetting();
     delete ui;
 }
@@ -339,14 +339,14 @@ bool MainWindow::validInput(CheckInput type)
 
 void MainWindow::send()
 {
-    if (m_sendFiles.isEmpty())
+    if (m_files == nullptr || m_files->isEmpty())
     {
         ui->buttonSend->setEnabled(true);
         return;
     }
 
     auto store = new StoreThread(ui->radioDcmtk->isChecked() ? Library::dcmtk : Library::gdcm, this);
-    store->object()->setFiles(m_sendFiles);
+    store->object()->setFiles(m_files);
     store->object()->setLocalAE(ui->editLocalAE->text().trimmed());
     store->object()->setTargetAE(ui->editTargetAE->text().trimmed());
     store->object()->setHost(ui->editHost->text().trimmed());
@@ -362,7 +362,7 @@ void MainWindow::send()
         store->object()->setMaxReceivePDU(ui->comboBoxMaxReceivePDU->currentData().toInt() * 1024);
     }
 
-    auto fnDone = [&](const bool result, const QString &log)
+    auto fnResult = [&](const bool result, const QString &log)
     {
         if (!log.isEmpty())
         {
@@ -375,7 +375,7 @@ void MainWindow::send()
         qDebug() << "Progress:" << percent;
     };
 
-    auto fnProcessed = [&](const std::pair<int, int> &index, const bool result, const QString &log)
+    auto fnProcessed = [&](const QPair<int, int> &index, const bool result, const QString &log)
     {
         qDebug() << index.first << "/" << index.second << " " << log;
         QString totalStr = QString("%1").arg(index.second);
@@ -387,10 +387,12 @@ void MainWindow::send()
     auto fnFinished = [&]()
     {
         ui->buttonSend->setEnabled(true);
+        delete m_files;
+        m_files = nullptr;
         logDone();
     };
 
-    connect(store, &StoreThread::done, this, fnDone);
+    connect(store, &StoreThread::result, this, fnResult);
     connect(store, &StoreThread::progress, this, fnProgress);
     connect(store, &StoreThread::processed, this, fnProcessed);
     connect(store, &StoreThread::finished, this, fnFinished);
@@ -444,7 +446,7 @@ void MainWindow::onEcho()
         echo->object()->setMaxReceivePDU(ui->comboBoxMaxReceivePDU->currentData().toInt() * 1024);
     }
 
-    auto fnDone = [&](const bool result, const QString &log)
+    auto fnResult = [&](const bool result, const QString &log)
     {
         qDebug() << result << log;
         addColorLog(result, " " + log);
@@ -461,7 +463,7 @@ void MainWindow::onEcho()
         logDone();
     };
 
-    connect(echo, &EchoThread::done, this, fnDone);
+    connect(echo, &EchoThread::result, this, fnResult);
     connect(echo, &EchoThread::started, this, fnStarted);
     connect(echo, &EchoThread::finished, this, fnFinished);
     connect(echo, &EchoThread::finished, echo, &QObject::deleteLater);
@@ -478,11 +480,16 @@ void MainWindow::onSend()
     }
 
     auto scan = new ScanThread(ui->radioDcmtk->isChecked() ? Library::dcmtk : Library::gdcm, this);
-    scan->object()->setDir(ui->comboBoxPaths->currentText());
-    scan->object()->setOutput(m_sendFiles);
+    scan->object()->setScanDir(ui->comboBoxPaths->currentText());
 
-    auto fnDone = [&](const int count)
+    auto fnResult = [&](const QStringList *files)
     {
+        m_files = files;
+        int count = 0;
+        if (m_files != nullptr)
+        {
+            count = m_files->count();
+        }
         qDebug() << "File(s): " << count;
         addColorLog(true, QString(" Found %1 file(s)").arg(count));
     };
@@ -499,7 +506,7 @@ void MainWindow::onSend()
         send();
     };
 
-    connect(scan, &ScanThread::done, this, fnDone);
+    connect(scan, &ScanThread::result, this, fnResult);
     connect(scan, &ScanThread::started, this, fnStarted);
     connect(scan, &ScanThread::finished, this, fnFinished);
     connect(scan, &ScanThread::finished, scan, &QObject::deleteLater);

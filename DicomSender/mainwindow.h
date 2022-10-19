@@ -3,6 +3,7 @@
 #include <QMainWindow>
 #include <QDragEnterEvent>
 #include <QDropEvent>
+#include <QStringList>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -14,7 +15,7 @@ class MainWindow : public QMainWindow
 
 public:
     MainWindow(QWidget *parent = nullptr);
-    ~MainWindow();
+    virtual ~MainWindow();
 
 protected:
     void dragEnterEvent(QDragEnterEvent *event) override;
@@ -24,7 +25,7 @@ protected:
 private:
     Ui::MainWindow *ui;
     QStringList m_paths;
-    QStringList m_sendFiles;
+    const QStringList *m_files;
 
     enum class CheckInput { path, localAE, targetAE, host };
 
