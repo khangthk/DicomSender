@@ -89,7 +89,10 @@ void ScanBase::scanDir(const QString &dirPath)
     while (itFile.hasNext() && !cancel())
     {
         itFile.next();
-        files.push_back(itFile.filePath());
+        if (isValid(itFile.filePath()))
+        {
+            files.push_back(itFile.filePath());
+        }
     }
 
     if (cancel())
