@@ -9,7 +9,7 @@ class DICOMBASE_EXPORT EchoGdcm : public EchoBase
 
 public:
     EchoGdcm(QObject *parent = nullptr);
-    ~EchoGdcm();
+    virtual ~EchoGdcm();
 
     void echo() override;
 };

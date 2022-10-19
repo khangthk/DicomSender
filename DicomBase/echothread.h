@@ -10,8 +10,8 @@ class DICOMBASE_EXPORT EchoThread : public QThread
     Q_OBJECT
 
 public:
-    EchoThread(const Library &lib = Library::dcmtk, QObject *parent = nullptr);
-    ~EchoThread();
+    EchoThread(const Library lib = Library::dcmtk, QObject *parent = nullptr);
+    virtual ~EchoThread();
 
     EchoBase *object();
 
@@ -22,5 +22,5 @@ private:
     std::unique_ptr<EchoBase> m_echo;
 
 signals:
-    void done(const bool result, const QString &log);
+    void result(const bool result, const QString &log);
 };

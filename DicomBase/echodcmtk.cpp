@@ -49,7 +49,7 @@ void EchoDcmtk::echo()
     if (cond.bad())
     {
         DimseCondition::dump(temp_str, cond);
-        emit done(false, QString(temp_str.c_str()));
+        emit result(false, QString(temp_str.c_str()));
         return;
     }
 
@@ -58,7 +58,7 @@ void EchoDcmtk::echo()
     if (cond.bad())
     {
         DimseCondition::dump(temp_str, cond);
-        emit done(false, QString(temp_str.c_str()));
+        emit result(false, QString(temp_str.c_str()));
         return;
     }
 
@@ -77,7 +77,7 @@ void EchoDcmtk::echo()
     if (cond.bad())
     {
         DimseCondition::dump(temp_str, cond);
-        emit done(false, QString(temp_str.c_str()));
+        emit result(false, QString(temp_str.c_str()));
         return;
     }
 
@@ -97,14 +97,14 @@ void EchoDcmtk::echo()
             ASC_getRejectParameters(params, &rej);
             ASC_printRejectParameters(temp_str, &rej);
             log = "Association Rejected:\n" + QString(temp_str.c_str());
-            emit done(false, log);
+            emit result(false, log);
             return;
         }
         else
         {
             DimseCondition::dump(temp_str, cond);
             log = "Association Request Failed: " + QString(temp_str.c_str());
-            emit done(false, log);
+            emit result(false, log);
             return;
         }
     }
@@ -116,7 +116,7 @@ void EchoDcmtk::echo()
     /* If there are none, finish the execution */
     if (ASC_countAcceptedPresentationContexts(params) == 0)
     {
-        emit done(false, "No Acceptable Presentation Contexts");
+        emit result(false, "No Acceptable Presentation Contexts");
         return;
     }
 
@@ -130,7 +130,7 @@ void EchoDcmtk::echo()
     /* tear down association, i.e. terminate network connection to SCP */
     if (cond == EC_Normal)
     {
-        emit done(true, "Echo successfully");
+        emit result(true, "Echo successfully");
 
         /* release association */
         qDebug() << "Releasing Association";
@@ -138,7 +138,7 @@ void EchoDcmtk::echo()
         if (cond.bad())
         {
             DimseCondition::dump(temp_str, cond);
-            emit done(false, "Association Release Failed: " + QString(temp_str.c_str()));
+            emit result(false, "Association Release Failed: " + QString(temp_str.c_str()));
             return;
         }
     }
@@ -151,13 +151,13 @@ void EchoDcmtk::echo()
         if (cond.bad())
         {
             DimseCondition::dump(temp_str, cond);
-            emit done(false, "Association Abort Failed: " + QString(temp_str.c_str()));
+            emit result(false, "Association Abort Failed: " + QString(temp_str.c_str()));
             return;
         }
     }
     else if (cond == DUL_PEERABORTEDASSOCIATION)
     {
-        emit done(false, "Peer Aborted Association");
+        emit result(false, "Peer Aborted Association");
         return;
     }
     else
@@ -170,7 +170,7 @@ void EchoDcmtk::echo()
         if (cond.bad())
         {
             DimseCondition::dump(temp_str, cond);
-            emit done(false, "Association Abort Failed: " + QString(temp_str.c_str()));
+            emit result(false, "Association Abort Failed: " + QString(temp_str.c_str()));
             return;
         }
     }
@@ -181,7 +181,7 @@ void EchoDcmtk::echo()
     if (cond.bad())
     {
         DimseCondition::dump(temp_str, cond);
-        emit done(false, QString(temp_str.c_str()));
+        emit result(false, QString(temp_str.c_str()));
         return;
     }
 
@@ -191,7 +191,7 @@ void EchoDcmtk::echo()
     if (cond.bad())
     {
         DimseCondition::dump(temp_str, cond);
-        emit done(false, QString(temp_str.c_str()));
+        emit result(false, QString(temp_str.c_str()));
         return;
     }
 }

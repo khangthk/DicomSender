@@ -17,7 +17,7 @@ class DICOMBASE_EXPORT StoreDcmtk : public StoreBase
 
 public:
     StoreDcmtk(QObject *parent = nullptr);
-    ~StoreDcmtk();
+    virtual ~StoreDcmtk();
 
     QDebug &qDebugDelay();
     void resetQDebugDelay();

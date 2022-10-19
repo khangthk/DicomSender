@@ -11,7 +11,7 @@ class DICOMBASE_EXPORT SCUInfo : public QObject
 
 public:
     SCUInfo(QObject *parent = nullptr);
-    ~SCUInfo();
+    virtual ~SCUInfo();
 
     const QString &localAE() const;
     void setLocalAE(const QString &localAE);

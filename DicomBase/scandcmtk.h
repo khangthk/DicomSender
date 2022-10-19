@@ -9,7 +9,7 @@ class DICOMBASE_EXPORT ScanDcmtk : public ScanBase
 
 public:
     ScanDcmtk(QObject *parent = nullptr);
-    ~ScanDcmtk();
+    virtual ~ScanDcmtk();
 
 protected:
     bool isValid(const QString &file) override;

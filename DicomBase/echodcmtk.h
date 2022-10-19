@@ -12,7 +12,7 @@ class DICOMBASE_EXPORT EchoDcmtk : public EchoBase
 
 public:
     EchoDcmtk(QObject *parent = nullptr);
-    ~EchoDcmtk();
+    virtual ~EchoDcmtk();
 
     void echo() override;
 

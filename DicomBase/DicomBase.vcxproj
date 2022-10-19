@@ -117,7 +117,6 @@
     <ClCompile Include="echogdcm.cpp" />
     <ClCompile Include="echothread.cpp" />
     <ClCompile Include="gdcmhelper.cpp" />
-    <ClCompile Include="listfilesthread.cpp" />
     <ClCompile Include="scanbase.cpp" />
     <ClCompile Include="scandcmtk.cpp" />
     <ClCompile Include="scangdcm.cpp" />
@@ -143,7 +142,6 @@
     <ClInclude Include="dcmtkhelper.h" />
     <ClInclude Include="dicombase.h" />
     <ClInclude Include="gdcmhelper.h" />
-    <QtMoc Include="listfilesthread.h" />
     <ClInclude Include="global.h" />
     <ClInclude Include="version.h" />
   </ItemGroup>

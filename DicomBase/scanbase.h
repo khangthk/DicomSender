@@ -13,12 +13,10 @@ class DICOMBASE_EXPORT ScanBase : public QObject
 
 public:
     ScanBase(QObject *parent = nullptr);
-    ~ScanBase();
+    virtual ~ScanBase();
 
     void scan();
-
-    void setDir(const QString &dir);
-    void setOutput(QStringList &files);
+    void setScanDir(const QString &scanDir);
 
     const bool cancel() const;
     void setCancel(const bool value);
@@ -30,10 +28,10 @@ private:
     void scanDir(const QString &dirPath);
     void sortPathList(QStringList &list);
 
-    QString m_dir;
-    QStringList *m_files;
     bool m_cancel;
+    QString m_scanDir;
+    QStringList *m_files;
 
 signals:
-    void done(const uint count);
+    void result(const QStringList *files);
 };

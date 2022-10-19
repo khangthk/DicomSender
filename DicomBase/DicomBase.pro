@@ -20,7 +20,6 @@ SOURCES     += \
     echogdcm.cpp \
     echothread.cpp \
     gdcmhelper.cpp \
-    listfilesthread.cpp \
     scanbase.cpp \
     scandcmtk.cpp \
     scangdcm.cpp \
@@ -40,7 +39,6 @@ HEADERS     += \
     echothread.h \
     gdcmhelper.h \
     global.h \
-    listfilesthread.h \
     scanbase.h \
     scandcmtk.h \
     scangdcm.h \

@@ -4,11 +4,23 @@
 
 #include <QDebug>
 
-ScanThread::ScanThread(const Library &lib, QObject *parent)
+ScanThread::ScanThread(const Library lib, QObject *parent)
     : QThread(parent)
 {
-    Library::dcmtk == lib ? m_scan.reset(new ScanDcmtk()) : m_scan.reset(new ScanGdcm());
-    connect(m_scan.get(), &ScanBase::done, this, &ScanThread::done);
+    switch (lib)
+    {
+    case Library::dcmtk:
+        m_scan.reset(new ScanDcmtk());
+        break;
+    case Library::gdcm:
+        m_scan.reset(new ScanGdcm());
+        break;
+    default:
+        m_scan.reset(new ScanBase());
+        break;
+    }
+
+    connect(m_scan.get(), &ScanBase::result, this, &ScanThread::result);
 }
 
 ScanThread::~ScanThread()

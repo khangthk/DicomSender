@@ -9,8 +9,6 @@
 #include <dcmtk/dcmdata/dcdatutl.h>
 #include <dcmtk/dcmdata/dcvrui.h>
 
-#include <map>
-#include <set>
 #include <vector>
 #include <string>
 #include <utility>
@@ -47,6 +45,13 @@ void StoreDcmtk::resetQDebugDelay()
 
 void StoreDcmtk::store()
 {
+    auto sendFiles = files();
+    if (sendFiles == nullptr || sendFiles->empty())
+    {
+        emit result(false, "No files to send");
+        return;
+    }
+
     T_ASC_Network *net;
     T_ASC_Parameters *params;
     T_ASC_Association *assoc;
@@ -72,7 +77,7 @@ void StoreDcmtk::store()
     if (cond.bad())
     {
         DimseCondition::dump(temp_str, cond);
-        emit done(false, QString(temp_str.c_str()));
+        emit result(false, QString(temp_str.c_str()));
         return;
     }
 
@@ -81,7 +86,7 @@ void StoreDcmtk::store()
     if (cond.bad())
     {
         DimseCondition::dump(temp_str, cond);
-        emit done(false, QString(temp_str.c_str()));
+        emit result(false, QString(temp_str.c_str()));
         return;
     }
 
@@ -99,7 +104,7 @@ void StoreDcmtk::store()
     if (cond.bad())
     {
         DimseCondition::dump(temp_str, cond);
-        emit done(false, QString(temp_str.c_str()));
+        emit result(false, QString(temp_str.c_str()));
         return;
     }
 
@@ -119,14 +124,14 @@ void StoreDcmtk::store()
             ASC_getRejectParameters(params, &rej);
             ASC_printRejectParameters(temp_str, &rej);
             log = "Association Rejected:\n" + QString(temp_str.c_str());
-            emit done(false, log);
+            emit result(false, log);
             return;
         }
         else
         {
             DimseCondition::dump(temp_str, cond);
             log = "Association Request Failed: " + QString(temp_str.c_str());
-            emit done(false, log);
+            emit result(false, log);
             return;
         }
     }
@@ -141,7 +146,7 @@ void StoreDcmtk::store()
     /* If there are none, finish the execution */
     if (ASC_countAcceptedPresentationContexts(params) == 0)
     {
-        emit done(false, "No Acceptable Presentation Contexts");
+        emit result(false, "No Acceptable Presentation Contexts");
         return;
     }
 
@@ -149,8 +154,7 @@ void StoreDcmtk::store()
     qDebug() << "Association Accepted (Max Send PDV: " << assoc->sendPDVLength << ")";
 
     /* send files to the SCP */
-    auto &sendFiles = files();
-    auto total = sendFiles.size();
+    auto total = sendFiles->size();
     int index = 0;
     float oneFilePercent = 0.0f;
     if (total > 0)
@@ -158,7 +162,7 @@ void StoreDcmtk::store()
         oneFilePercent = 100.0f / total;
     }
 
-    for (auto &file : sendFiles)
+    for (auto &file : *sendFiles)
     {
         ++index;
         QString fileName = QFileInfo(file).fileName();
@@ -167,12 +171,12 @@ void StoreDcmtk::store()
         cond = storeSCU(assoc, file);
         if (cond.good())
         {
-            emit processed(std::make_pair(index, total), true, QString("Send \"%1\" successfully").arg(fileName));
+            emit processed(qMakePair(index, total), true, QString("Send \"%1\" successfully").arg(fileName));
         }
         else
         {
             DimseCondition::dump(temp_str, cond);
-            emit processed(std::make_pair(index, total), false, QString("Send \"%1\" failed. Error: %2").arg(fileName, temp_str.c_str()));
+            emit processed(qMakePair(index, total), false, QString("Send \"%1\" failed. Error: %2").arg(fileName, temp_str.c_str()));
         }
 
         setPercentOfProcessedFiles(oneFilePercent * index);
@@ -197,7 +201,7 @@ void StoreDcmtk::store()
         if (cond.bad())
         {
             DimseCondition::dump(temp_str, cond);
-            emit done(false, "Association Release Failed: " + QString(temp_str.c_str()));
+            emit result(false, "Association Release Failed: " + QString(temp_str.c_str()));
             return;
         }
     }
@@ -209,13 +213,13 @@ void StoreDcmtk::store()
         if (cond.bad())
         {
             DimseCondition::dump(temp_str, cond);
-            emit done(false, "Association Abort Failed: " + QString(temp_str.c_str()));
+            emit result(false, "Association Abort Failed: " + QString(temp_str.c_str()));
             return;
         }
     }
     else if (cond == DUL_PEERABORTEDASSOCIATION)
     {
-        emit done(false, "Peer Aborted Association");
+        emit result(false, "Peer Aborted Association");
         return;
     }
     else
@@ -227,7 +231,7 @@ void StoreDcmtk::store()
         if (cond.bad())
         {
             DimseCondition::dump(temp_str, cond);
-            emit done(false, "Association Abort Failed: " + QString(temp_str.c_str()));
+            emit result(false, "Association Abort Failed: " + QString(temp_str.c_str()));
             return;
         }
     }
@@ -238,7 +242,7 @@ void StoreDcmtk::store()
     if (cond.bad())
     {
         DimseCondition::dump(temp_str, cond);
-        emit done(false, QString(temp_str.c_str()));
+        emit result(false, QString(temp_str.c_str()));
         return;
     }
 
@@ -248,7 +252,7 @@ void StoreDcmtk::store()
     if (cond.bad())
     {
         DimseCondition::dump(temp_str, cond);
-        emit done(false, QString(temp_str.c_str()));
+        emit result(false, QString(temp_str.c_str()));
         return;
     }
 }
@@ -380,11 +384,11 @@ OFCondition StoreDcmtk::addPresentationContext(T_ASC_Parameters *params)
 {
     OFCondition cond = EC_Normal;
 
-    auto &sendFiles = files();
-    if (!sendFiles.empty())
+    auto sendFiles = files();
+    if (sendFiles != nullptr && !sendFiles->empty())
     {
         std::vector<std::pair<std::string, std::string>> listPreCtx;
-        for (auto &file : sendFiles)
+        for (auto &file : *sendFiles)
         {
             /* get relevant information from the DICOM file */
             OFString sopClassUID, sopInstanceUID, transferSyntaxUID;
@@ -595,7 +599,7 @@ void StoreDcmtk::progressCallback(void *parent, T_DIMSE_StoreProgress *progress,
 #ifndef QT_NO_DEBUG_OUTPUT
             storeDcmtk->qDebugDelay() << ".";
 #endif
-            auto totalFile = storeDcmtk->files().size();
+            auto totalFile = storeDcmtk->files()->size();
             if (totalFile > 0)
             {
                 totalPercent = storeDcmtk->percentOfProcessedFiles() + 100.0f / totalFile * progress->progressBytes / progress->totalBytes;

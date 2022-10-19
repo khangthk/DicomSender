@@ -9,7 +9,7 @@ class DICOMBASE_EXPORT StoreGdcm : public StoreBase
 
 public:
     StoreGdcm(QObject *parent = nullptr);
-    ~StoreGdcm();
+    virtual ~StoreGdcm();
 
 protected:
     void store() override;

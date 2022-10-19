@@ -6,7 +6,6 @@
 #include <echogdcm.h>
 #include <echothread.h>
 #include <gdcmhelper.h>
-#include <listfilesthread.h>
 #include <scanbase.h>
 #include <scandcmtk.h>
 #include <scangdcm.h>

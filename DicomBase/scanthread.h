@@ -10,8 +10,8 @@ class DICOMBASE_EXPORT ScanThread : public QThread
     Q_OBJECT
 
 public:
-    ScanThread(const Library &lib = Library::dcmtk, QObject *parent = nullptr);
-    ~ScanThread();
+    ScanThread(const Library lib = Library::dcmtk, QObject *parent = nullptr);
+    virtual ~ScanThread();
 
     ScanBase *object();
 
@@ -22,5 +22,5 @@ private:
     std::unique_ptr<ScanBase> m_scan;
 
 signals:
-    void done(const uint count);
+    void result(const QStringList *files);
 };

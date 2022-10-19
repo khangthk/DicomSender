@@ -8,8 +8,6 @@
 #include <gdcmProgressEvent.h>
 #include <gdcmPresentationContextGenerator.h>
 
-#include <utility>
-
 #include <QDebug>
 #include <QFileInfo>
 
@@ -19,11 +17,11 @@ class StoreWatcher : public SimpleSubjectWatcher
 {
 public:
     StoreWatcher(Subject *s, const char *comment = "cstore", StoreGdcm *parent = nullptr)
-        :SimpleSubjectWatcher(s, comment), m_totalFile(1), m_totalPercent(0.0f), m_parent(parent)
+        : SimpleSubjectWatcher(s, comment), m_totalFile(1), m_totalPercent(0.0f), m_parent(parent)
     {
         if (parent != nullptr)
         {
-            auto totalFile = parent->files().size();
+            auto totalFile = parent->files()->size();
             if (totalFile > 0)
             {
                 m_totalFile = totalFile;
@@ -75,13 +73,19 @@ StoreGdcm::~StoreGdcm()
 
 void StoreGdcm::store()
 {
-    auto &sendFiles = files();
-    auto total = sendFiles.size();
+    auto sendFiles = files();
+    if (sendFiles == nullptr || sendFiles->empty())
+    {
+        emit result(false, "No files to send");
+        return;
+    }
+
+    auto total = sendFiles->size();
 
     Directory::FilenamesType fileList;
     fileList.reserve(total);
 
-    for (auto &file : sendFiles)
+    for (auto &file : *sendFiles)
     {
         fileList.push_back(file.toStdString());
     }
@@ -95,7 +99,7 @@ void StoreGdcm::store()
     PresentationContextGenerator generator;
     if (!generator.GenerateFromFilenames(fileList))
     {
-        emit done(false, "Failed to generate presentation context");
+        emit result(false, "Failed to generate presentation context");
         return;
     }
 
@@ -120,7 +124,7 @@ void StoreGdcm::store()
 
     if (!connect)
     {
-        emit done(false, "Failed to establish connection");
+        emit result(false, "Failed to establish connection");
         return;
     }
 
@@ -133,7 +137,7 @@ void StoreGdcm::store()
         oneFilePercent = 100.0f / total;
     }
 
-    for (auto &file : sendFiles)
+    for (auto &file : *sendFiles)
     {
         ++index;
         try
@@ -146,7 +150,7 @@ void StoreGdcm::store()
             reader.SetFileName(file.toStdString().c_str());
             if (!reader.Read())
             {
-                emit processed(std::make_pair(index, total), false, QString("Send \"%1\" failed. Error: Unable to read file.").arg(fileName));
+                emit processed(qMakePair(index, total), false, QString("Send \"%1\" failed. Error: Unable to read file.").arg(fileName));
                 error = true;
                 goto doneOneFile;
             }
@@ -155,7 +159,7 @@ void StoreGdcm::store()
             theDataSets = theManager.SendStore(reader.GetFile());
             if (theDataSets.empty())
             {
-                emit processed(std::make_pair(index, total), false, QString("Send \"%1\" failed. Error: Unable to send file.").arg(fileName));
+                emit processed(qMakePair(index, total), false, QString("Send \"%1\" failed. Error: Unable to send file.").arg(fileName));
                 error = true;
                 goto doneOneFile;
             }
@@ -172,12 +176,12 @@ void StoreGdcm::store()
             // http://dicom.nema.org/medical/dicom/current/output/chtml/part07/chapter_C.html
             if (theVal == 0x0) // Success
             {
-                emit processed(std::make_pair(index, total), true, QString("Send \"%1\" successfully").arg(fileName));
+                emit processed(qMakePair(index, total), true, QString("Send \"%1\" successfully").arg(fileName));
                 error = false;
             }
             else if (theVal == 0x0001 || (theVal & 0xf000) == 0xb000) // Warning
             {
-                emit processed(std::make_pair(index, total), true, QString("Send \"%1\" successfully but with warning").arg(fileName));
+                emit processed(qMakePair(index, total), true, QString("Send \"%1\" successfully but with warning").arg(fileName));
                 error = false;
             }
             else if ((theVal & 0xf000) == 0xa000 || (theVal & 0xf000) == 0xc000) // Failure
@@ -186,12 +190,12 @@ void StoreGdcm::store()
                 errormsg.SetFromDataSet(ds);
                 const char *themsg = errormsg.GetValue();
                 assert(themsg); (void)themsg;
-                emit processed(std::make_pair(index, total), false, QString("Send \"%1\" failed. Response Status: %2").arg(fileName).arg(QString(themsg)));
+                emit processed(qMakePair(index, total), false, QString("Send \"%1\" failed. Response Status: %2").arg(fileName).arg(QString(themsg)));
                 error = true;
             }
             else
             {
-                emit processed(std::make_pair(index, total), false, QString("Send \"%1\" failed. Unhandled error code: %2").arg(fileName).arg(QString(theVal)));
+                emit processed(qMakePair(index, total), false, QString("Send \"%1\" failed. Unhandled error code: %2").arg(fileName).arg(QString(theVal)));
                 error = true;
             }
 
@@ -201,12 +205,12 @@ void StoreGdcm::store()
         {
             // If you reach here this is basically because GDCM does not support encoding other
             // than raw transfer syntax (Little Endian Explicit/Implicit...)
-            emit processed(std::make_pair(index, total), false, QString("Send \"%1\" failed. Error: %2").arg(fileErr).arg(QString(ex.GetDescription())));
+            emit processed(qMakePair(index, total), false, QString("Send \"%1\" failed. Error: %2").arg(fileErr).arg(QString(ex.GetDescription())));
             error = true;
         }
         catch (...)
         {
-            emit processed(std::make_pair(index, total), false, QString("Send \"%1\" failed").arg(fileErr));
+            emit processed(qMakePair(index, total), false, QString("Send \"%1\" failed").arg(fileErr));
             error = true;
         }
 

@@ -9,7 +9,7 @@ class DICOMBASE_EXPORT ScanGdcm : public ScanBase
 
 public:
     ScanGdcm(QObject *parent = nullptr);
-    ~ScanGdcm();
+    virtual ~ScanGdcm();
 
 protected:
     bool isValid(const QString &file) override;

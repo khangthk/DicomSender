@@ -5,7 +5,7 @@
 #include <QCollator>
 
 ScanBase::ScanBase(QObject *parent)
-    : QObject(parent), m_files(new QStringList), m_cancel(false)
+    : QObject(parent), m_cancel(false), m_files(nullptr)
 {}
 
 ScanBase::~ScanBase()
@@ -15,26 +15,27 @@ ScanBase::~ScanBase()
 
 void ScanBase::scan()
 {
+    if (m_files == nullptr)
+    {
+        m_files = new QStringList;
+    }
+
     m_files->clear();
 
-    scanDir(m_dir);
+    scanDir(m_scanDir);
 
     if (cancel())
     {
-        m_files->clear();
+        delete m_files;
+        m_files = nullptr;
     }
 
-    emit done(m_files->count());
+    emit result(m_files);
 }
 
-void ScanBase::setDir(const QString &dir)
+void ScanBase::setScanDir(const QString &scanDir)
 {
-    m_dir = dir;
-}
-
-void ScanBase::setOutput(QStringList &files)
-{
-    m_files = &files;
+    m_scanDir = scanDir;
 }
 
 const bool ScanBase::cancel() const
@@ -103,11 +104,7 @@ void ScanBase::scanDir(const QString &dirPath)
     if (!files.empty())
     {
         sortPathList(files);
-
-        for (auto &file : files)
-        {
-            m_files->push_back(file);
-        }
+        *m_files << files;
     }    
 }
 

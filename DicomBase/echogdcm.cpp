@@ -22,7 +22,7 @@ void EchoGdcm::echo()
     PresentationContextGenerator generator;
     if (!generator.GenerateFromUID(UIDs::VerificationSOPClass))
     {
-        emit done(false, "Failed to generate presentation context");
+        emit result(false, "Failed to generate presentation context");
         return;
     }
 
@@ -48,7 +48,7 @@ void EchoGdcm::echo()
 
     if (!connect)
     {
-        emit done(false, "Failed to establish connection");
+        emit result(false, "Failed to establish connection");
         return;
     }
 
@@ -70,14 +70,14 @@ void EchoGdcm::echo()
         at.SetFromDataSet(ds);
         if (at.GetValue() != 0)
         {
-            emit done(false, "Wrong value for status (C-ECHO)");
+            emit result(false, "Wrong value for status (C-ECHO)");
             return;
         }
 
-        emit done(true, "Echo successfully");
+        emit result(true, "Echo successfully");
         return;
     }
 
-    emit done(false, "Empty return on C-ECHO (no status)");
+    emit result(false, "Empty return on C-ECHO (no status)");
     return;
 }

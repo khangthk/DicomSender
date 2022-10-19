@@ -9,10 +9,10 @@ class DICOMBASE_EXPORT EchoBase : public SCUInfo
 
 public:
     EchoBase(QObject *parent = nullptr);
-    ~EchoBase();
+    virtual ~EchoBase();
 
     virtual void echo() = 0;
 
 signals:
-    void done(const bool result, const QString &log);
+    void result(const bool result, const QString &log);
 };
