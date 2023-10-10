@@ -38,6 +38,11 @@ void ScanBase::setScanDir(const QString &scanDir)
     m_scanDir = scanDir;
 }
 
+const QString &ScanBase::scanDir() const
+{
+    return m_scanDir;
+}
+
 const bool ScanBase::cancel() const
 {
     return m_cancel;
@@ -52,6 +57,19 @@ bool ScanBase::isValid(const QString &file)
 {
     Q_UNUSED(file);
     return true;
+}
+
+void ScanBase::sortPathList(QStringList &list)
+{
+    QCollator collator;
+    collator.setNumericMode(true);
+
+    auto fnCollator = [&collator](const QString &s1, const QString &s2)
+    {
+        return collator.compare(s1, s2) < 0;
+    };
+
+    std::sort(list.begin(), list.end(), fnCollator);
 }
 
 void ScanBase::scanDir(const QString &dirPath)
@@ -106,17 +124,4 @@ void ScanBase::scanDir(const QString &dirPath)
         sortPathList(files);
         *m_files << files;
     }    
-}
-
-void ScanBase::sortPathList(QStringList &list)
-{
-    QCollator collator;
-    collator.setNumericMode(true);
-
-    auto fnCollator = [&collator](const QString &s1, const QString &s2)
-    {
-        return collator.compare(s1, s2) < 0;
-    };
-
-    std::sort(list.begin(), list.end(), fnCollator);
 }

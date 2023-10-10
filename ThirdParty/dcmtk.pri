@@ -1,17 +1,4 @@
-win32 {
-    !contains(QMAKE_TARGET.arch, x86_64) {
-        ARCH = x86
-    } else {
-        ARCH = x64
-    }
-}
-
-CONFIG(debug, debug|release): {
-    LIB_PATH = $$PWD/../build/$${ARCH}/dcmtk/lib/Debug
-} else {
-    LIB_PATH = $$PWD/../build/$${ARCH}/dcmtk/lib/Release
-}
-
+LIB_PATH    = $$PWD/../build/$${ARCH}/dcmtk/lib/$${BUILD_MODE}
 HEADER_PATH = $$PWD/../build/$${ARCH}/dcmtk/config/include \
               $$PWD/dcmtk/ofstd/include \
               $$PWD/dcmtk/oflog/include \
@@ -38,13 +25,13 @@ HEADER_PATH = $$PWD/../build/$${ARCH}/dcmtk/config/include \
               $$PWD/dcmtk/config/include
 
 INCLUDEPATH += $${HEADER_PATH}
-DEPENDPATH += $${HEADER_PATH}
+DEPENDPATH  += $${HEADER_PATH}
 
 win32 {LIBS += -ladvapi32 -lcomdlg32 -lgdi32 -liphlpapi -lkernel32 -lnetapi32 -lole32 -loleaut32 -lshell32 -luser32 -luuid -lwinspool -lws2_32 -lwsock32}
 
 LIBS += -L$${LIB_PATH} -lcmr -ldcmdata -ldcmdsig -ldcmect -ldcmfg -ldcmimage -ldcmimgle -ldcmiod -ldcmjpeg -ldcmjpls -ldcmnet -ldcmpmap -ldcmpstat -ldcmqrdb -ldcmrt -ldcmseg -ldcmsr -ldcmtkcharls -ldcmtls -ldcmtract -ldcmwlm -ldcmxml -li2d -lijg12 -lijg16 -lijg8 -loficonv -loflog -lofstd
 
-win32: LIB_EXT = lib
+win32 {LIB_EXT = lib}
 unix: {
     LIB_EXT = a
     LIB_PREFIX = lib

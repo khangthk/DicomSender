@@ -8,10 +8,10 @@ CONFIG      += c++17
 
 DEFINES     += QT_DISABLE_DEPRECATED_BEFORE=0x060000
 
+include($$PWD/../ThirdParty/qt.pri)
 include($$PWD/../ThirdParty/dcmtk.pri)
 include($$PWD/../ThirdParty/gdcm.pri)
 include($$PWD/../ThirdParty/zlib.pri)
-include($$PWD/../ThirdParty/qt.pri)
 
 SOURCES     += \
     dcmtkhelper.cpp \

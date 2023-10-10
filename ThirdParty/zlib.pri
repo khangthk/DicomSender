@@ -1,18 +1,10 @@
-win32 {
-    !contains(QMAKE_TARGET.arch, x86_64) {
-        ARCH = x86
-    } else {
-        ARCH = x64
-    }
-}
-
 LIB_PATH = $$PWD/../build/$${ARCH}/zlib/bin/lib
 HEADER_PATH = $$PWD/../build/$${ARCH}/zlib/bin/include
 
 INCLUDEPATH += $${HEADER_PATH}
 DEPENDPATH += $${HEADER_PATH}
 
-win32 {LIBS += -ladvapi32 -lcomdlg32 -lgdi32 -lkernel32 -lole32 -loleaut32 -lshell32 -luser32 -luuid -lwinspool}
+win32: {LIBS += -ladvapi32 -lcomdlg32 -lgdi32 -lkernel32 -lole32 -loleaut32 -lshell32 -luser32 -luuid -lwinspool}
 
 win32: LIB_EXT = lib
 unix: {

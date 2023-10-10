@@ -15,18 +15,20 @@ public:
     ScanBase(QObject *parent = nullptr);
     virtual ~ScanBase();
 
-    void scan();
+    virtual void scan();
+
     void setScanDir(const QString &scanDir);
+    const QString &scanDir() const;
 
     const bool cancel() const;
     void setCancel(const bool value);
 
 protected:
     virtual bool isValid(const QString &file);
+    virtual void sortPathList(QStringList &list);
 
 private:
     void scanDir(const QString &dirPath);
-    void sortPathList(QStringList &list);
 
     bool m_cancel;
     QString m_scanDir;

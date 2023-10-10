@@ -12,4 +12,4 @@
 # define DICOMBASE_EXPORT
 #endif
 
-enum class Library { none, dcmtk, gdcm };
+enum class Library { dcmtk, gdcm };

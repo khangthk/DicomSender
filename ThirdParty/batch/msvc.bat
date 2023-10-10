@@ -26,6 +26,7 @@ for /f "usebackq tokens=*" %%i in (`vswhere %VSWHERE_ARGS%`) do (
 	if %arch%==x86 (call "%%i\VC\Auxiliary\Build\vcvars32.bat")
 	exit /b 0
 )
+
 REM Visual Studio 2019 (16.X, toolset 14.2)
 set VSWHERE_LMT=-version "[16.0,17.0)"
 set VSWHERE_ARGS=-latest -products * %VSWHERE_REQ% %VSWHERE_PRP% %VSWHERE_LMT% %VSWHERE_PRERELEASE%

@@ -7,7 +7,6 @@
 EchoThread::EchoThread(const Library lib, QObject *parent)
     : QThread(parent)
 {
-    Q_ASSERT(lib != Library::none);
     Library::dcmtk == lib ? m_echo.reset(new EchoDcmtk()) : m_echo.reset(new EchoGdcm());
     connect(m_echo.get(), &EchoBase::result, this, &EchoThread::result);
 }

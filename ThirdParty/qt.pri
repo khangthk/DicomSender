@@ -1,5 +1,4 @@
 CONFIG  += no_batch
-CONFIG(release, debug|release): DEFINES += QT_NO_DEBUG_OUTPUT
 
 win32 {
     !contains(QMAKE_TARGET.arch, x86_64) {
@@ -9,13 +8,16 @@ win32 {
     }
 }
 
-CONFIG(debug, debug|release): {
-    DESTDIR = $$PWD/../bin/$${ARCH}/Debug
+CONFIG(debug, debug|release) {
+    DESTDIR    = $$PWD/../bin/$${ARCH}/Debug
+    BUILD_MODE = Debug
 } else {
-    DESTDIR = $$PWD/../bin/$${ARCH}/Release
+    DESTDIR    = $$PWD/../bin/$${ARCH}/Release
+    BUILD_MODE = Release
+    DEFINES   += QT_NO_DEBUG_OUTPUT
 }
 
-win32: {
+win32 {
     mkdestdir.commands = $(CHK_DIR_EXISTS) $$shell_path($$DESTDIR) $(MKDIR) $$shell_path($$DESTDIR)
 }
 else {

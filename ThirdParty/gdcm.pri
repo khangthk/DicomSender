@@ -1,17 +1,4 @@
-win32 {
-    !contains(QMAKE_TARGET.arch, x86_64) {
-        ARCH = x86
-    } else {
-        ARCH = x64
-    }
-}
-
-CONFIG(debug, debug|release): {
-    LIB_PATH = $$PWD/../build/$${ARCH}/gdcm/bin/Debug
-} else {
-    LIB_PATH = $$PWD/../build/$${ARCH}/gdcm/bin/Release
-}
-
+LIB_PATH    = $$PWD/../build/$${ARCH}/gdcm/bin/$${BUILD_MODE}
 HEADER_PATH = $$PWD/../build/$${ARCH}/gdcm/Source/Common \
               $$PWD/../build/$${ARCH}/gdcm/Source/InformationObjectDefinition \
               $$PWD/gdcm/Source/Common \
